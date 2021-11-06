@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
+use Fnsc\FiscalDoc\Validator as FiscalDoc;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private array $rules = [
+        FiscalDoc::class
+    ];
+
     /**
      * Register any application services.
      *
@@ -23,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->registerRules();
+    }
+
+    private function registerRules(): void
+    {
+        foreach ($this->rules as $rule) {
+            $alias = (new $rule)->getAlias();
+            Validator::extend($alias, $rule . '@passes');
+        }
     }
 }
