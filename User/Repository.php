@@ -6,6 +6,8 @@ use User\Store\User as UserValueObject;
 
 class Repository
 {
+    private const USER_TYPE = ['regular', 'seller'];
+
     private User $model;
 
     public function __construct(User $model)
@@ -15,6 +17,10 @@ class Repository
 
     public function store(UserValueObject $user): User
     {
+        if (!in_array($user->getType(), self::USER_TYPE, true)) {
+            throw UserException::invalidUserType();
+        }
+
         if (!$this->isUnique($user->getEmail(), 'email')) {
             throw UserException::emailAlreadyExists();
         }
