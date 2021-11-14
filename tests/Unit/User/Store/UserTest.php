@@ -13,6 +13,7 @@ class UserTest extends TestCase
             'name' => 'some random name',
             'email' => 'random@email.com',
             'fiscal_doc' => '123.456.789-09',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 

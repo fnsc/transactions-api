@@ -11,6 +11,7 @@ class Transformer
         return [
             'id' => $user->id,
             'name' => $user->name,
+            'type' => $user->type,
         ];
     }
 }

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'fiscal_doc',
+        'type',
         'password',
     ];
 

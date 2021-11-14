@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,id',
             'fiscal_doc' => 'required|string|fiscal_doc|unique:users,fiscal_doc,id',
+            'type' => 'required|string|in:regular,seller',
             'password' => 'required|min:6',
         ];
     }
