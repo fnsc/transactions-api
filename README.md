@@ -1,65 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Desafio Back-end PicPay
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Primeiramente, obrigado pelo seu interesse em trabalhar na melhor plataforma de pagamentos do mundo!
+Abaixo você encontrará todos as informações necessárias para iniciar o seu teste.
 
-## About Laravel
+## Avisos antes de começar
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Crie um repositório no seu GitHub **sem citar nada relacionado ao PicPay**.
+- Faça seus commits no seu repositório.
+- Envie o link do seu repositório para o email **talentos_php@picpay.com**.
+- Você poderá consultar o Google, Stackoverflow ou algum projeto particular na sua máquina.
+- Dê uma olhada nos [Materiais úteis](#materiais-úteis).
+- Dê uma olhada em como será a [entrevista](#para-o-dia-da-entrevista-técnica).
+- Fique à vontade para perguntar qualquer dúvida aos recrutadores.
+- Fique tranquilo, respire, assim como você, também já passamos por essa etapa. Boa sorte! :)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*Corpo do Email com o link do repositório do desafio*
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+>Seu Nome
+>
+>Nome do recrutador
+>
+>Link do repositório
+>
+>Link do Linkedin
 
-## Learning Laravel
+### Sobre o ambiente da aplicação:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Escolha qualquer framework que se sinta **confortável** em trabalhar. Esse teste **não faz** nenhuma preferência, portanto decida por aquele com o qual estará mais seguro em apresentar e conversar com a gente na entrevista ;)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Você pode, inclusive, não optar por framework nenhum. Neste caso, recomendamos a implementação do serviço via script para diminuir a sobrecarga de criar um servidor web.
 
-## Laravel Sponsors
+- Ainda assim, se optar por um framework tente evitar usar muito métodos mágicos ou atalhos já prontos. Sabemos que essas facilidades aumentam a produtividade no dia-a-dia mas aqui queremos ver o **seu** código e a sua forma de resolver problemas.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Valorizamos uma boa estrutura de containeres criada por você.
 
-### Premium Partners
+## Para o dia da entrevista técnica
+Na data marcada pelo recrutador tenha sua aplicação rodando na sua máquina local para execução dos testes e para nos mostrar os pontos desenvolvidos e possíveis questionamentos.
+Faremos um code review junto contigo como se você já fosse do nosso time :heart:, você poderá explicar o que você pensou, como arquitetou e como pode evoluir o projeto.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Objetivo: PicPay Simplificado
 
-## Contributing
+Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinheiro e realizam transferências entre eles. Vamos nos atentar **somente** ao fluxo de transferência entre dois usuários.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Requisitos:
 
-## Code of Conduct
+- Para ambos tipos de usuário, precisamos do Nome Completo, CPF, e-mail e Senha. CPF/CNPJ e e-mails devem ser únicos no sistema. Sendo assim, seu sistema deve permitir apenas um cadastro com o mesmo CPF ou endereço de e-mail.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Usuários podem enviar dinheiro (efetuar transferência) para lojistas e entre usuários. 
 
-## Security Vulnerabilities
+- Lojistas **só recebem** transferências, não enviam dinheiro para ninguém.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Validar se o usuário tem saldo antes da transferência.
 
-## License
+- Antes de finalizar a transferência, deve-se consultar um serviço autorizador externo, use este mock para simular (https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- A operação de transferência deve ser uma transação (ou seja, revertida em qualquer caso de inconsistência) e o dinheiro deve voltar para a carteira do usuário que envia. 
+
+- No recebimento de pagamento, o usuário ou lojista precisa receber notificação (envio de email, sms) enviada por um serviço de terceiro e eventualmente este serviço pode estar indisponível/instável. Use este mock para simular o envio (http://o4d9z.mocklab.io/notify). 
+
+- Este serviço deve ser RESTFul.
+
+### Payload
+
+Faça uma **proposta** :heart: de payload, se preferir, temos uma exemplo aqui:
+
+POST /transaction
+
+```json
+{
+    "value" : 100.00,
+    "payer" : 4,
+    "payee" : 15
+}
+```
+
+
+# Avaliação
+
+Apresente sua solução utilizando o framework que você desejar, justificando a escolha.
+Atente-se a cumprir a maioria dos requisitos, pois você pode cumprir-los parcialmente e durante a avaliação vamos bater um papo a respeito do que faltou.
+
+Teremos 2 partes da avaliação:
+
+A correção objetiva será realizada através da utilização de um script de correção automatizada. Você **pode** rodar na sua máquina local ou usar outra ferramenta:
+```
+docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
+```    
+
+A correção qualitativa será durante a entrevista e levará em conta os seguintes critérios:
+
+## O que será avaliado e valorizamos :heart:
+- Documentação
+- Se for para vaga sênior, foque bastante no **desenho de arquitetura**
+- Código limpo e organizado (nomenclatura, etc)
+- Conhecimento de padrões (PSRs, design patterns, SOLID)
+- Ser consistente e saber argumentar suas escolhas
+- Apresentar soluções que domina
+- Modelagem de Dados
+- Manutenibilidade do Código
+- Tratamento de erros
+- Cuidado com itens de segurança
+- Arquitetura (estruturar o pensamento antes de escrever)
+- Carinho em desacoplar componentes (outras camadas, service, repository)
+
+De acordo com os critérios acima, iremos avaliar seu teste para avançarmos para a entrevista técnica.
+Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremos prosseguir com o processo.
+
+## O que NÃO será avaliado :warning:
+- Fluxo de cadastro de usuários e lojistas
+- Frontend (só avaliaremos a (API Restful)[https://www.devmedia.com.br/rest-tutorial/28912])
+- Autenticação
+
+## O que será um Diferencial
+- Uso de Docker
+- Testes de [integração](https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing)
+- Testes [unitários](https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing)
+- Uso de Design Patterns
+- Documentação
+- Proposta de melhoria na arquitetura
+
+
+## Materiais úteis
+- https://picpay.com/site/sobre-nos
+- https://hub.packtpub.com/why-we-need-design-patterns/
+- https://refactoring.guru/
+- http://br.phptherightway.com/
+- https://www.php-fig.org/psr/psr-12/
+- https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing
+- https://github.com/exakat/php-static-analysis-tools
+- https://martinfowler.com/articles/microservices.htm
+- https://docs.guzzlephp.org/en/stable/request-options.html
+- https://www.devmedia.com.br/rest-tutorial/28912
