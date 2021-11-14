@@ -27,6 +27,7 @@ class UserRequestTest extends TestCase
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,id',
             'fiscal_doc' => 'required|string|fiscal_doc|unique:users,fiscal_doc,id',
+            'type' => 'required|string|in:regular,seller',
             'password' => 'required|min:6',
         ];
 
@@ -45,6 +46,7 @@ class UserRequestTest extends TestCase
                 'name' => 'some random name',
                 'email' => 'some@random.com',
                 'fiscal_doc' => '123.456.789-09',
+                'type' => 'seller',
                 'password' => 'password',
             ],
         ]);

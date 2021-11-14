@@ -19,6 +19,7 @@ class UsersControllerTest extends TestCase
             'name' => 'some random name',
             'email' => 'some@random.com',
             'fiscal_doc' => '123.456.789-09',
+            'type' => 'regular',
             'password' => 'password',
         ];
 
@@ -39,6 +40,7 @@ class UsersControllerTest extends TestCase
             'name' => 'some random name',
             'email' => 'some@random.com',
             'fiscal_doc' => '123.456.789-09',
+            'type' => 'seller',
             'password' => 'password',
         ];
 
@@ -46,6 +48,7 @@ class UsersControllerTest extends TestCase
             'name' => 'some random name',
             'email' => 'some2@random.com',
             'fiscal_doc' => '123.456.789-09',
+            'type' => 'regular',
             'password' => 'password',
         ];
 

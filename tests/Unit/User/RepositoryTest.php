@@ -21,9 +21,14 @@ class RepositoryTest extends TestCase
             'email' => 'random@email.com',
             'fiscal_doc' => '12345678909',
             'password' => 'secret',
+            'type' => 'seller',
         ];
 
         // Expectations
+        $userValueObject->expects()
+            ->getType()
+            ->andReturn('seller');
+
         $userValueObject->expects()
             ->getEmail()
             ->andReturn('random@email.com');
@@ -70,6 +75,10 @@ class RepositoryTest extends TestCase
 
         // Expectations
         $userValueObject->expects()
+            ->getType()
+            ->andReturn('seller');
+
+        $userValueObject->expects()
             ->getEmail()
             ->andReturn('random@email.com');
 
@@ -97,6 +106,10 @@ class RepositoryTest extends TestCase
         $repository = new Repository($userModel);
 
         // Expectations
+        $userValueObject->expects()
+            ->getType()
+            ->andReturn('seller');
+
         $userValueObject->expects()
             ->getEmail()
             ->andReturn('random@email.com');
@@ -143,9 +156,14 @@ class RepositoryTest extends TestCase
             'email' => 'random@email.com',
             'fiscal_doc' => '12345678909',
             'password' => 'secret',
+            'type' => 'regular',
         ];
 
         // Expectations
+        $userValueObject->expects()
+            ->getType()
+            ->andReturn('regular');
+
         $userValueObject->expects()
             ->getEmail()
             ->andReturn('random@email.com');
@@ -177,6 +195,25 @@ class RepositoryTest extends TestCase
 
         $this->expectException(UserException::class);
         $this->expectExceptionMessage('The new user cannot be stored.');
+
+        // Actions
+        $repository->store($userValueObject);
+    }
+
+    public function test_should_throw_an_exception_when_user_type_is_invalid(): void
+    {
+        // Set
+        $userModel = m::mock(User::class);
+        $userValueObject = m::mock(UserValueObject::class);
+        $repository = new Repository($userModel);
+
+        // Expectations
+        $userValueObject->expects()
+            ->getType()
+            ->andReturn('random');
+
+        $this->expectException(UserException::class);
+        $this->expectExceptionMessage('The user type is invalid.');
 
         // Actions
         $repository->store($userValueObject);

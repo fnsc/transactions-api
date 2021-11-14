@@ -16,6 +16,7 @@ class TransformerTest extends TestCase
         $expected = [
             'id' => 1,
             'name' => 'Random Name',
+            'type' => 'regular',
         ];
 
         // Expectations
@@ -26,6 +27,10 @@ class TransformerTest extends TestCase
         $user->expects()
             ->getAttribute('name')
             ->andReturn('Random Name');
+
+        $user->expects()
+            ->getAttribute('type')
+            ->andReturn('regular');
 
         // Actions
         $result = $transformer->transform($user);

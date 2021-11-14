@@ -25,6 +25,7 @@ class RepositoryTest extends TestCase
             'name' => 'some random name',
             'email' => 'some@email.com',
             'fiscal_doc' => '12345678909',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 
@@ -45,6 +46,7 @@ class RepositoryTest extends TestCase
             'name' => 'some random name',
             'email' => 'some@email.com',
             'fiscal_doc' => '12345678909',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 
@@ -53,6 +55,7 @@ class RepositoryTest extends TestCase
             'name' => 'another random name',
             'email' => 'some@email.com',
             'fiscal_doc' => '12345678911',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 
@@ -74,6 +77,7 @@ class RepositoryTest extends TestCase
             'name' => 'some random name',
             'email' => 'some@email.com',
             'fiscal_doc' => '12345678909',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 
@@ -82,6 +86,7 @@ class RepositoryTest extends TestCase
             'name' => 'another random name',
             'email' => 'another@email.com',
             'fiscal_doc' => '12345678909',
+            'type' => 'regular',
             'password' => 'secret',
         ]);
 
@@ -104,6 +109,10 @@ class RepositoryTest extends TestCase
 
         // Expectations
         $userValueObject->expects()
+            ->getType()
+            ->andReturn('regular');
+
+        $userValueObject->expects()
             ->getEmail()
             ->andReturn('some@email.com');
 
@@ -117,6 +126,7 @@ class RepositoryTest extends TestCase
                 'name' => null,
                 'email' => 'some@email.com',
                 'fiscal_doc' => '12345678909',
+                'type' => 'regular',
                 'password' => 'secret',
             ]);
 

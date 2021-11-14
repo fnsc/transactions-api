@@ -21,4 +21,9 @@ class UserException extends Exception
     {
         return new static('The fiscal doc has already been taken.', Response::HTTP_CONFLICT);
     }
+
+    public static function invalidUserType(): self
+    {
+        return new static('The user type is invalid.', Response::HTTP_NOT_ACCEPTABLE);
+    }
 }
