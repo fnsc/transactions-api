@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     private array $rules = [
-        FiscalDoc::class
+        FiscalDoc::class,
     ];
 
     /**
@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
@@ -35,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     private function registerRules(): void
     {
         foreach ($this->rules as $rule) {
-            $alias = (new $rule)->getAlias();
+            $alias = (new $rule())->getAlias();
             Validator::extend($alias, $rule . '@passes');
         }
     }

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('fiscal_doc')->unique();
             $table->string('password');
-            $table->string('type');
+            $table->enum('type', ['regular', 'seller']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,6 +32,5 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
     }
 }
