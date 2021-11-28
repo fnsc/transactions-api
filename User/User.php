@@ -3,9 +3,13 @@
 namespace User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Transfer\Account;
+use Transfer\Transaction;
 
 class User extends Authenticatable
 {
@@ -44,4 +48,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function account(): HasOne
+    {
+        return $this->hasOne(Account::class);
+    }
+
+    public function getTransactionsAsPayer(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payer_id', 'id');
+    }
+
+    public function getTransactionsAsPayee(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payee_id', 'id');
+    }
 }

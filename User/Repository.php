@@ -2,22 +2,30 @@
 
 namespace User;
 
+use Transfer\AccountRepository;
 use User\Store\User as UserValueObject;
 
 class Repository
 {
-    private const USER_TYPE = ['regular', 'seller'];
+    private const USER_TYPES = [EnumUserType::REGULAR, EnumUserType::SELLER];
 
-    private User $model;
+    private User $user;
+    private AccountRepository $accountRepository;
 
-    public function __construct(User $model)
+    public function __construct(User $user, AccountRepository $accountRepository)
     {
-        $this->model = $model;
+        $this->user = $user;
+        $this->accountRepository = $accountRepository;
+    }
+
+    public function find(int $id): ?User
+    {
+        return $this->user->where('id', $id)->first();
     }
 
     public function store(UserValueObject $user): User
     {
-        if (!in_array($user->getType(), self::USER_TYPE, true)) {
+        if (!in_array($user->getType(), self::USER_TYPES, true)) {
             throw UserException::invalidUserType();
         }
 
@@ -29,17 +37,19 @@ class Repository
             throw UserException::fiscalDocAlreadyExists();
         }
 
-        $user = $this->model->create($user->toArray());
+        $user = $this->user->create($user->toArray());
 
         if (!$user) {
             throw UserException::failedStoring();
         }
+
+        $this->accountRepository->store($user);
 
         return $user;
     }
 
     private function isUnique(mixed $value, string $field): bool
     {
-        return !(bool) $this->model->where($field, $value)->first();
+        return !(bool) $this->user->where($field, $value)->first();
     }
 }
