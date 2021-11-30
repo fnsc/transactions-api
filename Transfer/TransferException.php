@@ -26,7 +26,7 @@ class TransferException extends Exception
     {
         return new static(
             'The payer does not have the sufficient amount on your account to proceed with the operation',
-            Response::HTTP_PRECONDITION_REQUIRED
+            Response::HTTP_FORBIDDEN
         );
     }
 

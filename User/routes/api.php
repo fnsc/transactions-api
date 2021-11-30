@@ -19,4 +19,5 @@ Route::group([
     'as' => 'api.v1.users',
 ], function () {
     Route::post('', [UsersController::class, 'store'])->name('.store');
+    Route::post('login', [UsersController::class, 'login'])->name('.login');
 });

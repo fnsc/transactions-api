@@ -156,7 +156,7 @@ class TransfersControllerTest extends TestCase
         $result = $this->post(route('api.v1.transfers.store'), $data);
 
         // Assertions
-        $result->assertStatus(Response::HTTP_FORBIDDEN);
+        $result->assertRedirect(route('api.v1.transfers.forbidden'));
     }
 
     protected function setUp(): void

@@ -25,6 +25,7 @@ use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Transfer\Http\Middleware\SendTransferMiddleware;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 class Kernel extends HttpKernel
 {
@@ -62,7 +63,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
         ],
