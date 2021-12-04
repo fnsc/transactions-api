@@ -46,4 +46,20 @@ class TransfersController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function forbidden(): JsonResponse
+    {
+        return response()->json([
+            'message' => 'This user cannot proceed with this transaction.',
+            'data' => [],
+        ], Response::HTTP_FORBIDDEN);
+    }
+
+    public function unauthorized(): JsonResponse
+    {
+        return response()->json([
+            'message' => 'You must be logged in to proceed with a transaction.',
+            'data' => [],
+        ], Response::HTTP_UNAUTHORIZED);
+    }
 }

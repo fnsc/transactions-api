@@ -15,6 +15,7 @@ class TransformerTest extends TestCase
         $transformer = new Transformer();
         $user = m::mock(User::class);
         $account = m::mock(Account::class);
+        $token = 'your_new_auth_token';
         $expected = [
             'id' => 1,
             'name' => 'Random Name',
@@ -22,6 +23,7 @@ class TransformerTest extends TestCase
             'account' => [
                 'number' => 'some random account number',
             ],
+            'token' => 'your_new_auth_token',
         ];
 
         // Expectations
@@ -46,7 +48,7 @@ class TransformerTest extends TestCase
             ->andReturn('some random account number');
 
         // Actions
-        $result = $transformer->transform($user);
+        $result = $transformer->transform($user, $token);
 
         // Assertions
         $this->assertSame($expected, $result);

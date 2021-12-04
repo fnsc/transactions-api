@@ -30,7 +30,7 @@ class TransferExceptionTest extends TestCase
             'The payer does not have the sufficient amount on your account to proceed with the operation',
             $notSufficientAmount->getMessage()
         );
-        $this->assertSame(Response::HTTP_PRECONDITION_REQUIRED, $notSufficientAmount->getCode());
+        $this->assertSame(Response::HTTP_FORBIDDEN, $notSufficientAmount->getCode());
 
         $this->assertSame(
             'The user notification was not send due an issue with the provider.',

@@ -48,6 +48,11 @@ class Repository
         return $user;
     }
 
+    public function findByEmail(mixed $email): ?User
+    {
+        return $this->user->where('email', $email)->first();
+    }
+
     private function isUnique(mixed $value, string $field): bool
     {
         return !(bool) $this->user->where($field, $value)->first();

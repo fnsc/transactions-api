@@ -10,7 +10,7 @@ class UserRequestTest extends TestCase
     public function test_should_return_if_the_class_is_authorized_to_validate_the_data(): void
     {
          // Set
-        $userRequest = new UserRequest();
+        $userRequest = new LoginRequest();
 
         // Actions
         $result = $userRequest->authorize();

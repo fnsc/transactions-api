@@ -4,7 +4,6 @@ namespace Transfer\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use User\EnumUserType;
 
 class SendTransferMiddleware
@@ -13,10 +12,10 @@ class SendTransferMiddleware
     {
         $user = auth()->user();
 
-        if (EnumUserType::REGULAR !== $user->type) {
-            return abort(Response::HTTP_FORBIDDEN, 'This user cannot do a transfer.');
+        if (EnumUserType::REGULAR === $user->type) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect(route('api.v1.transfers.forbidden'));
     }
 }

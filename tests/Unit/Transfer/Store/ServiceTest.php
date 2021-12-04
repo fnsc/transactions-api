@@ -117,7 +117,7 @@ class ServiceTest extends TestCase
         $this->expectExceptionMessage(
             'The payer does not have the sufficient amount on your account to proceed with the operation'
         );
-        $this->expectExceptionCode(Response::HTTP_PRECONDITION_REQUIRED);
+        $this->expectExceptionCode(Response::HTTP_FORBIDDEN);
 
         // Actions
         $service->handle($transfer, $authUser);

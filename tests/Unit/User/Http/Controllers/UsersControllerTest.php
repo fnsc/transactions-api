@@ -7,7 +7,10 @@ use Illuminate\Http\Response;
 use Mockery as m;
 use Psr\Log\LoggerInterface;
 use Tests\TestCase;
+use User\Http\Requests\LoginRequest;
 use User\Http\Requests\UserRequest;
+use User\Login\Service as LoginService;
+use User\LoginException;
 use User\Store\Service;
 use User\Store\User;
 use User\UserException;
@@ -44,7 +47,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * @dataProvider getExceptionsCases
+     * @dataProvider getStoreExceptionsCases
      */
     public function test_should_throw_an_exception(
         Exception $exception,
@@ -80,7 +83,7 @@ class UsersControllerTest extends TestCase
         $this->assertSame($expectedResponseContent, $result->getContent());
     }
 
-    public function getExceptionsCases(): array
+    public function getStoreExceptionsCases(): array
     {
         return [
             'user exception when failed storing' => [
@@ -112,5 +115,109 @@ class UsersControllerTest extends TestCase
                 'expectedResponseContent' => '{"message":"Error","data":[]}',
             ],
         ];
+    }
+
+    /**
+     * @dataProvider getLoginExceptionCases
+     */
+    public function test_should_throw_an_exception_when_trying_to_login(
+        Exception $exception,
+        string $loggerMethod,
+        string $loggerMessage,
+        int $expectedResponseStatusCode,
+        string $expectedResponseContent
+    ): void {
+        // Set
+        $request = m::mock(LoginRequest::class);
+        $service = m::mock(LoginService::class);
+        $logger = m::mock(LoggerInterface::class);
+        $controller = new UsersController();
+        $requestData = [
+            'email' => 'random@email.com',
+            'password' => 'secret',
+        ];
+
+        // Expectations
+        $request->expects()
+            ->all()
+            ->andReturn($requestData);
+
+        $service->expects()
+            ->handle($requestData)
+            ->andThrow($exception);
+
+        $logger->expects()
+            ->{$loggerMethod}($loggerMessage, ['exception' => $exception]);
+
+        // Actions
+        $result = $controller->login($request, $service, $logger);
+
+        // Assertions
+        $this->assertSame($expectedResponseStatusCode, $result->getStatusCode());
+        $this->assertSame($expectedResponseContent, $result->getContent());
+    }
+
+    public function getLoginExceptionCases(): array
+    {
+        return [
+            'cannot login when the given data is invalid' => [
+                'exception' => LoginException::invalidData(),
+                'loggerMethod' => 'notice',
+                'loggerMessage' => 'Something went wrong while logging in.',
+                'expectedResponseStatusCode' => Response::HTTP_UNAUTHORIZED,
+                'expectedResponseContent' => '{"message":"The given data is invalid.","data":[]}',
+            ],
+            'cannot login when the user was not found' => [
+                'exception' => LoginException::userNotFound(),
+                'loggerMethod' => 'notice',
+                'loggerMessage' => 'Something went wrong while logging in.',
+                'expectedResponseStatusCode' => Response::HTTP_MOVED_PERMANENTLY,
+                'expectedResponseContent' => '{"message":"User not found.","data":[]}',
+            ],
+            'user exception when fiscal doc already exists' => [
+                'exception' => new Exception('Some unexpected random error occurs.'),
+                'loggerMethod' => 'warning',
+                'loggerMessage' => 'Something went wrong.',
+                'expectedResponseStatusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'expectedResponseContent' => '{"message":"Error","data":[]}',
+            ],
+        ];
+    }
+
+    public function test_should_proceed_with_the_login(): void
+    {
+        // Set
+        $request = m::mock(LoginRequest::class);
+        $service = m::mock(LoginService::class);
+        $logger = m::mock(LoggerInterface::class);
+        $controller = new UsersController();
+        $requestData = [
+            'email' => 'random@email.com',
+            'password' => 'secret',
+        ];
+
+        // Expectations
+        $request->expects()
+            ->all()
+            ->andReturn($requestData);
+
+        $service->expects()
+            ->handle($requestData)
+            ->andReturn([
+                'message' => 'You\'re logged in!',
+                'data' => [
+                    'token' => 'your_access_token',
+                ],
+            ]);
+
+        // Actions
+        $result = $controller->login($request, $service, $logger);
+
+        // Assertions
+        $this->assertSame(Response::HTTP_ACCEPTED, $result->getStatusCode());
+        $this->assertSame(
+            '{"message":"You\'re logged in!","data":{"token":"your_access_token"}}',
+            $result->getContent()
+        );
     }
 }
