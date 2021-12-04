@@ -1,28 +1,7 @@
-# Desafio Back-end PicPay
+# Desafio Back-end
 
 Primeiramente, obrigado pelo seu interesse em trabalhar na melhor plataforma de pagamentos do mundo!
 Abaixo você encontrará todos as informações necessárias para iniciar o seu teste.
-
-## Avisos antes de começar
-
-- Crie um repositório no seu GitHub **sem citar nada relacionado ao PicPay**.
-- Faça seus commits no seu repositório.
-- Envie o link do seu repositório para o email **talentos_php@picpay.com**.
-- Você poderá consultar o Google, Stackoverflow ou algum projeto particular na sua máquina.
-- Dê uma olhada nos [Materiais úteis](#materiais-úteis).
-- Dê uma olhada em como será a [entrevista](#para-o-dia-da-entrevista-técnica).
-- Fique à vontade para perguntar qualquer dúvida aos recrutadores.
-- Fique tranquilo, respire, assim como você, também já passamos por essa etapa. Boa sorte! :)
-
-*Corpo do Email com o link do repositório do desafio*
-
->Seu Nome
->
->Nome do recrutador
->
->Link do repositório
->
->Link do Linkedin
 
 ### Sobre o ambiente da aplicação:
 
@@ -38,7 +17,7 @@ Abaixo você encontrará todos as informações necessárias para iniciar o seu 
 Na data marcada pelo recrutador tenha sua aplicação rodando na sua máquina local para execução dos testes e para nos mostrar os pontos desenvolvidos e possíveis questionamentos.
 Faremos um code review junto contigo como se você já fosse do nosso time :heart:, você poderá explicar o que você pensou, como arquitetou e como pode evoluir o projeto.
 
-## Objetivo: PicPay Simplificado
+## Objetivo:
 
 Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinheiro e realizam transferências entre eles. Vamos nos atentar **somente** ao fluxo de transferência entre dois usuários.
 
@@ -83,7 +62,7 @@ Atente-se a cumprir a maioria dos requisitos, pois você pode cumprir-los parcia
 Teremos 2 partes da avaliação:
 
 A correção objetiva será realizada através da utilização de um script de correção automatizada. Você **pode** rodar na sua máquina local ou usar outra ferramenta:
-```
+```bash
 docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
 ```    
 
@@ -108,7 +87,7 @@ Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremo
 
 ## O que NÃO será avaliado :warning:
 - Fluxo de cadastro de usuários e lojistas
-- Frontend (só avaliaremos a (API Restful)[https://www.devmedia.com.br/rest-tutorial/28912])
+- Frontend (só avaliaremos a [API Restful](https://www.devmedia.com.br/rest-tutorial/28912))
 - Autenticação
 
 ## O que será um Diferencial
@@ -118,16 +97,3 @@ Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremo
 - Uso de Design Patterns
 - Documentação
 - Proposta de melhoria na arquitetura
-
-
-## Materiais úteis
-- https://picpay.com/site/sobre-nos
-- https://hub.packtpub.com/why-we-need-design-patterns/
-- https://refactoring.guru/
-- http://br.phptherightway.com/
-- https://www.php-fig.org/psr/psr-12/
-- https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing
-- https://github.com/exakat/php-static-analysis-tools
-- https://martinfowler.com/articles/microservices.htm
-- https://docs.guzzlephp.org/en/stable/request-options.html
-- https://www.devmedia.com.br/rest-tutorial/28912
