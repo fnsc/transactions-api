@@ -4,6 +4,7 @@ namespace User\Store;
 
 use Mockery as m;
 use Tests\TestCase;
+use User\Login\TokenManager;
 use User\Repository;
 use User\User as UserModel;
 
@@ -16,7 +17,8 @@ class ServiceTest extends TestCase
         $transformer = m::mock(Transformer::class);
         $userValueObject = m::mock(User::class);
         $userModel = m::mock(UserModel::class);
-        $service = new Service($repository, $transformer);
+        $manager = m::mock(TokenManager::class);
+        $service = new Service($repository, $transformer, $manager);
         $expected = [
             'id' => 1,
             'name' => 'Some Random Name',
@@ -24,7 +26,7 @@ class ServiceTest extends TestCase
 
         // Expectations
         $transformer->expects()
-            ->transform($userModel)
+            ->transform($userModel, m::type('string'))
             ->andReturn([
                 'id' => 1,
                 'name' => 'Some Random Name',
@@ -34,9 +36,9 @@ class ServiceTest extends TestCase
             ->store($userValueObject)
             ->andReturn($userModel);
 
-        $userModel->expects()
-            ->getAuthIdentifier()
-            ->andReturn('id');
+        $manager->expects()
+            ->manage($userModel)
+            ->andReturn('your_new_token');
 
         // Actions
         $result = $service->handle($userValueObject);

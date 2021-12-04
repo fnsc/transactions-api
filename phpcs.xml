@@ -13,6 +13,7 @@
     <file>./app</file>
     <file>./tests</file>
     <file>./User</file>
+    <file>./Transfer</file>
 
     <rule ref="LeroyMerlin"/>
 </ruleset>

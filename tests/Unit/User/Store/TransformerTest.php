@@ -4,6 +4,7 @@ namespace User\Store;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Transfer\Account;
 use User\User;
 
 class TransformerTest extends TestCase
@@ -13,10 +14,16 @@ class TransformerTest extends TestCase
         // Set
         $transformer = new Transformer();
         $user = m::mock(User::class);
+        $account = m::mock(Account::class);
+        $token = 'your_new_auth_token';
         $expected = [
             'id' => 1,
             'name' => 'Random Name',
             'type' => 'regular',
+            'account' => [
+                'number' => 'some random account number',
+            ],
+            'token' => 'your_new_auth_token',
         ];
 
         // Expectations
@@ -32,8 +39,16 @@ class TransformerTest extends TestCase
             ->getAttribute('type')
             ->andReturn('regular');
 
+        $user->expects()
+            ->getAttribute('account')
+            ->andReturn($account);
+
+        $account->expects()
+            ->getAttribute('number')
+            ->andReturn('some random account number');
+
         // Actions
-        $result = $transformer->transform($user);
+        $result = $transformer->transform($user, $token);
 
         // Assertions
         $this->assertSame($expected, $result);
