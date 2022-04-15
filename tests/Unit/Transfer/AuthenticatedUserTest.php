@@ -12,7 +12,7 @@ class AuthenticatedUserTest extends TestCase
     public function test_should_return_an_authenticated_user(): void
     {
         // Set
-        $user = Mockery::mock(User::class)->makePartial();
+        $user = new User();
         $user->id = 1;
         $user->name = 'Some Random Name';
         $user->email = 'random@email.com';

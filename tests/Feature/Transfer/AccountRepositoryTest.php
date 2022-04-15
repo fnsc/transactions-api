@@ -79,7 +79,7 @@ class AccountRepositoryTest extends TestCase
         $account = Account::first();
 
         // Assertions
-        $this->assertSame('200', $account->getAttribute('amount'));
+        $this->assertSame(200, $account->getAttribute('amount'));
         $this->assertSame('61a3c6e78e832a50830b8bb1', $account->getAttribute('number'));
     }
 
@@ -92,7 +92,7 @@ class AccountRepositoryTest extends TestCase
             'email' => 'regular_number_one@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '12345678901',
+            'registration_number' => '12345678901',
         ]);
     }
 }

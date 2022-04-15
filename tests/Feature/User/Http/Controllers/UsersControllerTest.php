@@ -19,7 +19,7 @@ class UsersControllerTest extends TestCase
         $data = [
             'name' => 'some random name',
             'email' => 'some@random.com',
-            'fiscal_doc' => '123.456.789-09',
+            'registration_number' => '123.456.789-09',
             'type' => 'regular',
             'password' => 'password',
         ];
@@ -30,16 +30,16 @@ class UsersControllerTest extends TestCase
         // Assertions
         $result->assertStatus(Response::HTTP_CREATED);
         $this->assertDatabaseHas('users', ['name' => 'Some Random Name']);
-        $this->assertDatabaseHas('users', ['fiscal_doc' => '12345678909']);
+        $this->assertDatabaseHas('users', ['registration_number' => '12345678909']);
     }
 
-    public function test_should_not_store_a_user_with_same_fiscal_doc(): void
+    public function test_should_not_store_a_user_with_same_registration_number(): void
     {
         // Set
         $dataOne = [
             'name' => 'some random name',
             'email' => 'some@random.com',
-            'fiscal_doc' => '123.456.789-09',
+            'registration_number' => '123.456.789-09',
             'type' => 'seller',
             'password' => 'password',
         ];
@@ -47,7 +47,7 @@ class UsersControllerTest extends TestCase
         $dataTwo = [
             'name' => 'some random name',
             'email' => 'some2@random.com',
-            'fiscal_doc' => '123.456.789-09',
+            'registration_number' => '123.456.789-09',
             'type' => 'regular',
             'password' => 'password',
         ];
@@ -66,7 +66,7 @@ class UsersControllerTest extends TestCase
         User::create([
             'name' => 'some random name',
             'email' => 'some@random.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'type' => 'regular',
             'password' => bcrypt('secret'),
         ]);

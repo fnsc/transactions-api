@@ -22,7 +22,7 @@ class RepositoryTest extends TestCase
         $userData = [
             'name' => 'Some Random Name',
             'email' => 'random@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'password' => 'secret',
             'type' => 'seller',
         ];
@@ -37,7 +37,7 @@ class RepositoryTest extends TestCase
             ->andReturn('random@email.com');
 
         $userValueObject->expects()
-            ->getFiscalDoc()
+            ->getRegistrationNumber()
             ->andReturn('12345678909');
 
         $userValueObject->expects()
@@ -49,7 +49,7 @@ class RepositoryTest extends TestCase
             ->andReturn($collection);
 
         $userModel->expects()
-            ->where('fiscal_doc', '12345678909')
+            ->where('registration_number', '12345678909')
             ->andReturn($collection);
 
         $userModel->expects()
@@ -105,7 +105,7 @@ class RepositoryTest extends TestCase
         $repository->store($userValueObject);
     }
 
-    public function test_should_throw_an_user_exception_when_fiscal_doc_already_exists(): void
+    public function test_should_throw_an_user_exception_when_registration_number_already_exists(): void
     {
         // Set
         $userModel = m::mock(User::class);
@@ -124,7 +124,7 @@ class RepositoryTest extends TestCase
             ->andReturn('random@email.com');
 
         $userValueObject->expects()
-            ->getFiscalDoc()
+            ->getRegistrationNumber()
             ->andReturn('12345678909');
 
         $userModel->expects()
@@ -132,7 +132,7 @@ class RepositoryTest extends TestCase
             ->andReturn($collection);
 
         $userModel->expects()
-            ->where('fiscal_doc', '12345678909')
+            ->where('registration_number', '12345678909')
             ->andReturn($collection);
 
         $collection->expects()
@@ -164,7 +164,7 @@ class RepositoryTest extends TestCase
         $userData = [
             'name' => 'Some Random Name',
             'email' => 'random@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'password' => 'secret',
             'type' => 'regular',
         ];
@@ -179,7 +179,7 @@ class RepositoryTest extends TestCase
             ->andReturn('random@email.com');
 
         $userValueObject->expects()
-            ->getFiscalDoc()
+            ->getRegistrationNumber()
             ->andReturn('12345678909');
 
         $userValueObject->expects()
@@ -191,7 +191,7 @@ class RepositoryTest extends TestCase
             ->andReturn($collection);
 
         $userModel->expects()
-            ->where('fiscal_doc', '12345678909')
+            ->where('registration_number', '12345678909')
             ->andReturn($collection);
 
         $userModel->expects()

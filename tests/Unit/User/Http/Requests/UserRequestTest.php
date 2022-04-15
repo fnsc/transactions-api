@@ -26,7 +26,7 @@ class UserRequestTest extends TestCase
         $expected = [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,id',
-            'fiscal_doc' => 'required|string|fiscal_doc|unique:users,fiscal_doc,id',
+            'registration_number' => 'required|string|fiscal_doc|unique:users,registration_number,id',
             'type' => 'required|string|in:regular,seller',
             'password' => 'required|min:6',
         ];
@@ -45,7 +45,7 @@ class UserRequestTest extends TestCase
             'query' => [
                 'name' => 'some random name',
                 'email' => 'some@random.com',
-                'fiscal_doc' => '123.456.789-09',
+                'registration_number' => '123.456.789-09',
                 'type' => 'seller',
                 'password' => 'password',
             ],

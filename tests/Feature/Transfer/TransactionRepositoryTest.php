@@ -99,7 +99,7 @@ class TransactionRepositoryTest extends TestCase
             'email' => 'regular_number_one@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '12345678901',
+            'registration_number' => '12345678901',
         ]));
 
         app(UserRepository::class)->store(new UserValueObject([
@@ -107,7 +107,7 @@ class TransactionRepositoryTest extends TestCase
             'email' => 'seller_number_two@email.com',
             'type' => 'seller',
             'password' => 'secret',
-            'fiscal_doc' => '98765432101',
+            'registration_number' => '98765432101',
         ]));
     }
 }

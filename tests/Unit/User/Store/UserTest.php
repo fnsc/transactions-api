@@ -12,7 +12,7 @@ class UserTest extends TestCase
         $user = new User([
             'name' => 'some random name',
             'email' => 'random@email.com',
-            'fiscal_doc' => '123.456.789-09',
+            'registration_number' => '123.456.789-09',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -20,7 +20,7 @@ class UserTest extends TestCase
         // Actions
         $name = $user->getName();
         $email = $user->getEmail();
-        $fiscalDoc = $user->getFiscalDoc();
+        $fiscalDoc = $user->getRegistrationNumber();
         $user->getPassword();
 
         // Assertions

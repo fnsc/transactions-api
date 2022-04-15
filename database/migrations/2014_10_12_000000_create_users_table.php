@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('fiscal_doc')->unique();
+            $table->string('registration_number')->unique();
             $table->string('password');
             $table->enum('type', ['regular', 'seller']);
             $table->rememberToken();

@@ -24,7 +24,7 @@ class RepositoryTest extends TestCase
         $userValueObject = new User([
             'name' => 'some random name',
             'email' => 'some@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -45,7 +45,7 @@ class RepositoryTest extends TestCase
         UserModel::create([
             'name' => 'some random name',
             'email' => 'some@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -54,7 +54,7 @@ class RepositoryTest extends TestCase
         $userValueObject = new User([
             'name' => 'another random name',
             'email' => 'some@email.com',
-            'fiscal_doc' => '12345678911',
+            'registration_number' => '12345678911',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -70,13 +70,13 @@ class RepositoryTest extends TestCase
         $this->assertDatabaseCount('users', 1);
     }
 
-    public function test_should_throw_an_user_exception_when_the_fiscal_doc_already_exists(): void
+    public function test_should_throw_an_user_exception_when_the_registration_number_already_exists(): void
     {
         // Set
         UserModel::create([
             'name' => 'some random name',
             'email' => 'some@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -85,7 +85,7 @@ class RepositoryTest extends TestCase
         $userValueObject = new User([
             'name' => 'another random name',
             'email' => 'another@email.com',
-            'fiscal_doc' => '12345678909',
+            'registration_number' => '12345678909',
             'type' => 'regular',
             'password' => 'secret',
         ]);
@@ -117,7 +117,7 @@ class RepositoryTest extends TestCase
             ->andReturn('some@email.com');
 
         $userValueObject->expects()
-            ->getFiscalDoc()
+            ->getRegistrationNumber()
             ->andReturn('12345678909');
 
         $userValueObject->expects()
@@ -125,7 +125,7 @@ class RepositoryTest extends TestCase
             ->andReturn([
                 'name' => null,
                 'email' => 'some@email.com',
-                'fiscal_doc' => '12345678909',
+                'registration_number' => '12345678909',
                 'type' => 'regular',
                 'password' => 'secret',
             ]);

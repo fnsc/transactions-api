@@ -25,7 +25,7 @@ class User
     /**
      * @var string|mixed
      */
-    private string $fiscalDoc;
+    private string $registrationNumber;
 
     /**
      * @param string
@@ -37,7 +37,7 @@ class User
         $this->name = $data['name'];
         $this->email = $data['email'];
         $this->password = $data['password'];
-        $this->fiscalDoc = $data['fiscal_doc'];
+        $this->registrationNumber = $data['registration_number'];
         $this->type = $data['type'];
     }
 
@@ -56,9 +56,9 @@ class User
         return Hash::make($this->password);
     }
 
-    public function getFiscalDoc(): string
+    public function getRegistrationNumber(): string
     {
-        return preg_replace('/[^0-9]/is', '', $this->fiscalDoc);
+        return preg_replace('/[^0-9]/is', '', $this->registrationNumber);
     }
 
     public function getType(): string
@@ -72,7 +72,7 @@ class User
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'password' => $this->getPassword(),
-            'fiscal_doc' => $this->getFiscalDoc(),
+            'registration_number' => $this->getRegistrationNumber(),
             'type' => $this->getType(),
         ];
     }

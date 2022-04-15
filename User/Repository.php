@@ -33,7 +33,7 @@ class Repository
             throw UserException::emailAlreadyExists();
         }
 
-        if (!$this->isUnique($user->getFiscalDoc(), 'fiscal_doc')) {
+        if (!$this->isUnique($user->getRegistrationNumber(), 'registration_number')) {
             throw UserException::fiscalDocAlreadyExists();
         }
 

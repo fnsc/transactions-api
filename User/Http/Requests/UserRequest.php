@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,id',
-            'fiscal_doc' => 'required|string|fiscal_doc|unique:users,fiscal_doc,id',
+            'registration_number' => 'required|string|fiscal_doc|unique:users,registration_number,id',
             'type' => 'required|string|in:regular,seller',
             'password' => 'required|min:6',
         ];

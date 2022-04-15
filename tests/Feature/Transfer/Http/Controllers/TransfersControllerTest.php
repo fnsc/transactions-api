@@ -31,7 +31,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_one@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '12345678901',
+            'registration_number' => '12345678901',
         ]);
 
         auth()->login($user);
@@ -44,7 +44,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_two@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '98765432101',
+            'registration_number' => '98765432101',
         ]);
         $accountRepository->store($user);
 
@@ -81,7 +81,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_one@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '12345678901',
+            'registration_number' => '12345678901',
         ]);
 
         auth()->login($payer);
@@ -94,7 +94,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_two@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '98765432101',
+            'registration_number' => '98765432101',
         ]);
         $accountRepository->store($payee);
 
@@ -115,8 +115,8 @@ class TransfersControllerTest extends TestCase
         // Assertions
         $result->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
         $this->assertDatabaseMissing('transactions', ['amount' => 10027]);
-        $this->assertSame('0', $payee->account->amount);
-        $this->assertSame('200000', $payer->account->amount);
+        $this->assertSame(0, $payee->account->amount);
+        $this->assertSame(200000, $payer->account->amount);
     }
 
     public function test_should_redirect_when_seller_user_try_to_do_a_transfer(): void
@@ -129,7 +129,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_one@email.com',
             'type' => 'seller',
             'password' => 'secret',
-            'fiscal_doc' => '12345678901',
+            'registration_number' => '12345678901',
         ]);
 
         auth()->login($user);
@@ -142,7 +142,7 @@ class TransfersControllerTest extends TestCase
             'email' => 'regular_number_two@email.com',
             'type' => 'regular',
             'password' => 'secret',
-            'fiscal_doc' => '98765432101',
+            'registration_number' => '98765432101',
         ]);
         $accountRepository->store($user);
 
