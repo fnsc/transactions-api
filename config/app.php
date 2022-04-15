@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Package Service Providers
          */
 
         /*
@@ -175,6 +175,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MoneyServiceProvider::class,
+
+        Transaction\Infra\Providers\AccountServiceProvider::class,
+        Transaction\Infra\Providers\AuthenticatedUserServiceProvider::class,
+        Transaction\Infra\Providers\AuthorizationServiceProvider::class,
+        Transaction\Infra\Providers\EventDispatcherServiceProvider::class,
+        Transaction\Infra\Providers\LoginAdapterServiceProvider::class,
+        Transaction\Infra\Providers\SendTransferNotificationServiceProvider::class,
+        Transaction\Infra\Providers\TransactionServiceProvider::class,
+        Transaction\Infra\Providers\UserServiceProvider::class,
 
     ],
 
