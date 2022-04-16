@@ -11,13 +11,15 @@ use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\InputBoundary;
 use Transaction\Application\StoreTransaction\Service;
 use Transaction\Infra\Http\Requests\TransferRequest;
+use Transaction\Infra\Presenters\TransactionTransformer;
 use Transaction\TransferException;
 
 class TransactionsController extends Controller
 {
     public function __construct(
         private readonly Service $service,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly TransactionTransformer $transformer
     ) {
     }
 
@@ -26,8 +28,14 @@ class TransactionsController extends Controller
         try {
             $input = $this->getInputBoundary($request);
             $result = $this->service->handle($input);
+            $result = $this->transformer->transform($result->getTransaction());
 
-            return new JsonResponse($result, Response::HTTP_ACCEPTED);
+            return new JsonResponse([
+                'message' => 'Success!!!',
+                'data' => [
+                    'transaction' => $result,
+                ],
+            ], Response::HTTP_ACCEPTED);
         } catch (FraudException $exception) {
             $this->logger->alert('Maybe something nasty is happening.', compact('exception'));
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Transaction;
+namespace Tests\Feature\Transaction\Infra\Repositories;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,6 +13,7 @@ use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Infra\Eloquent\User;
 use Transaction\Infra\Repositories\Transaction as TransactionRepository;
 use Transaction\Infra\Repositories\User as UserRepository;
+use function app;
 
 //use Transaction\Infra\Eloquent\Transaction as TransactionModel;
 

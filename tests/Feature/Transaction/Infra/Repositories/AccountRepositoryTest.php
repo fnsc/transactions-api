@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Transaction;
+namespace Tests\Feature\Transaction\Infra\Repositories;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Transaction\Infra\Eloquent\Account;
 use Transaction\Infra\Eloquent\User;
-use Transaction\Infra\Repositories\Account;
+use function app;
 
 class AccountRepositoryTest extends TestCase
 {
@@ -63,7 +63,7 @@ class AccountRepositoryTest extends TestCase
     {
         // Set
         $repository = app(\Transaction\Infra\Repositories\Account::class);
-        Account::create([
+        \Tests\Feature\Transaction\Account::create([
             'number' => '61a3c6e78e832a50830b8bb1',
             'user_id' => 1,
             'amount' => 1000,

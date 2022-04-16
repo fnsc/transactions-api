@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\User;
+namespace Tests\Feature\Transaction\Infra\Repositories;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -10,6 +10,7 @@ use Tests\TestCase;
 use Transaction\Application\StoreUser\User;
 use Transaction\Infra\Eloquent\User as UserModel;
 use User\UserException;
+use function app;
 
 class RepositoryTest extends TestCase
 {

@@ -3,7 +3,6 @@
 namespace Transaction\Application\Events;
 
 use DateTime;
-use Illuminate\Support\Str;
 use Money\Money;
 use Money\MoneyFormatter;
 use Transaction\Application\Contracts\EventInterface;
@@ -47,12 +46,12 @@ class TransferProcessed implements EventInterface
 
     public function getPayee(): string
     {
-        return Str::headline($this->payee);
+        return $this->payee;
     }
 
     public function getPayer(): string
     {
-        return Str::headline($this->payer);
+        return $this->payer;
     }
 
     public function getAmount(): string

@@ -1,14 +1,16 @@
 <?php
 
-namespace Tests\Feature\User\Http\Controllers;
+namespace Tests\Feature\Transaction\Infra\Http\Controllers;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 use Transaction\Infra\Eloquent\User;
+use function bcrypt;
+use function route;
 
-class UsersControllerTest extends TestCase
+class StoreControllerTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
@@ -29,7 +31,7 @@ class UsersControllerTest extends TestCase
 
         // Assertions
         $result->assertStatus(Response::HTTP_CREATED);
-        $this->assertDatabaseHas('users', ['name' => 'Some Random Name']);
+        $this->assertDatabaseHas('users', ['name' => 'some random name']);
         $this->assertDatabaseHas('users', ['registration_number' => '12345678909']);
     }
 

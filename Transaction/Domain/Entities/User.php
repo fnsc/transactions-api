@@ -57,7 +57,7 @@ class User
 
     public function getRegistrationNumber(): string
     {
-        return $this->registrationNumber;
+        return preg_replace('/[^0-9]/is', '', $this->registrationNumber);
     }
 
     public function getToken(): string

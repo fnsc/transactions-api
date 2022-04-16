@@ -3,28 +3,17 @@
 namespace Transaction\Application\StoreTransaction;
 
 use Transaction\Application\Contracts\OutputBoundary as OutputBoundaryInterface;
+use Transaction\Domain\Entities\Transaction;
 
 class OutputBoundary implements OutputBoundaryInterface
 {
     public function __construct(
-        private readonly string $message,
-        private readonly array $data
+        private readonly Transaction $transaction
     ) {
     }
 
-    /**
-     * @return string
-     */
-    public function getMessage(): string
+    public function getTransaction(): Transaction
     {
-        return $this->message;
-    }
-
-    /**
-     * @return array
-     */
-    public function getData(): array
-    {
-        return $this->data;
+        return $this->transaction;
     }
 }

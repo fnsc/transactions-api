@@ -51,7 +51,7 @@ class Service implements ServiceInterface
 
         $this->eventDispatcher->dispatch(new TransferProcessed($transaction, app(MoneyFormatter::class)));
 
-        return new OutputBoundary('You did it!!!', compact('transaction'));
+        return new OutputBoundary($transaction);
     }
 
     private function getTransaction(InputBoundaryInterface $input): Transaction
