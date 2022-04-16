@@ -48,7 +48,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace('User\\Http\\Controllers')
             ->group(base_path('User/routes/api.php'));
     }
 
@@ -56,7 +55,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace('Transfer\\Http\\Controllers')
-            ->group(base_path('Transfer/routes/api.php'));
+            ->group(base_path('Transaction/routes/api.php'));
     }
 }

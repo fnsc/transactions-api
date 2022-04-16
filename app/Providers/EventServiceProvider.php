@@ -5,8 +5,8 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Transfer\Events\TransferProcessed;
-use Transfer\Listeners\SendTransferNotification;
+use Transaction\Application\Events\TransferProcessed;
+use Transaction\Infra\Listeners\SendTransferNotification;
 
 class EventServiceProvider extends ServiceProvider
 {

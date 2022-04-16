@@ -2,16 +2,16 @@
 
 namespace User\Store;
 
+use Transaction\Infra\Repositories\User;
 use User\Login\TokenManager;
-use User\Repository;
 
 class Service
 {
-    private Repository $repository;
+    private User $repository;
     private Transformer $transformer;
     private TokenManager $manager;
 
-    public function __construct(Repository $repository, Transformer $transformer, TokenManager $manager)
+    public function __construct(User $repository, Transformer $transformer, TokenManager $manager)
     {
         $this->repository = $repository;
         $this->transformer = $transformer;

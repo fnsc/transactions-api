@@ -2,7 +2,7 @@
 
 namespace User\Login;
 
-use User\User;
+use Transaction\Infra\Eloquent\User;
 
 class TokenManager
 {

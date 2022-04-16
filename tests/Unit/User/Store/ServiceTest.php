@@ -4,16 +4,16 @@ namespace User\Store;
 
 use Mockery as m;
 use Tests\TestCase;
+use Transaction\Infra\Eloquent\User as UserModel;
+use Transaction\Infra\Repositories\User;
 use User\Login\TokenManager;
-use User\Repository;
-use User\User as UserModel;
 
 class ServiceTest extends TestCase
 {
     public function test_should_handle_with_the_new_user_data(): void
     {
         // Set
-        $repository = m::mock(Repository::class);
+        $repository = m::mock(User::class);
         $transformer = m::mock(Transformer::class);
         $userValueObject = m::mock(User::class);
         $userModel = m::mock(UserModel::class);

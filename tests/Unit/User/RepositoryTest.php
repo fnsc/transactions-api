@@ -5,8 +5,9 @@ namespace User;
 use Illuminate\Support\Collection;
 use Mockery as m;
 use Tests\TestCase;
-use Transfer\Account;
-use Transfer\AccountRepository;
+use Transaction\Infra\Eloquent\Account;
+use Transaction\Infra\Repositories\Account;
+use Transaction\Infra\Repositories\User;
 use User\Store\User as UserValueObject;
 
 class RepositoryTest extends TestCase
@@ -17,8 +18,8 @@ class RepositoryTest extends TestCase
         $userModel = m::mock(User::class);
         $userValueObject = m::mock(UserValueObject::class);
         $collection = m::mock(Collection::class);
-        $accountRepository = m::mock(AccountRepository::class);
-        $repository = new Repository($userModel, $accountRepository);
+        $accountRepository = m::mock(Account::class);
+        $repository = new User($userModel, $accountRepository);
         $userData = [
             'name' => 'Some Random Name',
             'email' => 'random@email.com',
@@ -78,8 +79,8 @@ class RepositoryTest extends TestCase
         $userModel = m::mock(User::class);
         $userValueObject = m::mock(UserValueObject::class);
         $collection = m::mock(Collection::class);
-        $accountRepository = m::mock(AccountRepository::class);
-        $repository = new Repository($userModel, $accountRepository);
+        $accountRepository = m::mock(Account::class);
+        $repository = new User($userModel, $accountRepository);
 
         // Expectations
         $userValueObject->expects()
@@ -111,8 +112,8 @@ class RepositoryTest extends TestCase
         $userModel = m::mock(User::class);
         $userValueObject = m::mock(UserValueObject::class);
         $collection = m::mock(Collection::class);
-        $accountRepository = m::mock(AccountRepository::class);
-        $repository = new Repository($userModel, $accountRepository);
+        $accountRepository = m::mock(Account::class);
+        $repository = new User($userModel, $accountRepository);
 
         // Expectations
         $userValueObject->expects()
@@ -159,8 +160,8 @@ class RepositoryTest extends TestCase
         $userModel = m::mock(User::class);
         $userValueObject = m::mock(UserValueObject::class);
         $collection = m::mock(Collection::class);
-        $accountRepository = m::mock(AccountRepository::class);
-        $repository = new Repository($userModel, $accountRepository);
+        $accountRepository = m::mock(Account::class);
+        $repository = new User($userModel, $accountRepository);
         $userData = [
             'name' => 'Some Random Name',
             'email' => 'random@email.com',
@@ -215,8 +216,8 @@ class RepositoryTest extends TestCase
         // Set
         $userModel = m::mock(User::class);
         $userValueObject = m::mock(UserValueObject::class);
-        $accountRepository = m::mock(AccountRepository::class);
-        $repository = new Repository($userModel, $accountRepository);
+        $accountRepository = m::mock(Account::class);
+        $repository = new User($userModel, $accountRepository);
 
         // Expectations
         $userValueObject->expects()

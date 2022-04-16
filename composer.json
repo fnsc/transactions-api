@@ -27,16 +27,15 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Transfer\\": "Transfer/",
+            "Transaction\\": "Transaction/",
             "User\\": "User/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Transfer\\": "tests/Unit/Transfer",
+            "Transaction\\\\": "tests/Unit/Transaction",
             "User\\": "tests/Unit/User"
         }
     },

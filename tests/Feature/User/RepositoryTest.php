@@ -7,9 +7,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Tests\TestCase;
-use User\Repository;
+use Transaction\Infra\Eloquent\User as UserModel;
 use User\Store\User;
-use User\User as UserModel;
 use User\UserException;
 
 class RepositoryTest extends TestCase
@@ -20,7 +19,7 @@ class RepositoryTest extends TestCase
     public function test_should_store_the_new_user(): void
     {
         // Set
-        $repository = app(Repository::class);
+        $repository = app(\Transaction\Infra\Repositories\User::class);
         $userValueObject = new User([
             'name' => 'some random name',
             'email' => 'some@email.com',
@@ -50,7 +49,7 @@ class RepositoryTest extends TestCase
             'password' => 'secret',
         ]);
 
-        $repository = app(Repository::class);
+        $repository = app(\Transaction\Infra\Repositories\User::class);
         $userValueObject = new User([
             'name' => 'another random name',
             'email' => 'some@email.com',
@@ -81,7 +80,7 @@ class RepositoryTest extends TestCase
             'password' => 'secret',
         ]);
 
-        $repository = app(Repository::class);
+        $repository = app(\Transaction\Infra\Repositories\User::class);
         $userValueObject = new User([
             'name' => 'another random name',
             'email' => 'another@email.com',
@@ -104,7 +103,7 @@ class RepositoryTest extends TestCase
     public function test_should_throw_an_user_exception_when_something_went_wrong_with_the_database(): void
     {
         // Set
-        $repository = app(Repository::class);
+        $repository = app(\Transaction\Infra\Repositories\User::class);
         $userValueObject = m::mock(User::class);
 
         // Expectations

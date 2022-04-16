@@ -4,8 +4,8 @@ namespace User\Store;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Transfer\Account;
-use User\User;
+use Transaction\Infra\Eloquent\Account;
+use Transaction\Infra\Eloquent\User;
 
 class TransformerTest extends TestCase
 {

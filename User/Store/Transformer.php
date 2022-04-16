@@ -2,7 +2,7 @@
 
 namespace User\Store;
 
-use User\User;
+use Transaction\Infra\Eloquent\User;
 
 class Transformer
 {

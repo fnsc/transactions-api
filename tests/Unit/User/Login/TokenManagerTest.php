@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Laravel\Sanctum\NewAccessToken;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use User\User;
+use Transaction\Infra\Eloquent\User;
 
 class TokenManagerTest extends TestCase
 {

@@ -3,16 +3,15 @@
 namespace User\Login;
 
 use Illuminate\Support\Facades\Auth;
+use Transaction\Infra\Eloquent\User;
 use User\LoginException;
-use User\Repository;
-use User\User;
 
 class Service
 {
     private TokenManager $manager;
-    private Repository $repository;
+    private User $repository;
 
-    public function __construct(TokenManager $manager, Repository $repository)
+    public function __construct(TokenManager $manager, User $repository)
     {
         $this->manager = $manager;
         $this->repository = $repository;

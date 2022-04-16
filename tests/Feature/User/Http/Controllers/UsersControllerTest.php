@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
-use User\User;
+use Transaction\Infra\Eloquent\User;
 
 class UsersControllerTest extends TestCase
 {
