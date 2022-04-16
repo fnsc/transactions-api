@@ -7,7 +7,7 @@ use Transaction\Domain\Entities\User;
 
 interface AccountRepository
 {
-    public function find(int $accountId): ?Account;
+    public function find(Account $account): ?Account;
 
     public function findByUser(User $user): Account;
 

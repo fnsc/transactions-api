@@ -9,11 +9,8 @@ class Service
 {
     private const AUTHORIZED = 'Autorizado';
 
-    private Client $client;
-
-    public function __construct(Client $client)
+    public function __construct(private readonly Client $client)
     {
-        $this->client = $client;
     }
 
     public function handle(Transaction $transaction): bool

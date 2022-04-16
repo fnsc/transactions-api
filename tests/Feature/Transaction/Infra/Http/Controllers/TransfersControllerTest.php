@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
+use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;
@@ -27,7 +28,7 @@ class TransfersControllerTest extends TestCase
         $accountRepository = app(AccountRepository::class);
         $authorizationService = $this->instance(
             AuthorizationService::class,
-            $this->createMock(AuthorizationService::class)
+            m::mock(AuthorizationService::class)
         );
 
         $this->setPayerScenario($accountRepository);
@@ -40,10 +41,9 @@ class TransfersControllerTest extends TestCase
         ];
 
         // Expected
-        $authorizationService->expects($this->once())
-            ->method('handle')
-            ->with(m::type(TransactionEntity::class))
-            ->willReturn(true);
+        $authorizationService->expects()
+            ->handle(m::type(TransactionEntity::class))
+            ->andReturnTrue();
 
         // Actions
         $result = $this->post(route('api.v1.transfers.store'), $data);
@@ -59,7 +59,7 @@ class TransfersControllerTest extends TestCase
         $accountRepository = app(AccountRepository::class);
         $authorizationService = $this->instance(
             AuthorizationService::class,
-            $this->createMock(AuthorizationService::class)
+            m::mock(AuthorizationService::class)
         );
 
         $this->setPayerScenario($accountRepository);
@@ -72,10 +72,9 @@ class TransfersControllerTest extends TestCase
         ];
 
         // Expectations
-        $authorizationService->expects($this->once())
-            ->method('handle')
-            ->with(m::mock(TransactionEntity::class))
-            ->willReturn(false);
+        $authorizationService->expects()
+            ->handle(m::type(TransactionEntity::class))
+            ->andReturnFalse();
 
         // Actions
         $result = $this->post(route('api.v1.transfers.store'), $data);
@@ -83,8 +82,6 @@ class TransfersControllerTest extends TestCase
         // Assertions
         $result->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
         $this->assertDatabaseMissing('transactions', ['amount' => 10027]);
-//        $this->assertSame(0, $payee->account->amount);
-//        $this->assertSame(200000, $payer->account->amount);
     }
 
     public function test_should_redirect_when_seller_user_try_to_do_a_transfer(): void
@@ -92,27 +89,21 @@ class TransfersControllerTest extends TestCase
         // Set
         $accountRepository = app(AccountRepository::class);
 
-        $user = UserModel::create([
-            'name' => 'Regular User #1',
-            'email' => 'regular_number_one@email.com',
+        $payer = UserModel::create([
+            'name' => 'Seller User #1',
+            'email' => 'seller_number_one@email.com',
             'type' => 'seller',
             'password' => 'secret',
             'registration_number' => '12345678901',
         ]);
 
-        auth()->login($user);
-        $account = $accountRepository->store($user);
-        $account->amount = 200000;
-        $account->update();
+        auth()->login($payer);
+        $payer = UserEntity::newUser($payer->id, $payer->email, $payer->registration_number, $payer->type);
+        $account = $accountRepository->store($payer);
+        $account->setAmount(200000);
+        $accountRepository->update($account);
 
-        $user = UserModel::create([
-            'name' => 'Regular User #2',
-            'email' => 'regular_number_two@email.com',
-            'type' => 'regular',
-            'password' => 'secret',
-            'registration_number' => '98765432101',
-        ]);
-        $accountRepository->store($user);
+        $this->setPayeeScenario($accountRepository);
 
         $data = [
             'payer_id' => 1,

@@ -13,11 +13,20 @@ class Account implements AccountRepositoryInterface
 {
     use GenerateObjectId;
 
-    public function find(int $accountId): ?AccountEntity
+    public function find(AccountEntity $account): ?AccountEntity
     {
         $accountModel = $this->getModel();
 
-        return $accountModel->where('id', $accountId)->first();
+        if (!$accountModel = $accountModel->where('id', $account->getId())->first()) {
+            return null;
+        }
+
+        return new AccountEntity(
+            amount: $accountModel->getAttribute('amount'),
+            userId: $accountModel->getAttribute('user_id'),
+            number: $accountModel->getAttribute('number'),
+            id: $accountModel->getAttribute('id')
+        );
     }
 
     public function findByUser(UserEntity $user): AccountEntity

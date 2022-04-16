@@ -7,9 +7,9 @@ use Money\Money;
 class Account
 {
     public function __construct(
-        private int $amount,
-        private readonly int $userId,
-        private readonly string $number,
+        private int $amount = 0,
+        private readonly int $userId = 0,
+        private readonly string $number = '',
         private readonly int $id = 0,
     ) {
     }

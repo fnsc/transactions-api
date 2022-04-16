@@ -10,7 +10,7 @@ use Transaction\Infra\Eloquent\User;
 use function bcrypt;
 use function route;
 
-class StoreControllerTest extends TestCase
+class StoreUserControllerTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;

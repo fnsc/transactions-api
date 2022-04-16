@@ -5,11 +5,14 @@ namespace Tests\Feature\Transaction\Infra\Repositories;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Transaction\Infra\Eloquent\Account;
-use Transaction\Infra\Eloquent\User;
+use Transaction\Domain\Entities\Account as AccountEntity;
+use Transaction\Domain\Entities\User;
+use Transaction\Infra\Eloquent\Account as AccountModel;
+use Transaction\Infra\Eloquent\User as UserModel;
+use Transaction\Infra\Repositories\Account as AccountRepository;
 use function app;
 
-class AccountRepositoryTest extends TestCase
+class AccountTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
@@ -17,29 +20,29 @@ class AccountRepositoryTest extends TestCase
     public function test_should_return_the_required_account(): void
     {
         // Set
-        \Transaction\Infra\Eloquent\Account::create([
+        AccountModel::create([
             'number' => '61a3c6e78e832a50830b8bb1',
             'user_id' => 1,
             'amount' => 1000,
         ]);
 
-        $repository = app(\Transaction\Infra\Repositories\Account::class);
+        $repository = app(AccountRepository::class);
 
         // Actions
-        $result = $repository->find(1);
+        $result = $repository->find(new AccountEntity(id: 1));
 
         // Assertions
-        $this->assertInstanceOf(\Transaction\Infra\Eloquent\Account::class, $result);
-        $this->assertSame('61a3c6e78e832a50830b8bb1', $result->getAttribute('number'));
+        $this->assertInstanceOf(AccountEntity::class, $result);
+        $this->assertSame('61a3c6e78e832a50830b8bb1', $result->getNumber());
     }
 
     public function test_should_return_null_when_the_account_not_found(): void
     {
         // Set
-        $repository = app(\Transaction\Infra\Repositories\Account::class);
+        $repository = app(AccountRepository::class);
 
         // Actions
-        $result = $repository->find(1);
+        $result = $repository->find(new AccountEntity(id: 1));
 
         // Assertions
         $this->assertNull($result);
@@ -48,22 +51,21 @@ class AccountRepositoryTest extends TestCase
     public function test_should_store_a_new_account(): void
     {
         // Set
-        $repository = app(Account::class);
-        $user = User::first();
+        $repository = app(AccountRepository::class);
 
         // Actions
-        $result = $repository->store($user);
+        $result = $repository->store(User::newUser(id: 1));
 
         // Assertions
-        $this->assertInstanceOf(\Transaction\Infra\Eloquent\Account::class, $result);
-        $this->assertSame(0, $result->getAttribute('amount'));
+        $this->assertInstanceOf(AccountEntity::class, $result);
+        $this->assertSame('0', $result->getAmount()->getAmount());
     }
 
     public function test_should_update_the_given_account(): void
     {
         // Set
-        $repository = app(\Transaction\Infra\Repositories\Account::class);
-        \Tests\Feature\Transaction\Account::create([
+        $repository = app(AccountRepository::class);
+        AccountModel::create([
             'number' => '61a3c6e78e832a50830b8bb1',
             'user_id' => 1,
             'amount' => 1000,
@@ -75,8 +77,14 @@ class AccountRepositoryTest extends TestCase
         ];
 
         // Actions
-        $repository->update($data, 1);
-        $account = \Transaction\Infra\Eloquent\Account::first();
+        $repository->update(
+            new AccountEntity(
+                amount: 200,
+                number: 'random number',
+                id: 1
+            )
+        );
+        $account = AccountModel::first();
 
         // Assertions
         $this->assertSame(200, $account->getAttribute('amount'));
@@ -87,7 +95,7 @@ class AccountRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        User::create([
+        UserModel::create([
             'name' => 'Regular User #1',
             'email' => 'regular_number_one@email.com',
             'type' => 'regular',

@@ -18,15 +18,13 @@ class TransactionTransformer
     public function transform(Transaction $transaction): array
     {
         $amount = $transaction->getAmount();
-        $payerFiscalDoc = $transaction->getPayer()
-            ->getRegistrationNumber();
-        $payeeFiscalDoc = $transaction->getPayee()
-            ->getRegistrationNumber();
+        $payerRegistrationNumber = $transaction->getPayer()->getRegistrationNumber();
+        $payeeRegistrationNumber = $transaction->getPayee()->getRegistrationNumber();
 
         return [
             'number' => $transaction->getNumber(),
-            'payerFiscalDoc' => $payerFiscalDoc,
-            'payeeFiscalDoc' => $payeeFiscalDoc,
+            'payerRegistrationNumber' => $payerRegistrationNumber,
+            'payeeRegistrationNumber' => $payeeRegistrationNumber,
             'amount' => $this->getFormattedAmount($amount),
         ];
     }

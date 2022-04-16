@@ -42,7 +42,7 @@ class TransactionsController extends Controller
             return new JsonResponse([
                 'message' => $exception->getMessage(),
                 'data' => [],
-            ], $exception->getCode());
+            ], Response::HTTP_NOT_ACCEPTABLE);
         } catch (TransferException $exception) {
             $this->logger->notice(
                 'Something went wrong while we transferring the solicited amount.',
