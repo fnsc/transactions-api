@@ -1,6 +1,6 @@
 <?php
 
-namespace Transaction\Application\Store;
+namespace Transaction\Application\StoreTransaction;
 
 use Money\MoneyFormatter;
 use Transaction\Application\Contracts\AuthenticatedUserAdapter;

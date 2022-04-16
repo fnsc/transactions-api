@@ -1,8 +1,9 @@
 <?php
 
-namespace User\Store;
+namespace User\StoreUser;
 
 use Tests\TestCase;
+use Transaction\Application\StoreUser\User;
 
 class UserTest extends TestCase
 {

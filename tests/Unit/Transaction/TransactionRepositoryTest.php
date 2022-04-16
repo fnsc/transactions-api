@@ -7,7 +7,7 @@ use Mockery as m;
 use Money\Money;
 use Tests\TestCase;
 use Transaction\Application\Authorization\Service;
-use Transaction\Application\Store\FraudException;
+use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Domain\Entities\Transaction;
 use Transaction\Infra\Eloquent\Account;
 use Transaction\Infra\Eloquent\User;

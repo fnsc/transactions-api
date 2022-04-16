@@ -1,9 +1,10 @@
 <?php
 
-namespace User\Store;
+namespace User\StoreUser;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Transaction\Application\StoreUser\Transformer;
 use Transaction\Infra\Eloquent\Account;
 use Transaction\Infra\Eloquent\User;
 

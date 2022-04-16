@@ -10,18 +10,19 @@ class User
     private Account $account;
 
     public static function newUser(
-        int $id,
+        int $id = 0,
         string $name = '',
         string $email = '',
         string $registrationNumber = '',
         string $type = '',
-        string $password = ''
+        string $password = '',
+        string $token = ''
     ): self
     {
         $email = new Email($email);
         $password = app(Password::class, ['password' => $password]);
 
-        return new static($id, $name, $registrationNumber, $email, $password, $type);
+        return new static($id, $name, $registrationNumber, $email, $password, $type, $token);
     }
 
     public function getId(): int
@@ -44,7 +45,7 @@ class User
         return $this->type;
     }
 
-    public function getPassword(): string
+    public function getPassword(): Password
     {
         return $this->password;
     }
@@ -59,6 +60,11 @@ class User
         return $this->registrationNumber;
     }
 
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
     public function setAccount(Account $account): void
     {
         $this->account = $account;
@@ -70,7 +76,8 @@ class User
         private readonly string $registrationNumber,
         private readonly Email $email,
         private readonly Password $password,
-        private readonly string $type
+        private readonly string $type,
+        private readonly string $token
     ) {
     }
 }

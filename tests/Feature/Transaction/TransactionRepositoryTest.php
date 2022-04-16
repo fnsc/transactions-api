@@ -7,13 +7,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Tests\TestCase;
 use Transaction\Application\Authorization\Service as AuthorizationService;
-use Transaction\Application\Store\FraudException;
-//use Transaction\Infra\Eloquent\Transaction as TransactionModel;
+use Transaction\Application\StoreTransaction\FraudException;
+use Transaction\Application\StoreUser\User as UserValueObject;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Infra\Eloquent\User;
 use Transaction\Infra\Repositories\Transaction as TransactionRepository;
 use Transaction\Infra\Repositories\User as UserRepository;
-use User\Store\User as UserValueObject;
+
+//use Transaction\Infra\Eloquent\Transaction as TransactionModel;
 
 class TransactionRepositoryTest extends TestCase
 {

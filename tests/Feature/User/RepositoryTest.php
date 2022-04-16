@@ -7,8 +7,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Tests\TestCase;
+use Transaction\Application\StoreUser\User;
 use Transaction\Infra\Eloquent\User as UserModel;
-use User\Store\User;
 use User\UserException;
 
 class RepositoryTest extends TestCase

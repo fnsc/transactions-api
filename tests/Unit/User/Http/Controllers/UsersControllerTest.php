@@ -7,12 +7,13 @@ use Illuminate\Http\Response;
 use Mockery as m;
 use Psr\Log\LoggerInterface;
 use Tests\TestCase;
-use User\Http\Requests\LoginRequest;
-use User\Http\Requests\UserRequest;
-use User\Login\Service as LoginService;
+use Transaction\Application\Login\Service as LoginService;
+use Transaction\Application\StoreUser\Service;
+use Transaction\Application\StoreUser\User;
+use Transaction\Infra\Http\Controllers\UsersController;
+use Transaction\Infra\Http\Requests\LoginRequest;
+use Transaction\Infra\Http\Requests\UserRequest;
 use User\LoginException;
-use User\Store\Service;
-use User\Store\User;
 use User\UserException;
 
 class UsersControllerTest extends TestCase

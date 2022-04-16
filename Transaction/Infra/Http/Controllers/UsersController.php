@@ -1,41 +1,54 @@
 <?php
 
-namespace User\Http\Controllers;
+namespace Transaction\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Psr\Log\LoggerInterface;
-use User\Http\Requests\LoginRequest;
-use User\Http\Requests\UserRequest;
-use User\Login\Service as LoginService;
+use Transaction\Application\Login\Service as LoginService;
+use Transaction\Application\StoreUser\InputBoundary;
+use Transaction\Application\StoreUser\Service;
+use Transaction\Infra\Http\Requests\LoginRequest;
+use Transaction\Infra\Http\Requests\UserRequest;
+use Transaction\Infra\Presenters\UserTransformer;
 use User\LoginException;
-use User\Store\Service;
 use User\UserException;
+use function response;
 
 class UsersController extends Controller
 {
-    public function store(UserRequest $request, Service $service, LoggerInterface $logger): JsonResponse
+    public function __construct(
+        private readonly Service $service,
+        private readonly UserTransformer $transformer,
+        private readonly LoggerInterface $logger
+    ) {
+    }
+
+    public function store(UserRequest $request): JsonResponse
     {
         try {
-            $user = $service->handle($request->getUserValueObject());
+            $input = $this->getInputBoundary($request);
+            $output = $this->service->handle($input);
+
+            $result = $this->transformer->transform($output->getUser());
 
             return response()->json([
                 'message' => 'Success',
                 'data' => [
-                    'user' => $user,
+                    'user' => $result,
                 ],
             ], Response::HTTP_CREATED);
         } catch (UserException $exception) {
-            $logger->notice('Something went wrong while storing the user', compact('exception'));
+            $this->logger->notice('Something went wrong while storing the user', compact('exception'));
 
             return response()->json([
                 'message' => $exception->getMessage(),
                 'data' => [],
             ], $exception->getCode());
         } catch (Exception $exception) {
-            $logger->warning('Something went wrong.', compact('exception'));
+            $this->logger->warning('Something went wrong.', compact('exception'));
 
             return response()->json([
                 'message' => 'Error',
@@ -68,5 +81,16 @@ class UsersController extends Controller
                 'data' => [],
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private function getInputBoundary(UserRequest $request): InputBoundary
+    {
+        return new InputBoundary(
+            $request->get('name'),
+            $request->get('email'),
+            $request->get('registration_number'),
+            $request->get('type'),
+            $request->get('password'),
+        );
     }
 }

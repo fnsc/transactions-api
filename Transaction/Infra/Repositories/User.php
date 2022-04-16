@@ -51,13 +51,21 @@ class User implements UserRepository
 
         $userModel = $this->getModel();
 
-        $user = $userModel->create($user->toArray());
+        $user = $userModel->create([
+            'name' => $user->getName(),
+            'email' => $user->getEmail(),
+            'password' => (string) $user->getPassword(),
+            'registration_number' => $user->getRegistrationNumber(),
+            'type' => $user->getType(),
+        ]);
 
         if (!$user) {
             throw UserException::failedStoring();
         }
 
-        $this->accountRepository->store($user);
+        $user = $this->getNewUser($user);
+        $account = $this->accountRepository->store($user);
+        $user->setAccount($account);
 
         return $user;
     }
@@ -65,8 +73,25 @@ class User implements UserRepository
     public function findByEmail(mixed $email): ?UserEntity
     {
         $userModel = $this->getModel();
+        $userModel = $userModel->where('email', $email)->first();
 
-        return $userModel->where('email', $email)->first();
+        return $this->getNewUser($userModel);
+    }
+
+    public function authenticate(UserEntity $user): UserEntity
+    {
+        $userModel = $this->getModel();
+        $userModel = $userModel->whereId($user->getId())->first();
+        $userModel->tokens()->delete();
+
+        return UserEntity::newUser(
+            id: $userModel->getAttribute('id'),
+            name: $userModel->getAttribute('name'),
+            email: $userModel->getAttribute('email'),
+            registrationNumber: $userModel->getAttribute('registration_number'),
+            type: $userModel->getAttribute('type'),
+            token: $userModel->createToken('auth')->plainTextToken
+        );
     }
 
     private function isUnique(mixed $value, string $field): bool
@@ -91,7 +116,7 @@ class User implements UserRepository
         );
     }
 
-    private function getNewUser($userModel): UserEntity
+    private function getNewUser(UserModel $userModel): UserEntity
     {
         return UserEntity::newUser(
             $userModel->getAttribute('id'),

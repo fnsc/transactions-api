@@ -3,7 +3,9 @@
 namespace User\Http\Requests;
 
 use PHPUnit\Framework\TestCase;
-use User\Store\User;
+use Transaction\Application\StoreUser\User;
+use Transaction\Infra\Http\Requests\LoginRequest;
+use Transaction\Infra\Http\Requests\UserRequest;
 
 class UserRequestTest extends TestCase
 {

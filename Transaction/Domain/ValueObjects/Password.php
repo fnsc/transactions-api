@@ -24,4 +24,9 @@ class Password implements Stringable
 
         return $this->hasher->make($this->password);
     }
+
+    public function getPlainPassword(): string
+    {
+        return $this->password;
+    }
 }

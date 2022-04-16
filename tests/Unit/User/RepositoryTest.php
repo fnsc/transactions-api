@@ -5,10 +5,9 @@ namespace User;
 use Illuminate\Support\Collection;
 use Mockery as m;
 use Tests\TestCase;
+use Transaction\Application\StoreUser\User as UserValueObject;
 use Transaction\Infra\Eloquent\Account;
-use Transaction\Infra\Repositories\Account;
 use Transaction\Infra\Repositories\User;
-use User\Store\User as UserValueObject;
 
 class RepositoryTest extends TestCase
 {

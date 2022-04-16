@@ -182,6 +182,7 @@ return [
         Transaction\Infra\Providers\EventDispatcherServiceProvider::class,
         Transaction\Infra\Providers\UserServiceProvider::class,
         Transaction\Infra\Providers\AuthenticatedUserServiceProvider::class,
+        Transaction\Infra\Providers\LoginAdapterServiceProvider::class,
 
     ],
 

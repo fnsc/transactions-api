@@ -1,6 +1,6 @@
 <?php
 
-namespace Transaction\Application\Store;
+namespace Transaction\Application\StoreTransaction;
 
 use Transaction\Application\Contracts\InputBoundary as InputBoundaryInterface;
 

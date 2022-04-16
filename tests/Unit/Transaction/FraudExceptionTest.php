@@ -4,7 +4,7 @@ namespace Transaction;
 
 use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
-use Transaction\Application\Store\FraudException;
+use Transaction\Application\StoreTransaction\FraudException;
 
 class FraudExceptionTest extends TestCase
 {

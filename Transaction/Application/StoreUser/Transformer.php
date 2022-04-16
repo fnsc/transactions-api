@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Store;
+namespace Transaction\Application\StoreUser;
 
 use Transaction\Infra\Eloquent\User;
 

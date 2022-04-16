@@ -1,12 +1,14 @@
 <?php
 
-namespace User\Store;
+namespace User\StoreUser;
 
 use Mockery as m;
 use Tests\TestCase;
+use Transaction\Application\StoreUser\Service;
+use Transaction\Application\StoreUser\Transformer;
+use Transaction\Infra\Adapters\TokenManager;
 use Transaction\Infra\Eloquent\User as UserModel;
 use Transaction\Infra\Repositories\User;
-use User\Login\TokenManager;
 
 class ServiceTest extends TestCase
 {

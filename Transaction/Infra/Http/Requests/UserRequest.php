@@ -1,9 +1,9 @@
 <?php
 
-namespace User\Http\Requests;
+namespace Transaction\Infra\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use User\Store\User as UserValueObject;
+use Transaction\Application\StoreUser\User as UserValueObject;
 
 class UserRequest extends FormRequest
 {
