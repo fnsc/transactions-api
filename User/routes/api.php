@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Transaction\Infra\Http\Controllers\UsersController;
+use Transaction\Infra\Http\Controllers\LoginController;
+use Transaction\Infra\Http\Controllers\StoreUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,6 @@ Route::group([
     'prefix' => 'v1/users',
     'as' => 'api.v1.users',
 ], function () {
-    Route::post('', [UsersController::class, 'store'])->name('.store');
-    Route::post('login', [UsersController::class, 'login'])->name('.login');
+    Route::post('', [StoreUsersController::class, 'store'])->name('.store');
+    Route::post('login', [LoginController::class, 'login'])->name('.login');
 });

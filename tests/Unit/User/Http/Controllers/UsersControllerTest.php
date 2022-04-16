@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Transaction\Application\Login\Service as LoginService;
 use Transaction\Application\StoreUser\Service;
 use Transaction\Application\StoreUser\User;
-use Transaction\Infra\Http\Controllers\UsersController;
+use Transaction\Infra\Http\Controllers\StoreUsersController;
 use Transaction\Infra\Http\Requests\LoginRequest;
 use Transaction\Infra\Http\Requests\UserRequest;
 use User\LoginException;
@@ -25,7 +25,7 @@ class UsersControllerTest extends TestCase
         $service = m::mock(Service::class);
         $logger = m::mock(LoggerInterface::class);
         $userValueObject = $this->instance(User::class, m::mock(User::class));
-        $controller = new UsersController();
+        $controller = new StoreUsersController();
 
         // Expectations
         $request->expects()
@@ -62,7 +62,7 @@ class UsersControllerTest extends TestCase
         $service = m::mock(Service::class);
         $logger = m::mock(LoggerInterface::class);
         $userValueObject = $this->instance(User::class, m::mock(User::class));
-        $controller = new UsersController();
+        $controller = new StoreUsersController();
 
         // Expectations
         $request->expects()
@@ -132,7 +132,7 @@ class UsersControllerTest extends TestCase
         $request = m::mock(LoginRequest::class);
         $service = m::mock(LoginService::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new UsersController();
+        $controller = new StoreUsersController();
         $requestData = [
             'email' => 'random@email.com',
             'password' => 'secret',
@@ -191,7 +191,7 @@ class UsersControllerTest extends TestCase
         $request = m::mock(LoginRequest::class);
         $service = m::mock(LoginService::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new UsersController();
+        $controller = new StoreUsersController();
         $requestData = [
             'email' => 'random@email.com',
             'password' => 'secret',

@@ -13,7 +13,7 @@ use Transaction\Application\StoreTransaction\Service;
 use Transaction\Infra\Http\Requests\TransferRequest;
 use Transaction\TransferException;
 
-class TransfersController extends Controller
+class TransactionsController extends Controller
 {
     public function __construct(
         private readonly Service $service,

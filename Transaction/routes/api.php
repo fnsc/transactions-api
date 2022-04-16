@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Transaction\Infra\Http\Controllers\TransfersController;
+use Transaction\Infra\Http\Controllers\TransactionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +18,13 @@ Route::group([
     'prefix' => 'v1/transfers',
     'as' => 'api.v1.transfers',
 ], function () {
-    Route::post('', [TransfersController::class, 'store'])
+    Route::post('', [TransactionsController::class, 'store'])
         ->middleware(['auth:sanctum', 'can.send.transfer'])
         ->name('.store');
 
-    Route::get('forbidden', [TransfersController::class, 'forbidden'])
+    Route::get('forbidden', [TransactionsController::class, 'forbidden'])
         ->name('.forbidden');
 
-    Route::get('unauthorized', [TransfersController::class, 'unauthorized'])
+    Route::get('unauthorized', [TransactionsController::class, 'unauthorized'])
         ->name('.unauthorized');
 });

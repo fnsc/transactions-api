@@ -11,7 +11,7 @@ use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\Service;
 use Transaction\Domain\Entities\User;
 use Transaction\Domain\Entities\Transaction;
-use Transaction\Infra\Http\Controllers\TransfersController;
+use Transaction\Infra\Http\Controllers\TransactionsController;
 use Transaction\Infra\Http\Requests\TransferRequest;
 use Transaction\TransferException;
 
@@ -23,7 +23,7 @@ class TransfersControllerTest extends TestCase
         $request = m::mock(TransferRequest::class);
         $service = m::mock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new TransfersController();
+        $controller = new TransactionsController();
         $expected = [
             'message' => 'You did it!!!',
             'data' => [],
@@ -66,7 +66,7 @@ class TransfersControllerTest extends TestCase
         $request = m::mock(TransferRequest::class);
         $service = m::mock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new TransfersController();
+        $controller = new TransactionsController();
         $expected = [
             'message' => $exceptionMessage,
             'data' => [],

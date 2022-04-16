@@ -15,9 +15,8 @@ use Transaction\Infra\Http\Requests\UserRequest;
 use Transaction\Infra\Presenters\UserTransformer;
 use User\LoginException;
 use User\UserException;
-use function response;
 
-class UsersController extends Controller
+class StoreUsersController extends Controller
 {
     public function __construct(
         private readonly Service $service,
@@ -35,7 +34,7 @@ class UsersController extends Controller
             $result = $this->transformer->transform($output->getUser());
 
             return response()->json([
-                'message' => 'Success',
+                'message' => 'Success!!!',
                 'data' => [
                     'user' => $result,
                 ],
