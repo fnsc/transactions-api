@@ -6,9 +6,9 @@ use Transaction\Application\Contracts\InputBoundary as InputBoundaryInterface;
 use Transaction\Application\Contracts\LoginAdapter;
 use Transaction\Application\Contracts\OutputBoundary as OutputBoundaryInterface;
 use Transaction\Application\Contracts\ServiceInterface;
+use Transaction\Application\Exceptions\LoginException;
 use Transaction\Domain\Contracts\UserRepository;
 use Transaction\Domain\Entities\User as UserEntity;
-use User\LoginException;
 
 class Service implements ServiceInterface
 {

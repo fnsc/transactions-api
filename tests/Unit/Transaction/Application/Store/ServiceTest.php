@@ -7,14 +7,13 @@ use Illuminate\Http\Response;
 use Mockery as m;
 use Money\Money;
 use Tests\TestCase;
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\Service;
-use Transaction\Domain\Entities\Transaction;
 use Transaction\Domain\Entities\User;
 use Transaction\Infra\Eloquent\Account;
-use Transaction\Infra\Repositories\User as UserRepository;
 use Transaction\Infra\Repositories\Transaction;
-use Transaction\TransferException;
+use Transaction\Infra\Repositories\User as UserRepository;
 
 class ServiceTest extends TestCase
 {

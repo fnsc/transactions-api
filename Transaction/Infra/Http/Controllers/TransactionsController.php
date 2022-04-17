@@ -7,12 +7,12 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Psr\Log\LoggerInterface;
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\InputBoundary;
 use Transaction\Application\StoreTransaction\Service;
 use Transaction\Infra\Http\Requests\TransferRequest;
 use Transaction\Infra\Presenters\TransactionTransformer;
-use Transaction\TransferException;
 
 class TransactionsController extends Controller
 {

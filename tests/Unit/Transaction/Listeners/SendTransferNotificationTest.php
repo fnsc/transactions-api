@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Transaction\Application\Events\TransferProcessed;
-use Transaction\Infra\Client\NotificationClient;
+use Transaction\Application\Exceptions\TransferException;
+use Transaction\Infra\Client\Notification;
 use Transaction\Infra\Listeners\SendTransferNotification;
-use Transaction\TransferException;
 
 class SendTransferNotificationTest extends TestCase
 {
@@ -18,7 +18,7 @@ class SendTransferNotificationTest extends TestCase
     {
         // Set
         $event = m::mock(TransferProcessed::class);
-        $client = m::mock(NotificationClient::class);
+        $client = m::mock(Notification::class);
         $response = m::mock(ResponseInterface::class);
         $body = m::mock(StreamInterface::class);
         $listener = new SendTransferNotification($client);
@@ -51,7 +51,7 @@ class SendTransferNotificationTest extends TestCase
     {
         // Set
         $event = m::mock(TransferProcessed::class);
-        $client = m::mock(NotificationClient::class);
+        $client = m::mock(Notification::class);
         $response = m::mock(ResponseInterface::class);
         $body = m::mock(StreamInterface::class);
         $listener = new SendTransferNotification($client);

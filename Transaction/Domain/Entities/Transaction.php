@@ -47,13 +47,4 @@ class Transaction
 
         return $this;
     }
-
-    public function toArray(): array
-    {
-        return [
-            'payer_id' => $this->getPayer()->getId(),
-            'payee_id' => $this->getPayee()->getId(),
-            'amount' => (int) $this->getAmount()->getAmount(),
-        ];
-    }
 }

@@ -71,11 +71,6 @@ class AccountTest extends TestCase
             'amount' => 1000,
         ]);
 
-        $data = [
-            'number' => 'random number',
-            'amount' => 200,
-        ];
-
         // Actions
         $repository->update(
             new AccountEntity(

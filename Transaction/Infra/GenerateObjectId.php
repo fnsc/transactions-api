@@ -1,6 +1,6 @@
 <?php
 
-namespace Transaction;
+namespace Transaction\Infra;
 
 use MongoDB\BSON\ObjectId;
 

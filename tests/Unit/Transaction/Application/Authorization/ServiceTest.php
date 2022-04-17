@@ -6,7 +6,6 @@ use Mockery as m;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Tests\TestCase;
-use Transaction\Application\Authorization\Client;
 use Transaction\Application\Authorization\Service;
 use Transaction\Infra\Eloquent\Transaction;
 
@@ -18,7 +17,7 @@ class ServiceTest extends TestCase
     public function test_should_handle_the_authorization_service(string $message, bool $expected): void
     {
         // Set
-        $client = m::mock(Client::class);
+        $client = m::mock(\Transaction\Infra\Client\Authorization::class);
         $service = new Service($client);
         $transaction = m::mock(Transaction::class);
         $response = m::mock(ResponseInterface::class);

@@ -7,8 +7,8 @@ use Illuminate\Config\Repository as Config;
 use Mockery as m;
 use Psr\Http\Message\ResponseInterface;
 use Tests\TestCase;
-use Transaction\Application\Authorization\Client;
 use Transaction\Application\Authorization\TransactionTransformer;
+use Transaction\Infra\Client\Authorization;
 use Transaction\Infra\Eloquent\Transaction;
 
 class ClientTest extends TestCase
@@ -19,7 +19,7 @@ class ClientTest extends TestCase
         $httpClient = m::mock(HttpClient::class);
         $config = m::mock(Config::class);
         $transformer = m::mock(TransactionTransformer::class);
-        $client = new Client($httpClient, $config, $transformer);
+        $client = new Authorization($httpClient, $config, $transformer);
         $transaction = m::mock(Transaction::class);
         $transformedTransaction = ['transaction' => 'transformed'];
         $uri = 'https://some-uri.com';

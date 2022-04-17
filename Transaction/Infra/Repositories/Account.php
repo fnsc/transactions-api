@@ -2,12 +2,12 @@
 
 namespace Transaction\Infra\Repositories;
 
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Domain\Contracts\AccountRepository as AccountRepositoryInterface;
 use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\User as UserEntity;
-use Transaction\GenerateObjectId;
 use Transaction\Infra\Eloquent\Account as AccountModel;
-use Transaction\TransferException;
+use Transaction\Infra\GenerateObjectId;
 
 class Account implements AccountRepositoryInterface
 {

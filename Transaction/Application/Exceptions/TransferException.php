@@ -1,6 +1,6 @@
 <?php
 
-namespace Transaction;
+namespace Transaction\Application\Exceptions;
 
 use Exception;
 use Illuminate\Http\Response;

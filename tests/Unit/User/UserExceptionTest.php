@@ -4,6 +4,7 @@ namespace User;
 
 use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
+use Transaction\Application\Exceptions\UserException;
 
 class UserExceptionTest extends TestCase
 {

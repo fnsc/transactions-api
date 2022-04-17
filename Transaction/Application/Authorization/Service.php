@@ -3,6 +3,7 @@
 namespace Transaction\Application\Authorization;
 
 use Psr\Http\Message\ResponseInterface;
+use Transaction\Application\Contracts\Client;
 use Transaction\Domain\Entities\Transaction;
 
 class Service

@@ -2,12 +2,12 @@
 
 namespace Transaction\Infra\Repositories;
 
+use Transaction\Application\Exceptions\UserException;
 use Transaction\Domain\Contracts\UserRepository;
 use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Domain\UserType;
 use Transaction\Infra\Eloquent\User as UserModel;
-use User\UserException;
 
 class User implements UserRepository
 {

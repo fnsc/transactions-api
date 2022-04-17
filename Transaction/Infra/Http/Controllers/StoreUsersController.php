@@ -7,14 +7,14 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Psr\Log\LoggerInterface;
+use Transaction\Application\Exceptions\LoginException;
+use Transaction\Application\Exceptions\UserException;
 use Transaction\Application\Login\Service as LoginService;
 use Transaction\Application\StoreUser\InputBoundary;
 use Transaction\Application\StoreUser\Service;
 use Transaction\Infra\Http\Requests\LoginRequest;
 use Transaction\Infra\Http\Requests\UserRequest;
 use Transaction\Infra\Presenters\UserTransformer;
-use User\LoginException;
-use User\UserException;
 
 class StoreUsersController extends Controller
 {

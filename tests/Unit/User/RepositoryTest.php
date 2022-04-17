@@ -5,6 +5,7 @@ namespace User;
 use Illuminate\Support\Collection;
 use Mockery as m;
 use Tests\TestCase;
+use Transaction\Application\Exceptions\UserException;
 use Transaction\Application\StoreUser\User as UserValueObject;
 use Transaction\Infra\Eloquent\Account;
 use Transaction\Infra\Repositories\User;

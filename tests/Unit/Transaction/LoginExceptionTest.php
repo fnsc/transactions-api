@@ -4,7 +4,7 @@ namespace Transaction;
 
 use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
-use User\LoginException;
+use Transaction\Application\Exceptions\LoginException;
 
 class LoginExceptionTest extends TestCase
 {

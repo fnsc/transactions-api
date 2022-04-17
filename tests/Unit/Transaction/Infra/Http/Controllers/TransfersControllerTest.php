@@ -7,13 +7,13 @@ use Illuminate\Http\Response;
 use Mockery as m;
 use Psr\Log\LoggerInterface;
 use Tests\TestCase;
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\Service;
 use Transaction\Domain\Entities\Transaction;
 use Transaction\Domain\Entities\User;
 use Transaction\Infra\Http\Controllers\TransactionsController;
 use Transaction\Infra\Http\Requests\TransferRequest;
-use Transaction\TransferException;
 
 class TransfersControllerTest extends TestCase
 {

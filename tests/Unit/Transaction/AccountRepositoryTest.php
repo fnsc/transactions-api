@@ -5,7 +5,7 @@ namespace Transaction;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Transaction\Infra\Eloquent\Account;
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Infra\Eloquent\User;
 use Transaction\Infra\Repositories\Account;
 

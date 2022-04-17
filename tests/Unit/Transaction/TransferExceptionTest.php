@@ -4,6 +4,7 @@ namespace Transaction;
 
 use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
+use Transaction\Application\Exceptions\TransferException;
 
 class TransferExceptionTest extends TestCase
 {

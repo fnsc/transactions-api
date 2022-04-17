@@ -7,7 +7,7 @@ use Illuminate\Config\Repository;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Transaction\Infra\Client\NotificationClient;
+use Transaction\Infra\Client\Notification;
 
 class NotificationClientTest extends TestCase
 {
@@ -16,7 +16,7 @@ class NotificationClientTest extends TestCase
         // Set
         $client = m::mock(Client::class);
         $config = m::mock(Repository::class);
-        $notificationClient = new NotificationClient($client, $config);
+        $notificationClient = new Notification($client, $config);
         $transaction = ['transaction' => 'data'];
         $uri = 'https://some-url.com';
         $options = [

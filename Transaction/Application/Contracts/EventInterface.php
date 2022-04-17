@@ -2,7 +2,9 @@
 
 namespace Transaction\Application\Contracts;
 
+use Transaction\Domain\Entities\Transaction;
+
 interface EventInterface
 {
-    public function getAttributes(): array;
+    public function getTransaction(): Transaction;
 }

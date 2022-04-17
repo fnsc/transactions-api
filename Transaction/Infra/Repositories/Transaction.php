@@ -7,12 +7,12 @@ use Transaction\Application\Authorization\Service as AuthorizationService;
 use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Domain\Contracts\AccountRepository;
 use Transaction\Domain\Contracts\TransactionRepository as TransactionRepositoryInterface;
+use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
-use Transaction\GenerateObjectId;
-use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Infra\Eloquent\Transaction as TransactionModel;
 use Transaction\Infra\Eloquent\User as UserModel;
+use Transaction\Infra\GenerateObjectId;
 
 class Transaction implements TransactionRepositoryInterface
 {
@@ -30,9 +30,13 @@ class Transaction implements TransactionRepositoryInterface
     public function store(TransactionEntity $transaction): TransactionEntity
     {
         $transactionModel = $this->getModel();
-        $data = array_merge($transaction->toArray(), ['number' => $this->getNumber()]);
 
-        $transactionModel = $transactionModel->create($data);
+        $transactionModel = $transactionModel->create([
+            'number' => $this->getNumber(),
+            'payee_id' => $transaction->getPayee()->getId(),
+            'payer_id' => $transaction->getPayer()->getId(),
+            'amount' => $transaction->getAmount()->getAmount(),
+        ]);
 
         return $this->getTransactionEntity($transactionModel);
     }

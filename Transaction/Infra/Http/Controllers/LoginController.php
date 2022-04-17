@@ -7,11 +7,11 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Psr\Log\LoggerInterface;
+use Transaction\Application\Exceptions\LoginException;
 use Transaction\Application\Login\InputBoundary;
 use Transaction\Application\Login\Service;
 use Transaction\Infra\Http\Requests\LoginRequest;
 use Transaction\Infra\Presenters\UserTransformer;
-use User\LoginException;
 
 class LoginController extends Controller
 {

@@ -9,11 +9,11 @@ use Transaction\Application\Contracts\InputBoundary as InputBoundaryInterface;
 use Transaction\Application\Contracts\OutputBoundary as OutputBoundaryInterface;
 use Transaction\Application\Contracts\ServiceInterface;
 use Transaction\Application\Events\TransferProcessed;
+use Transaction\Application\Exceptions\TransferException;
 use Transaction\Domain\Contracts\TransactionRepository;
 use Transaction\Domain\Contracts\UserRepository as UserRepositoryInterface;
 use Transaction\Domain\Entities\Transaction;
 use Transaction\Domain\Entities\User;
-use Transaction\TransferException;
 
 class Service implements ServiceInterface
 {
