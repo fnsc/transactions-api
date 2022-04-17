@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             $this->getUserRoutes();
-            $this->getTransferRoutes();
+            $this->getTransactionRoutes();
         });
     }
 
@@ -48,13 +48,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->group(base_path('User/routes/api.php'));
+            ->group(base_path('Transaction/routes/users_api.php'));
     }
 
-    private function getTransferRoutes(): void
+    private function getTransactionRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
-            ->group(base_path('Transaction/routes/api.php'));
+            ->group(base_path('Transaction/routes/transactions_api.php'));
     }
 }
