@@ -1,10 +1,8 @@
 <?php
 
-namespace Transaction;
+namespace Transaction\Application\Exceptions;
 
-use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
-use Transaction\Application\Exceptions\LoginException;
 
 class LoginExceptionTest extends TestCase
 {
@@ -16,9 +14,6 @@ class LoginExceptionTest extends TestCase
 
         // Assertions
         $this->assertSame('The given data is invalid.', $invalidData->getMessage());
-        $this->assertSame(Response::HTTP_UNAUTHORIZED, $invalidData->getCode());
-
         $this->assertSame('User not found.', $userNotFound->getMessage());
-        $this->assertSame(Response::HTTP_MOVED_PERMANENTLY, $userNotFound->getCode());
     }
 }

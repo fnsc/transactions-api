@@ -9,6 +9,7 @@ use Transaction\Application\Contracts\ServiceInterface;
 use Transaction\Application\Exceptions\LoginException;
 use Transaction\Domain\Contracts\UserRepository;
 use Transaction\Domain\Entities\User as UserEntity;
+use Transaction\Domain\ValueObjects\Email;
 
 class Service implements ServiceInterface
 {
@@ -20,22 +21,22 @@ class Service implements ServiceInterface
 
     public function handle(InputBoundaryInterface $input): OutputBoundaryInterface
     {
-        $user = $this->getNewUser($input);
+        $userInput = $this->getNewUser($input);
 
-        if (!$this->login->attempt($user)) {
-            throw LoginException::invalidData();
-        }
-
-        if (!$user = $this->getUser($input->getEmail())) {
+        if (!$userDatabase = $this->getUser($userInput->getEmail())) {
             throw LoginException::userNotFound();
         }
 
-        $user = $this->repository->authenticate($user);
+        if (!$this->login->attempt($userInput)) {
+            throw LoginException::invalidData();
+        }
+
+        $user = $this->repository->authenticate($userDatabase);
 
         return new OutputBoundary($user);
     }
 
-    private function getUser(string $email): ?UserEntity
+    private function getUser(Email $email): ?UserEntity
     {
         return $this->repository->findByEmail($email);
     }

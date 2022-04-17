@@ -1,13 +1,13 @@
 <?php
 
-namespace Transaction\Authorization;
+namespace Transaction\Application\Authorization;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Tests\TestCase;
-use Transaction\Application\Authorization\Service;
-use Transaction\Infra\Eloquent\Transaction;
+use Transaction\Domain\Entities\Transaction;
+use Transaction\Infra\Client\Authorization as AuthorizationClient;
 
 class ServiceTest extends TestCase
 {
@@ -17,7 +17,7 @@ class ServiceTest extends TestCase
     public function test_should_handle_the_authorization_service(string $message, bool $expected): void
     {
         // Set
-        $client = m::mock(\Transaction\Infra\Client\Authorization::class);
+        $client = m::mock(AuthorizationClient::class);
         $service = new Service($client);
         $transaction = m::mock(Transaction::class);
         $response = m::mock(ResponseInterface::class);

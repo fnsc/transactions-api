@@ -4,7 +4,7 @@ namespace Transaction\Infra\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use Transaction\Application\Authorization\Service as AuthorizationService;
-use Transaction\Application\StoreTransaction\FraudException;
+use Transaction\Application\Exceptions\FraudException;
 use Transaction\Domain\Contracts\AccountRepository;
 use Transaction\Domain\Contracts\TransactionRepository as TransactionRepositoryInterface;
 use Transaction\Domain\Entities\Account as AccountEntity;

@@ -5,8 +5,9 @@ namespace Tests\Feature\Transaction\Infra\Http\Controllers;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
+use Mockery as m;
 use Tests\TestCase;
-use Transaction\Application\StoreTransaction\FraudException;
+use Tests\Unit\Transaction\Application\Authorization\Service as AuthorizationService;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;
@@ -14,8 +15,6 @@ use Transaction\Infra\Repositories\Account as AccountRepository;
 use function app;
 use function auth;
 use function route;
-use Mockery as m;
-use Transaction\Application\Authorization\Service as AuthorizationService;
 
 class TransfersControllerTest extends TestCase
 {

@@ -6,12 +6,10 @@ use Illuminate\Http\Response;
 use Mockery as m;
 use Money\Money;
 use Tests\TestCase;
-use Transaction\Application\Authorization\Service;
-use Transaction\Application\StoreTransaction\FraudException;
-use Transaction\Domain\Entities\Transaction;
+use Tests\Unit\Transaction\Application\Authorization\Service;
+use Transaction\Application\Exceptions\FraudException;
 use Transaction\Infra\Eloquent\Account;
 use Transaction\Infra\Eloquent\User;
-use Transaction\Infra\Repositories\Account;
 use Transaction\Infra\Repositories\Transaction;
 
 class TransactionRepositoryTest extends TestCase

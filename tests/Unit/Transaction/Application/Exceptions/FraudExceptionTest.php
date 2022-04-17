@@ -1,10 +1,8 @@
 <?php
 
-namespace Transaction;
+namespace Transaction\Application\Exceptions;
 
-use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
-use Transaction\Application\StoreTransaction\FraudException;
 
 class FraudExceptionTest extends TestCase
 {
@@ -18,7 +16,6 @@ class FraudExceptionTest extends TestCase
             'The payer id is different from the user that is currently authenticated.',
             $exception->getMessage()
         );
-        $this->assertSame(Response::HTTP_NOT_ACCEPTABLE, $exception->getCode());
     }
 
     public function test_should_throw_an_exception_when_authorization_was_declined(): void
@@ -31,6 +28,5 @@ class FraudExceptionTest extends TestCase
             'The authorization service declined the operation.',
             $exception->getMessage()
         );
-        $this->assertSame(Response::HTTP_NOT_ACCEPTABLE, $exception->getCode());
     }
 }
