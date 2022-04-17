@@ -1,9 +1,10 @@
 <?php
 
-namespace Transaction\Http\Requests;
+namespace Tests\Unit\Transaction\Infra\Http\Requests;
 
 use PHPUnit\Framework\TestCase;
 use Transaction\Infra\Http\Requests\TransferRequest;
+use function app;
 
 class TransferRequestTest extends TestCase
 {

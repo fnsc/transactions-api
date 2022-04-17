@@ -1,11 +1,12 @@
 <?php
 
-namespace User\Http\Requests;
+namespace Tests\Unit\Transaction\Infra\Http\Requests;
 
 use PHPUnit\Framework\TestCase;
 use Transaction\Application\StoreUser\User;
 use Transaction\Infra\Http\Requests\LoginRequest;
 use Transaction\Infra\Http\Requests\UserRequest;
+use function app;
 
 class UserRequestTest extends TestCase
 {

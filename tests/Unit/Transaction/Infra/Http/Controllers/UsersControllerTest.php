@@ -1,6 +1,6 @@
 <?php
 
-namespace User\Http\Controllers;
+namespace Tests\Unit\Transaction\Infra\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Response;

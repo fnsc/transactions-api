@@ -1,6 +1,6 @@
 <?php
 
-namespace User\StoreUser;
+namespace Tests\Unit\Transaction\Application\StoreUser;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;

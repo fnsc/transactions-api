@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Transfer\Http\Controllers;
+namespace Tests\Unit\Transaction\Infra\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Response;
@@ -9,8 +9,8 @@ use Psr\Log\LoggerInterface;
 use Tests\TestCase;
 use Transaction\Application\StoreTransaction\FraudException;
 use Transaction\Application\StoreTransaction\Service;
-use Transaction\Domain\Entities\User;
 use Transaction\Domain\Entities\Transaction;
+use Transaction\Domain\Entities\User;
 use Transaction\Infra\Http\Controllers\TransactionsController;
 use Transaction\Infra\Http\Requests\TransferRequest;
 use Transaction\TransferException;
