@@ -4,5 +4,5 @@ namespace Transaction\Domain\Contracts;
 
 interface PasswordHasher
 {
-    public function make(string $password): string;
+    public static function make(string $password): string;
 }

@@ -3,17 +3,11 @@
 namespace Transaction\Domain\ValueObjects;
 
 use Stringable;
-use Transaction\Domain\Contracts\PasswordHasher;
 
 class Password implements Stringable
 {
-    private string $password;
-    private PasswordHasher $hasher;
-
-    public function __construct(string $password, PasswordHasher $hasher)
+    public function __construct(private readonly string $password)
     {
-        $this->password = $password;
-        $this->hasher = $hasher;
     }
 
     public function __toString(): string
@@ -22,7 +16,7 @@ class Password implements Stringable
             return $this->password;
         }
 
-        return $this->hasher->make($this->password);
+        return password_hash($this->password, PASSWORD_ARGON2ID);
     }
 
     public function getPlainPassword(): string

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Mockery as m;
 use Tests\TestCase;
-use Tests\Unit\Transaction\Application\Authorization\Service as AuthorizationService;
+use Transaction\Application\Authorization\Service as AuthorizationService;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;

@@ -14,4 +14,6 @@ interface UserRepository
     public function findByEmail(Email $email): ?User;
 
     public function authenticate(User $user): User;
+
+    public function getLoginCredentials(Email $email): ?User;
 }

@@ -84,7 +84,7 @@ class TransactionsController extends Controller
         return new InputBoundary(
             $request->get('payee_id'),
             $request->get('payer_id'),
-            $request->get('amount')
+            (float) $request->get('amount')
         );
     }
 }

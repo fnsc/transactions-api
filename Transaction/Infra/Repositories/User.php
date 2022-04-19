@@ -7,6 +7,7 @@ use Transaction\Domain\Contracts\UserRepository;
 use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Domain\UserType;
+use Transaction\Domain\ValueObjects\Email;
 use Transaction\Infra\Eloquent\User as UserModel;
 
 class User implements UserRepository
@@ -70,12 +71,23 @@ class User implements UserRepository
         return $user;
     }
 
-    public function findByEmail(mixed $email): ?UserEntity
+    public function findByEmail(Email $email): ?UserEntity
     {
         $userModel = $this->getModel();
-        $userModel = $userModel->where('email', $email)->first();
+        $userModel = $userModel->where('email', (string) $email)->first();
 
         return $this->getNewUser($userModel);
+    }
+
+    public function getLoginCredentials(Email $email): ?UserEntity
+    {
+        $userModel = $this->getModel();
+        $userModel = $userModel->where('email', (string) $email)->first();
+
+        return UserEntity::newUser(
+            email: $userModel->getAttribute('email'),
+            password: $userModel->getAttribute('password'),
+        );
     }
 
     public function authenticate(UserEntity $user): UserEntity
@@ -98,7 +110,7 @@ class User implements UserRepository
     {
         $userModel = $this->getModel();
 
-        return !(bool) $userModel->where($field, $value)->first();
+        return !$userModel->where($field, $value)->first();
     }
 
     private function getModel(): UserModel

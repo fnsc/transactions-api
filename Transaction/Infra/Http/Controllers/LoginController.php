@@ -45,7 +45,7 @@ class LoginController extends Controller
             return response()->json([
                 'message' => $exception->getMessage(),
                 'data' => [],
-            ], $exception->getCode());
+            ], Response::HTTP_FORBIDDEN);
         } catch (Exception $exception) {
             $this->logger->warning('Something went wrong.', compact('exception'));
 

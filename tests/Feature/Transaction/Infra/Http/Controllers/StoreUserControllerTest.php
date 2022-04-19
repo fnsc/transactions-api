@@ -59,7 +59,7 @@ class StoreUserControllerTest extends TestCase
         $result = $this->post(route('api.v1.users.store'), $dataTwo);
 
         // Assertions
-        $result->assertStatus(Response::HTTP_CONFLICT);
+        $result->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function test_should_proceed_with_the_login(): void

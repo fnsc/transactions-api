@@ -50,7 +50,7 @@ class Service implements ServiceInterface
         $transaction->setPayee($payee)->setPayer($payer);
         $transaction = $this->transactionRepository->transfer($transaction);
 
-        $this->eventDispatcher->dispatch(new TransferProcessed($transaction, app(MoneyFormatter::class)));
+        $this->eventDispatcher->dispatch(new TransferProcessed($transaction));
 
         return new OutputBoundary($transaction);
     }
@@ -60,14 +60,14 @@ class Service implements ServiceInterface
         $amount = $this->getFormattedAmount($input);
 
         return new Transaction(
-            User::newUser($input->getPayeeId()),
-            User::newUser($input->getPayerId()),
+            User::newUser(id: $input->getPayeeId()),
+            User::newUser(id: $input->getPayerId()),
             $amount
         );
     }
 
     private function getFormattedAmount(InputBoundaryInterface $input): int
     {
-        return (int)number_format($input->getAmount(), 2, '', '');
+        return number_format($input->getAmount(), 2, '', '');
     }
 }

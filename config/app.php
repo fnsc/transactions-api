@@ -180,7 +180,6 @@ return [
         Transaction\Infra\Providers\AuthenticatedUserServiceProvider::class,
         Transaction\Infra\Providers\AuthorizationServiceProvider::class,
         Transaction\Infra\Providers\EventDispatcherServiceProvider::class,
-        Transaction\Infra\Providers\HasherServiceProvider::class,
         Transaction\Infra\Providers\LoginAdapterServiceProvider::class,
         Transaction\Infra\Providers\SendTransferNotificationServiceProvider::class,
         Transaction\Infra\Providers\TransactionServiceProvider::class,

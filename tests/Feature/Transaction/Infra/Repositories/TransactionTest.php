@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery as m;
 use Tests\TestCase;
-use Tests\Unit\Transaction\Application\Authorization\Service as AuthorizationService;
+use Transaction\Application\Authorization\Service as AuthorizationService;
 use Transaction\Application\Exceptions\FraudException;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
