@@ -2,50 +2,57 @@
 
 namespace Tests\Unit\Transaction\Application\StoreUser;
 
-use Mockery as m;
 use Tests\TestCase;
+use Transaction\Application\Login\InputBoundary as LoginInputBoundary;
+use Transaction\Application\Login\OutputBoundary;
+use Transaction\Application\Login\Service as LoginService;
+use Transaction\Application\StoreUser\InputBoundary;
 use Transaction\Application\StoreUser\Service;
-use Transaction\Application\StoreUser\Transformer;
-use Transaction\Infra\Adapters\TokenManager;
-use Transaction\Infra\Eloquent\User as UserModel;
-use Transaction\Infra\Repositories\User;
+use Transaction\Domain\Entities\User as UserEntity;
+use Transaction\Infra\Repositories\User as UserRepository;
 
 class ServiceTest extends TestCase
 {
     public function test_should_handle_with_the_new_user_data(): void
     {
         // Set
-        $repository = m::mock(User::class);
-        $transformer = m::mock(Transformer::class);
-        $userValueObject = m::mock(User::class);
-        $userModel = m::mock(UserModel::class);
-        $manager = m::mock(TokenManager::class);
-        $service = new Service($repository, $transformer, $manager);
-        $expected = [
-            'id' => 1,
-            'name' => 'Some Random Name',
-        ];
+        $repository = $this->createMock(UserRepository::class);
+        $loginService = $this->createMock(LoginService::class);
+        $service = new Service($repository, $loginService);
+
+        $input = new InputBoundary(
+            'random name',
+            'random@email.com',
+            '12345678909',
+            'regular',
+            'secret'
+        );
+        $user = UserEntity::newUser(
+            name: 'random name',
+            email: 'random@email.com',
+            registrationNumber: '12345678909',
+            type: 'regular',
+            password: 'secret'
+        );
+        $loginInput = new LoginInputBoundary('random@email.com', 'secret');
+        $output = new OutputBoundary($user);
 
         // Expectations
-        $transformer->expects()
-            ->transform($userModel, m::type('string'))
-            ->andReturn([
-                'id' => 1,
-                'name' => 'Some Random Name',
-            ]);
+        $repository->expects($this->once())
+            ->method('store')
+            ->with($user)
+            ->willReturn($user);
 
-        $repository->expects()
-            ->store($userValueObject)
-            ->andReturn($userModel);
-
-        $manager->expects()
-            ->manage($userModel)
-            ->andReturn('your_new_token');
+        $loginService->expects($this->once())
+            ->method('handle')
+            ->with($loginInput)
+            ->willReturn($output);
 
         // Actions
-        $result = $service->handle($userValueObject);
+        $result = $service->handle($input);
 
         // Assertions
-        $this->assertSame($expected, $result);
+        $this->assertInstanceOf(OutputBoundary::class, $result);
+        $this->assertInstanceOf(UserEntity::class, $result->getUser());
     }
 }
