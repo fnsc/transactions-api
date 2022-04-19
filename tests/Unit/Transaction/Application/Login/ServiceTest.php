@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Transaction\Application\Login;
 
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 use Transaction\Application\Contracts\LoginAdapter;
 use Transaction\Application\Contracts\OutputBoundary;
 use Transaction\Application\Exceptions\LoginException;

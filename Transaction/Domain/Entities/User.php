@@ -20,7 +20,7 @@ class User
     ): self
     {
         $email = new Email($email);
-        $password = app(Password::class, ['password' => $password]);
+        $password = new Password($password);
 
         return new static($id, $name, $registrationNumber, $email, $password, $type, $token);
     }

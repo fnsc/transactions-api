@@ -4,8 +4,7 @@ namespace Transaction\Application\StoreTransaction;
 
 use Mockery as m;
 use Money\Money;
-use Tests\TestCase;
-//use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Transaction\Application\Contracts\AuthenticatedUserAdapter;
 use Transaction\Application\Contracts\EventDispatcher;
 use Transaction\Application\Events\TransferProcessed;
@@ -15,7 +14,6 @@ use Transaction\Domain\Contracts\TransactionRepository;
 use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\Transaction;
 use Transaction\Domain\Entities\User;
-use Transaction\Infra\Eloquent\Account;
 use Transaction\Domain\Contracts\UserRepository;
 
 class ServiceTest extends TestCase
@@ -190,66 +188,48 @@ class ServiceTest extends TestCase
         $transactionRepository = $this->createMock(TransactionRepository::class);
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
-        $evenDispatcher = m::mock(EventDispatcher::class);
+        $evenDispatcher = $this->createMock(EventDispatcher::class);
+
         $service = new Service(
             $transactionRepository,
             $userRepository,
             $authenticatedUser,
             $evenDispatcher
         );
-        $user = m::mock(User::class);
-        $account = m::mock(AccountEntity::class);
-        $transaction = m::mock(Transaction::class);
-        $transactionDatabse = m::mock(Transaction::class);
+
+        $payer = User::newUser(id: 2);
+        $payer->setAccount(new AccountEntity(amount: 100000, userId: 2, number: 'io12j3oijasodi', id: 1));
+        $payee = User::newUser(id: 1);
+        $transaction = new Transaction($payee, $payer, 10000);
         $input = new InputBoundary(1, 2, '100.00');
 
         // Expectations
         $authenticatedUser->expects()
             ->getAuthenticatedUser()
-            ->andReturn($user);
-
-        $user->expects()
-            ->getId()
-            ->andReturn(2);
+            ->andReturn($payer);
 
         $userRepository->expects()
             ->find(2)
-            ->andReturn($user);
-
-        $user->expects()
-            ->getAccount()
-            ->andReturn($account);
-
-        $account->expects()
-            ->getAmount()
-            ->andReturn(Money::BRL(20000));
+            ->andReturn($payer);
 
         $userRepository->expects()
             ->find(1)
-            ->andReturn($user);
+            ->andReturn($payee);
 
         $transactionRepository->expects($this->once())
             ->method('transfer')
             ->with($transaction)
-            ->willReturn($transactionDatabse);
+            ->willReturn($transaction);
 
-        $evenDispatcher->expects()
-            ->dispatch(m::mock(TransferProcessed::class, [$transactionDatabse]));
+        $evenDispatcher->expects($this->once())
+            ->method('dispatch')
+            ->with(new TransferProcessed($transaction));
 
         // Actions
         $result = $service->handle($input);
 
         // Assertions
-        $this->assertSame([
-            'message' => 'You did it!!!',
-            'data' => [],
-        ], $result);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withoutEvents();
+        $this->assertInstanceOf(OutputBoundary::class, $result);
+        $this->assertInstanceOf(Transaction::class, $result->getTransaction());
     }
 }
