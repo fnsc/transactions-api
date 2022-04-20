@@ -13,11 +13,11 @@ class AuthenticatedUser implements AuthenticatedUserAdapterInterface
         $user = Auth::user();
 
         return User::newUser(
-            $user->id,
-            $user->name,
-            $user->email,
-            $user->registration_number,
-            $user->type
+            $user->getAttribute('id'),
+            $user->getAttribute('name'),
+            $user->getAttribute('email'),
+            $user->getAttribute('registration_number'),
+            $user->getAttribute('type')
         );
     }
 }

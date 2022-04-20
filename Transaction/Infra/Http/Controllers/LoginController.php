@@ -15,6 +15,8 @@ use Transaction\Infra\Presenters\UserTransformer;
 
 class LoginController extends Controller
 {
+    use ServerErrorResponse;
+
     public function __construct(
         private readonly Service $service,
         private readonly UserTransformer $transformer,
@@ -33,26 +35,33 @@ class LoginController extends Controller
             $output = $this->service->handle($input);
             $result = $this->transformer->transform($output->getUser());
 
-            return response()->json([
-                'message' => 'Success!!!',
-                'data' => [
-                    'user' => $result,
-                ],
-            ], Response::HTTP_ACCEPTED);
+            return $this->getSuccessResponse($result);
         } catch (LoginException $exception) {
             $this->logger->notice('Something went wrong while logging in.', compact('exception'));
 
-            return response()->json([
-                'message' => $exception->getMessage(),
-                'data' => [],
-            ], Response::HTTP_FORBIDDEN);
+            return $this->getForbiddenResponse($exception);
         } catch (Exception $exception) {
             $this->logger->warning('Something went wrong.', compact('exception'));
 
-            return response()->json([
-                'message' => 'Error',
-                'data' => [],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->getServerErrorResponse();
         }
+    }
+
+    private function getSuccessResponse(array $result): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => 'Success!!!',
+            'data' => [
+                'user' => $result,
+            ],
+        ], Response::HTTP_ACCEPTED);
+    }
+
+    private function getForbiddenResponse(Exception|LoginException $exception): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => $exception->getMessage(),
+            'data' => [],
+        ], Response::HTTP_FORBIDDEN);
     }
 }

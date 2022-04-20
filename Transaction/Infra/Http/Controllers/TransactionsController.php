@@ -16,6 +16,8 @@ use Transaction\Infra\Presenters\TransactionTransformer;
 
 class TransactionsController extends Controller
 {
+    use ServerErrorResponse;
+
     public function __construct(
         private readonly Service $service,
         private readonly LoggerInterface $logger,
@@ -30,36 +32,22 @@ class TransactionsController extends Controller
             $result = $this->service->handle($input);
             $result = $this->transformer->transform($result->getTransaction());
 
-            return new JsonResponse([
-                'message' => 'Success!!!',
-                'data' => [
-                    'transaction' => $result,
-                ],
-            ], Response::HTTP_ACCEPTED);
+            return $this->getSuccessResponse($result);
         } catch (FraudException $exception) {
             $this->logger->alert('Maybe something nasty is happening.', compact('exception'));
 
-            return new JsonResponse([
-                'message' => $exception->getMessage(),
-                'data' => [],
-            ], Response::HTTP_NOT_ACCEPTABLE);
+            return $this->getNotAcceptableResponse($exception);
         } catch (TransferException $exception) {
             $this->logger->notice(
                 'Something went wrong while we transferring the solicited amount.',
                 compact('exception')
             );
 
-            return new JsonResponse([
-                'message' => $exception->getMessage(),
-                'data' => [],
-            ], Response::HTTP_NOT_ACCEPTABLE);
+            return $this->getNotAcceptableResponse();
         } catch (Exception $exception) {
             $this->logger->warning('Something unexpected happened.', compact('exception'));
 
-            return new JsonResponse([
-                'message' => 'Error',
-                'data' => [],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->getServerErrorResponse();
         }
     }
 
@@ -86,5 +74,23 @@ class TransactionsController extends Controller
             $request->get('payer_id'),
             (float) $request->get('amount')
         );
+    }
+
+    private function getSuccessResponse(array $result): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => 'Success!!!',
+            'data' => [
+                'transaction' => $result,
+            ],
+        ], Response::HTTP_ACCEPTED);
+    }
+
+    private function getNotAcceptableResponse(Exception|FraudException $exception): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => $exception->getMessage(),
+            'data' => [],
+        ], Response::HTTP_NOT_ACCEPTABLE);
     }
 }

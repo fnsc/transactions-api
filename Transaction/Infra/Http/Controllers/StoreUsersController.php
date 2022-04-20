@@ -18,6 +18,8 @@ use Transaction\Infra\Presenters\UserTransformer;
 
 class StoreUsersController extends Controller
 {
+    use ServerErrorResponse;
+
     public function __construct(
         private readonly Service $service,
         private readonly UserTransformer $transformer,
@@ -33,26 +35,15 @@ class StoreUsersController extends Controller
 
             $result = $this->transformer->transform($output->getUser());
 
-            return response()->json([
-                'message' => 'Success!!!',
-                'data' => [
-                    'user' => $result,
-                ],
-            ], Response::HTTP_CREATED);
+            return $this->getSuccessResponse($result);
         } catch (UserException $exception) {
             $this->logger->notice('Something went wrong while storing the user', compact('exception'));
 
-            return response()->json([
-                'message' => $exception->getMessage(),
-                'data' => [],
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->getUnprocessableEntityResponse($exception);
         } catch (Exception $exception) {
             $this->logger->warning('Something went wrong.', compact('exception'));
 
-            return response()->json([
-                'message' => 'Error',
-                'data' => [],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->getServerErrorResponse();
         }
     }
 
@@ -65,5 +56,23 @@ class StoreUsersController extends Controller
             $request->get('type'),
             $request->get('password'),
         );
+    }
+
+    private function getSuccessResponse(array $result): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => 'Success!!!',
+            'data' => [
+                'user' => $result,
+            ],
+        ], Response::HTTP_CREATED);
+    }
+
+    private function getUnprocessableEntityResponse(UserException|Exception $exception): JsonResponse
+    {
+        return new JsonResponse([
+            'message' => $exception->getMessage(),
+            'data' => [],
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
