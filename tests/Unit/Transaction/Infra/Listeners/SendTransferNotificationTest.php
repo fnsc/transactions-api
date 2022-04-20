@@ -1,6 +1,6 @@
 <?php
 
-namespace Transaction\Listeners;
+namespace Transaction\Infra\Listeners;
 
 use Illuminate\Http\Response;
 use Mockery as m;
