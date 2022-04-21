@@ -58,7 +58,9 @@ class Account implements AccountRepositoryInterface
     {
         $accountModel = $this->getModel();
 
-        if (!$account = $accountModel->whereId($accountEntity->getId())) {
+        $account = $accountModel->whereId($accountEntity->getId())->first();
+
+        if (!$account) {
             throw TransferException::accountNotFound();
         }
 
