@@ -25,7 +25,7 @@ abstract class AbstractClient
         return $options;
     }
 
-    protected function getHeader(): array
+    private function getHeader(): array
     {
         return [
             'Content-Type' => 'application/json',
