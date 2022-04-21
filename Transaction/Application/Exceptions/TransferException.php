@@ -26,8 +26,8 @@ class TransferException extends Exception
         return new static('The payer does not have the sufficient amount on your account to proceed with the operation');
     }
 
-    public static function notificationWasNotSend(): self
+    public static function notificationWasNotSend(int $statusCode): self
     {
-        return new static('The user notification was not send due an issue with the provider.');
+        return new static('The user notification was not send due an issue with the provider.', $statusCode);
     }
 }

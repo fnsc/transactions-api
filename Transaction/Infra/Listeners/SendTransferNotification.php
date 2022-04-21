@@ -27,7 +27,7 @@ class SendTransferNotification implements ShouldQueue
         $body = json_decode($response->getBody()->getContents(), true);
 
         if (self::SUCCESS !== $body['message']) {
-            throw TransferException::notificationWasNotSend();
+            throw TransferException::notificationWasNotSend($response->getStatusCode());
         }
     }
 }

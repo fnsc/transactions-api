@@ -9,27 +9,29 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Transaction\Application\Events\TransferProcessed;
 use Transaction\Application\Exceptions\TransferException;
+use Transaction\Domain\Entities\Transaction;
 use Transaction\Infra\Client\Notification;
-use Transaction\Infra\Listeners\SendTransferNotification;
 
 class SendTransferNotificationTest extends TestCase
 {
     public function test_should_send_the_transfer_notification(): void
     {
         // Set
-        $event = m::mock(TransferProcessed::class);
         $client = m::mock(Notification::class);
+        $listener = new SendTransferNotification($client);
+
+        $event = m::mock(TransferProcessed::class);
         $response = m::mock(ResponseInterface::class);
         $body = m::mock(StreamInterface::class);
-        $listener = new SendTransferNotification($client);
+        $transaction = m::mock(Transaction::class);
 
         // Expectations
         $event->expects()
-            ->getAttributes()
-            ->andReturn([]);
+            ->getTransaction()
+            ->andReturn($transaction);
 
         $client->expects()
-            ->send(m::type('array'))
+            ->send($transaction)
             ->andReturn($response);
 
         $response->expects()
@@ -50,19 +52,21 @@ class SendTransferNotificationTest extends TestCase
     public function test_should_throw_an_exception_when_notification_service_fails(): void
     {
         // Set
-        $event = m::mock(TransferProcessed::class);
         $client = m::mock(Notification::class);
+        $listener = new SendTransferNotification($client);
+
+        $event = m::mock(TransferProcessed::class);
         $response = m::mock(ResponseInterface::class);
         $body = m::mock(StreamInterface::class);
-        $listener = new SendTransferNotification($client);
+        $transaction = m::mock(Transaction::class);
 
         // Expectations
         $event->expects()
-            ->getAttributes()
-            ->andReturn([]);
+            ->getTransaction()
+            ->andReturn($transaction);
 
         $client->expects()
-            ->send(m::type('array'))
+            ->send($transaction)
             ->andReturn($response);
 
         $response->expects()
