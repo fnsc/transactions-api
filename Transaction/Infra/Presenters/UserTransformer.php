@@ -12,7 +12,7 @@ class UserTransformer
             'name' => $user->getName(),
             'auth' => [
                 'token' => $user->getToken(),
-            ]
+            ],
         ];
     }
 }

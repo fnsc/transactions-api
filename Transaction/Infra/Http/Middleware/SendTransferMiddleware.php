@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Transaction\Domain\UserType;
 use Transaction\Infra\Adapters\AuthenticatedUser;
-use function auth;
 use function redirect;
 
 class SendTransferMiddleware
