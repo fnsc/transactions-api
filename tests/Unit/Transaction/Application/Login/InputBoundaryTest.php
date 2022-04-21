@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Unit\Transaction\Application\Login;
+namespace Transaction\Application\Login;
 
 use PHPUnit\Framework\TestCase;
-use Transaction\Application\Login\InputBoundary;
 
 class InputBoundaryTest extends TestCase
 {

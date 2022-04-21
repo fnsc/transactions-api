@@ -1,13 +1,11 @@
 <?php
 
-namespace Tests\Unit\Transaction\Application\Login;
+namespace Transaction\Application\Login;
 
 use PHPUnit\Framework\TestCase;
 use Transaction\Application\Contracts\LoginAdapter;
 use Transaction\Application\Contracts\OutputBoundary;
 use Transaction\Application\Exceptions\LoginException;
-use Transaction\Application\Login\InputBoundary;
-use Transaction\Application\Login\Service;
 use Transaction\Domain\Contracts\UserRepository;
 use Transaction\Domain\Entities\User;
 

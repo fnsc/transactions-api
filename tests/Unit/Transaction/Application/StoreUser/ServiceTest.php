@@ -1,13 +1,11 @@
 <?php
 
-namespace Tests\Unit\Transaction\Application\StoreUser;
+namespace Transaction\Application\StoreUser;
 
 use Tests\TestCase;
 use Transaction\Application\Login\InputBoundary as LoginInputBoundary;
 use Transaction\Application\Login\OutputBoundary;
 use Transaction\Application\Login\Service as LoginService;
-use Transaction\Application\StoreUser\InputBoundary;
-use Transaction\Application\StoreUser\Service;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Repositories\User as UserRepository;
 

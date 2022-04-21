@@ -43,7 +43,7 @@ class TransactionsController extends Controller
                 compact('exception')
             );
 
-            return $this->getNotAcceptableResponse();
+            return $this->getNotAcceptableResponse($exception);
         } catch (Exception $exception) {
             $this->logger->warning('Something unexpected happened.', compact('exception'));
 

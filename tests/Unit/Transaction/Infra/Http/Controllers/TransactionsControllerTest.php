@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Transaction\Infra\Http\Controllers;
+namespace Transaction\Infra\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Response;
@@ -9,43 +9,65 @@ use Psr\Log\LoggerInterface;
 use Tests\TestCase;
 use Transaction\Application\Exceptions\FraudException;
 use Transaction\Application\Exceptions\TransferException;
+use Transaction\Application\StoreTransaction\InputBoundary;
+use Transaction\Application\StoreTransaction\OutputBoundary;
 use Transaction\Application\StoreTransaction\Service;
-use Transaction\Domain\Entities\Transaction;
-use Transaction\Domain\Entities\User;
-use Transaction\Infra\Http\Controllers\TransactionsController;
+use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Infra\Http\Requests\TransferRequest;
+use Transaction\Infra\Presenters\TransactionTransformer;
 
-class TransfersControllerTest extends TestCase
+class TransactionsControllerTest extends TestCase
 {
     public function test_should_store_a_transfer_successfully(): void
     {
         // Set
         $request = m::mock(TransferRequest::class);
-        $service = m::mock(Service::class);
+        $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new TransactionsController();
+        $transformer = m::mock(TransactionTransformer::class);
+        $controller = new TransactionsController($service, $logger, $transformer);
         $expected = [
-            'message' => 'You did it!!!',
-            'data' => [],
+            'message' => 'Success!!!',
+            'data' => [
+                'transaction' => [
+                    'payer' => 'Payer Name',
+                    'payee' => 'Payee Name',
+                    'amount' => '100.97',
+                ],
+            ],
         ];
-        $transfer = m::mock(Transaction::class);
-        $authenticatedUser = m::mock(User::class);
+        $transaction = m::mock(TransactionEntity::class);
+        $input = new InputBoundary(1, 2, '100.97');
+        $output = new OutputBoundary($transaction);
 
         // Expectations
         $request->expects()
-            ->getTransferData()
-            ->andReturn($transfer);
+            ->get('payee_id')
+            ->andReturn('1');
 
         $request->expects()
-            ->getAuthenticatedUser()
-            ->andReturn($authenticatedUser);
+            ->get('payer_id')
+            ->andReturn('2');
 
-        $service->expects()
-            ->handle($transfer, $authenticatedUser)
-            ->andReturn($expected);
+        $request->expects()
+            ->get('amount')
+            ->andReturn('100.97');
+
+        $service->expects($this->once())
+            ->method('handle')
+            ->with($input)
+            ->willReturn($output);
+
+        $transformer->expects()
+            ->transform($transaction)
+            ->andReturn([
+                'payer' => 'Payer Name',
+                'payee' => 'Payee Name',
+                'amount' => '100.97',
+            ]);
 
         // Actions
-        $result = $controller->store($request, $service, $logger);
+        $result = $controller->store($request);
 
         // Assertions
         $this->assertSame(Response::HTTP_ACCEPTED, $result->getStatusCode());
@@ -64,34 +86,39 @@ class TransfersControllerTest extends TestCase
     ): void {
         // Set
         $request = m::mock(TransferRequest::class);
-        $service = m::mock(Service::class);
+        $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new TransactionsController();
+        $transformer = m::mock(TransactionTransformer::class);
+        $controller = new TransactionsController($service, $logger, $transformer);
         $expected = [
             'message' => $exceptionMessage,
             'data' => [],
         ];
-        $transfer = m::mock(Transaction::class);
-        $authenticatedUser = m::mock(User::class);
+        $input = new InputBoundary(1, 2, '100.97');
 
         // Expectations
         $request->expects()
-            ->getTransferData()
-            ->andReturn($transfer);
+            ->get('payee_id')
+            ->andReturn('1');
 
         $request->expects()
-            ->getAuthenticatedUser()
-            ->andReturn($authenticatedUser);
+            ->get('payer_id')
+            ->andReturn('2');
 
-        $service->expects()
-            ->handle($transfer, $authenticatedUser)
-            ->andThrow($exception);
+        $request->expects()
+            ->get('amount')
+            ->andReturn('100.97');
+
+        $service->expects($this->once())
+            ->method('handle')
+            ->with($input)
+            ->willThrowException($exception);
 
         $logger->expects()
             ->{$loggerMethod}($loggerMessage, ['exception' => $exception]);
 
         // Actions
-        $result = $controller->store($request, $service, $logger);
+        $result = $controller->store($request);
 
         // Assertions
         $this->assertSame($expectedStatusCode, $result->getStatusCode());
@@ -100,8 +127,6 @@ class TransfersControllerTest extends TestCase
 
     public function getExceptionsScenarios(): array
     {
-        $exception = new Exception('Random error', Response::HTTP_INTERNAL_SERVER_ERROR);
-
         return [
             'fraud exception' => [
                 'exception' => FraudException::payerIdisDifferent(),
@@ -118,9 +143,9 @@ class TransfersControllerTest extends TestCase
                 'loggerMessage' => 'Something went wrong while we transferring the solicited amount.',
             ],
             'unexpected exception' => [
-                'exception' => $exception,
+                'exception' => new Exception('Random error'),
                 'exceptionMessage' => 'Error',
-                'expectedStatusCode' => $exception->getCode(),
+                'expectedStatusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
                 'loggerMethod' => 'warning',
                 'loggerMessage' => 'Something unexpected happened.',
             ],

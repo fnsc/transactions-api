@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Unit\Transaction\Application\StoreTransaction;
+namespace Transaction\Application\StoreTransaction;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Transaction\Application\StoreTransaction\OutputBoundary;
 use Transaction\Domain\Entities\Transaction;
 
 class OutputBoundaryTest extends TestCase

@@ -12,7 +12,7 @@ class SendTransferNotification implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    private const SEND = 'Success';
+    private const SUCCESS = 'Success';
 
     public string $connection = 'database';
     public int $tries = 3;
@@ -26,8 +26,8 @@ class SendTransferNotification implements ShouldQueue
         $response = $this->client->send($event->getTransaction());
         $body = json_decode($response->getBody()->getContents(), true);
 
-        if (self::SEND !== $body['message']) {
-            throw TransferException::notificationWasNotSend($response->getStatusCode());
+        if (self::SUCCESS !== $body['message']) {
+            throw TransferException::notificationWasNotSend();
         }
     }
 }
