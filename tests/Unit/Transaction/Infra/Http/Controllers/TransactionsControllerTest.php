@@ -13,18 +13,18 @@ use Transaction\Application\StoreTransaction\InputBoundary;
 use Transaction\Application\StoreTransaction\OutputBoundary;
 use Transaction\Application\StoreTransaction\Service;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
-use Transaction\Infra\Http\Requests\TransferRequest;
-use Transaction\Infra\Presenters\TransactionTransformer;
+use Transaction\Infra\Http\Requests\TransactionRequest;
+use Transaction\Infra\Transformers\Transaction;
 
 class TransactionsControllerTest extends TestCase
 {
     public function test_should_store_a_transfer_successfully(): void
     {
         // Set
-        $request = m::mock(TransferRequest::class);
+        $request = m::mock(TransactionRequest::class);
         $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $transformer = m::mock(TransactionTransformer::class);
+        $transformer = m::mock(Transaction::class);
         $controller = new TransactionsController($service, $logger, $transformer);
         $expected = [
             'message' => 'Success!!!',
@@ -85,10 +85,10 @@ class TransactionsControllerTest extends TestCase
         string $loggerMessage
     ): void {
         // Set
-        $request = m::mock(TransferRequest::class);
+        $request = m::mock(TransactionRequest::class);
         $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
-        $transformer = m::mock(TransactionTransformer::class);
+        $transformer = m::mock(Transaction::class);
         $controller = new TransactionsController($service, $logger, $transformer);
         $expected = [
             'message' => $exceptionMessage,

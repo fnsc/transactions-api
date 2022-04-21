@@ -11,8 +11,8 @@ use Transaction\Application\Exceptions\FraudException;
 use Transaction\Application\Exceptions\TransferException;
 use Transaction\Application\StoreTransaction\InputBoundary;
 use Transaction\Application\StoreTransaction\Service;
-use Transaction\Infra\Http\Requests\TransferRequest;
-use Transaction\Infra\Presenters\TransactionTransformer;
+use Transaction\Infra\Http\Requests\TransactionRequest;
+use Transaction\Infra\Transformers\Transaction as TransactionTransformer;
 
 class TransactionsController extends Controller
 {
@@ -25,7 +25,7 @@ class TransactionsController extends Controller
     ) {
     }
 
-    public function store(TransferRequest $request): JsonResponse
+    public function store(TransactionRequest $request): JsonResponse
     {
         try {
             $input = $this->getInputBoundary($request);
@@ -67,7 +67,7 @@ class TransactionsController extends Controller
         ], Response::HTTP_UNAUTHORIZED);
     }
 
-    private function getInputBoundary(TransferRequest $request): InputBoundary
+    private function getInputBoundary(TransactionRequest $request): InputBoundary
     {
         return new InputBoundary(
             $request->get('payee_id'),

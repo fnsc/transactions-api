@@ -1,12 +1,12 @@
 <?php
 
-namespace Transaction\Infra\Presenters;
+namespace Transaction\Infra\Transformers;
 
-use Transaction\Domain\Entities\Transaction;
+use Transaction\Domain\Entities\Transaction as TransactionEntity;
 
-class TransactionTransformer
+class Transaction
 {
-    public function transform(Transaction $transaction): array
+    public function transform(TransactionEntity $transaction): array
     {
         return [
             'payer' => $transaction->getPayer()->getName(),

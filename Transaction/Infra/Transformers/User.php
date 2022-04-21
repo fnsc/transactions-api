@@ -1,12 +1,12 @@
 <?php
 
-namespace Transaction\Infra\Presenters;
+namespace Transaction\Infra\Transformers;
 
-use Transaction\Domain\Entities\User;
+use Transaction\Domain\Entities\User as UserEntity;
 
-class UserTransformer
+class User
 {
-    public function transform(User $user): array
+    public function transform(UserEntity $user): array
     {
         return [
             'name' => $user->getName(),

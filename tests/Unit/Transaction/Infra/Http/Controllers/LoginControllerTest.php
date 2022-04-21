@@ -13,7 +13,7 @@ use Transaction\Application\Login\OutputBoundary;
 use Transaction\Application\Login\Service as LoginService;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Http\Requests\LoginRequest;
-use Transaction\Infra\Presenters\UserTransformer;
+use Transaction\Infra\Transformers\User;
 
 class LoginControllerTest extends TestCase
 {
@@ -30,7 +30,7 @@ class LoginControllerTest extends TestCase
         // Set
         $request = m::mock(LoginRequest::class);
         $service = $this->createMock(LoginService::class);
-        $transformer = m::mock(UserTransformer::class);
+        $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
         $controller = new LoginController($service, $transformer, $logger);
 
@@ -69,7 +69,7 @@ class LoginControllerTest extends TestCase
         // Set
         $request = m::mock(LoginRequest::class);
         $service = $this->createMock(LoginService::class);
-        $transformer = m::mock(UserTransformer::class);
+        $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
         $controller = new LoginController($service, $transformer, $logger);
 

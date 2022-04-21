@@ -13,7 +13,7 @@ use Transaction\Application\StoreUser\InputBoundary;
 use Transaction\Application\StoreUser\Service;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Http\Requests\UserRequest;
-use Transaction\Infra\Presenters\UserTransformer;
+use Transaction\Infra\Transformers\User;
 
 class StoreUsersControllerTest extends TestCase
 {
@@ -22,7 +22,7 @@ class StoreUsersControllerTest extends TestCase
         // Set
         $request = m::mock(UserRequest::class);
         $service = $this->createMock(Service::class);
-        $transformer = m::mock(UserTransformer::class);
+        $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
         $controller = new StoreUsersController($service, $transformer, $logger);
 
@@ -104,7 +104,7 @@ class StoreUsersControllerTest extends TestCase
         // Set
         $request = m::mock(UserRequest::class);
         $service = $this->createMock(Service::class);
-        $transformer = m::mock(UserTransformer::class);
+        $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
         $controller = new StoreUsersController($service, $transformer, $logger);
 

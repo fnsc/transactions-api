@@ -11,7 +11,7 @@ use Transaction\Application\Exceptions\LoginException;
 use Transaction\Application\Login\InputBoundary;
 use Transaction\Application\Login\Service;
 use Transaction\Infra\Http\Requests\LoginRequest;
-use Transaction\Infra\Presenters\UserTransformer;
+use Transaction\Infra\Transformers\User as UserTransformer;
 
 class LoginController extends Controller
 {
