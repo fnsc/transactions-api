@@ -6,11 +6,10 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Transaction\Domain\Entities\Account as AccountEntity;
-use Transaction\Domain\Entities\User;
+use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\Account as AccountModel;
 use Transaction\Infra\Eloquent\User as UserModel;
 use Transaction\Infra\Repositories\Account as AccountRepository;
-use function app;
 
 class AccountTest extends TestCase
 {
@@ -20,11 +19,7 @@ class AccountTest extends TestCase
     public function test_should_return_the_required_account(): void
     {
         // Set
-        AccountModel::create([
-            'number' => '61a3c6e78e832a50830b8bb1',
-            'user_id' => 1,
-            'amount' => 1000,
-        ]);
+        $this->setAccountDatabase();
 
         $repository = app(AccountRepository::class);
 
@@ -39,7 +34,7 @@ class AccountTest extends TestCase
     public function test_should_return_null_when_the_account_not_found(): void
     {
         // Set
-        $repository = app(AccountRepository::class);
+        $repository = new AccountRepository();
 
         // Actions
         $result = $repository->find(new AccountEntity(id: 1));
@@ -48,13 +43,27 @@ class AccountTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function test_should_find_an_account_by_user(): void
+    {
+        // Set
+        $this->setAccountDatabase();
+        $user = UserEntity::newUser(id: 1);
+        $repository = new AccountRepository();
+
+        // Actions
+        $result = $repository->findByUser($user);
+
+        // Assertions
+        $this->assertInstanceOf(AccountEntity::class, $result);
+    }
+
     public function test_should_store_a_new_account(): void
     {
         // Set
         $repository = app(AccountRepository::class);
 
         // Actions
-        $result = $repository->store(User::newUser(id: 1));
+        $result = $repository->store(UserEntity::newUser(id: 1));
 
         // Assertions
         $this->assertInstanceOf(AccountEntity::class, $result);
@@ -96,6 +105,15 @@ class AccountTest extends TestCase
             'type' => 'regular',
             'password' => 'secret',
             'registration_number' => '12345678901',
+        ]);
+    }
+
+    private function setAccountDatabase(): void
+    {
+        AccountModel::create([
+            'number' => '61a3c6e78e832a50830b8bb1',
+            'user_id' => 1,
+            'amount' => 1000,
         ]);
     }
 }

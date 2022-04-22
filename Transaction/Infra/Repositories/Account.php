@@ -32,8 +32,14 @@ class Account implements AccountRepositoryInterface
     public function findByUser(UserEntity $user): AccountEntity
     {
         $accountModel = $this->getModel();
+        $accountDatabase = $accountModel->where('user_id', $user->getId())->first();
 
-        return $accountModel->where('user_id', $user->getId())->first();
+        return new AccountEntity(
+            amount: $accountDatabase->getAttribute('amount'),
+            userId: $accountDatabase->getAttribute('user_id'),
+            number: $accountDatabase->getAttribute('number'),
+            id: $accountDatabase->getAttribute('id')
+        );
     }
 
     public function store(UserEntity $user): AccountEntity
