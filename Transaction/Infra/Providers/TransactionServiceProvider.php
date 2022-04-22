@@ -15,8 +15,7 @@ class TransactionServiceProvider extends BaseServiceProvider
     {
         $this->app->bind(
             TransactionRepositoryInterface::class,
-            function(Application $app): TransactionRepository
-            {
+            function (Application $app): TransactionRepository {
                 $accountRepository = $app->make(AccountRepository::class);
                 $authorizationService = $app->make(Service::class);
 

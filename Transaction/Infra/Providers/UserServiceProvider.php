@@ -12,7 +12,7 @@ class UserServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(UserRepositoryInterface::class, function(Application $app) {
+        $this->app->bind(UserRepositoryInterface::class, function (Application $app) {
             $accountRepository = $app->make(AccountRepository::class);
 
             return new UserRepository($accountRepository);

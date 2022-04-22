@@ -12,6 +12,7 @@ use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;
 use Transaction\Infra\Repositories\Account as AccountRepository;
+
 use function app;
 use function auth;
 use function route;

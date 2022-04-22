@@ -25,12 +25,7 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service(
-            $transactionRepository,
-            $userRepository,
-            $authenticatedUser,
-            $evenDispatcher
-        );
+        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
         $user = m::mock(User::class);
         $input = new InputBoundary(1, 3, '100.00');
 
@@ -57,12 +52,7 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service(
-            $transactionRepository,
-            $userRepository,
-            $authenticatedUser,
-            $evenDispatcher
-        );
+        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
         $user = m::mock(User::class);
         $input = new InputBoundary(1, 2, '100.00');
 
@@ -93,12 +83,7 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service(
-            $transactionRepository,
-            $userRepository,
-            $authenticatedUser,
-            $evenDispatcher
-        );
+        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
         $user = m::mock(User::class);
         $account = m::mock(AccountEntity::class);
         $input = new InputBoundary(1, 2, '100.00');
@@ -140,12 +125,7 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service(
-            $transactionRepository,
-            $userRepository,
-            $authenticatedUser,
-            $evenDispatcher
-        );
+        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
         $user = m::mock(User::class);
         $account = m::mock(AccountEntity::class);
         $input = new InputBoundary(1, 2, '100.00');
@@ -190,12 +170,7 @@ class ServiceTest extends TestCase
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = $this->createMock(EventDispatcher::class);
 
-        $service = new Service(
-            $transactionRepository,
-            $userRepository,
-            $authenticatedUser,
-            $evenDispatcher
-        );
+        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
 
         $payer = User::newUser(id: 2);
         $payer->setAccount(new AccountEntity(amount: 100000, userId: 2, number: 'io12j3oijasodi', id: 1));

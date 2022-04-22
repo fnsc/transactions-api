@@ -9,6 +9,7 @@ use Transaction\Application\Exceptions\UserException;
 use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;
 use Transaction\Infra\Repositories\User as UserRepository;
+
 use function app;
 
 class UserTest extends TestCase

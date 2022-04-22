@@ -26,18 +26,9 @@ class StoreUsersControllerTest extends TestCase
         $logger = m::mock(LoggerInterface::class);
         $controller = new StoreUsersController($service, $transformer, $logger);
 
-        $input = new InputBoundary(
-        'User Name',
-        'user@email.com',
-        '12345678909',
-        'regular',
-        'secret',
-        );
+        $input = new InputBoundary('User Name', 'user@email.com', '12345678909', 'regular', 'secret');
 
-        $user = UserEntity::newUser(
-            name: 'User Name',
-            token: 'auth token',
-        );
+        $user = UserEntity::newUser(name: 'User Name', token: 'auth token');
 
         $output = new OutputBoundary($user);
 
@@ -113,13 +104,7 @@ class StoreUsersControllerTest extends TestCase
         $logger = m::mock(LoggerInterface::class);
         $controller = new StoreUsersController($service, $transformer, $logger);
 
-        $input = new InputBoundary(
-        'User Name',
-        'user@email.com',
-        '12345678909',
-        'regular',
-        'secret',
-        );
+        $input = new InputBoundary('User Name', 'user@email.com', '12345678909', 'regular', 'secret');
 
         // Expectations
         $request->expects()

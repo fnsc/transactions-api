@@ -10,9 +10,6 @@ class AccountServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(
-            AccountRepositoryInterface::class,
-            AccountRepository::class
-        );
+        $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
     }
 }

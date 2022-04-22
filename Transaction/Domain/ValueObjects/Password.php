@@ -10,6 +10,11 @@ class Password implements Stringable
     {
     }
 
+    public function getPlainPassword(): string
+    {
+        return $this->password;
+    }
+
     public function __toString(): string
     {
         if (empty($this->password)) {
@@ -17,10 +22,5 @@ class Password implements Stringable
         }
 
         return password_hash($this->password, PASSWORD_ARGON2ID);
-    }
-
-    public function getPlainPassword(): string
-    {
-        return $this->password;
     }
 }
