@@ -97,3 +97,6 @@ Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremo
 - Uso de Design Patterns
 - Documentação
 - Proposta de melhoria na arquitetura
+
+## Swagger
+O arquivo na raiz do projeto `api_swagger.yaml` contem as instruções necessárias para rodar os principais endpoints. 
