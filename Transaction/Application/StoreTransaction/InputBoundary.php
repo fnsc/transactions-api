@@ -13,25 +13,16 @@ class InputBoundary implements InputBoundaryInterface
     ) {
     }
 
-    /**
-     * @return int
-     */
     public function getPayeeId(): int
     {
         return $this->payeeId;
     }
 
-    /**
-     * @return int
-     */
     public function getPayerId(): int
     {
         return $this->payerId;
     }
 
-    /**
-     * @return float
-     */
     public function getAmount(): float
     {
         return $this->amount;

@@ -6,11 +6,8 @@ use Stringable;
 
 class Email implements Stringable
 {
-    private string $email;
-
-    public function __construct(string $email)
+    public function __construct(private readonly string $email)
     {
-        $this->email = $email;
     }
 
     public function __toString(): string
