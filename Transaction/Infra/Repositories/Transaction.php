@@ -91,12 +91,6 @@ class Transaction implements TransactionRepositoryInterface
 
     private function getNewUser(UserModel $user): UserEntity
     {
-        return UserEntity::newUser(
-            $user->id,
-            $user->name,
-            $user->email,
-            $user->registration_number,
-            $user->type,
-        );
+        return UserEntity::newUser($user->id, $user->name, $user->email, $user->registration_number, $user->type);
     }
 }

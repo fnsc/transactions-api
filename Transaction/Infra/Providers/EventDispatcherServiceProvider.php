@@ -10,9 +10,6 @@ class EventDispatcherServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(
-            EventDispatcherInterface::class,
-            EventDispatcher::class
-        );
+        $this->app->bind(EventDispatcherInterface::class, EventDispatcher::class);
     }
 }

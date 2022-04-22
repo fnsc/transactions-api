@@ -13,10 +13,7 @@ class LoginAdapterTest extends TestCase
         // Set
         $userRepository = $this->createMock(UserRepository::class);
         $loginAdapter = new LoginAdapter($userRepository);
-        $user = UserEntity::newUser(
-            email: 'random@email.com',
-            password: 'secret',
-        );
+        $user = UserEntity::newUser(email: 'random@email.com', password: 'secret');
 
         $userDatabase = UserEntity::newUser(
             email: 'random@email.com',
@@ -41,10 +38,7 @@ class LoginAdapterTest extends TestCase
         // Set
         $userRepository = $this->createMock(UserRepository::class);
         $loginAdapter = new LoginAdapter($userRepository);
-        $user = UserEntity::newUser(
-            email: 'random@email.com',
-            password: 'secret',
-        );
+        $user = UserEntity::newUser(email: 'random@email.com', password: 'secret');
 
         $userDatabase = UserEntity::newUser(
             email: 'random@email.com.br',
@@ -69,10 +63,7 @@ class LoginAdapterTest extends TestCase
         // Set
         $userRepository = $this->createMock(UserRepository::class);
         $loginAdapter = new LoginAdapter($userRepository);
-        $user = UserEntity::newUser(
-            email: 'random@email.com',
-            password: 'secret',
-        );
+        $user = UserEntity::newUser(email: 'random@email.com', password: 'secret');
 
         $userDatabase = UserEntity::newUser(
             email: 'random@email.com.br',

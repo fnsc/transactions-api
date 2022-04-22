@@ -9,13 +9,7 @@ class InputBoundaryTest extends TestCase
     public function test_should_get_an_instance_from_input_boundary(): void
     {
         // Actions
-        $input = new InputBoundary(
-            'random name',
-            'random@email.com',
-            '12345678909',
-            'regular',
-            'secret'
-        );
+        $input = new InputBoundary('random name', 'random@email.com', '12345678909', 'regular', 'secret');
 
         // Assertions
         $this->assertSame('random name', $input->getName());

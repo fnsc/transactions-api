@@ -13,6 +13,7 @@ use Transaction\Domain\Entities\User as UserEntity;
 use Transaction\Infra\Eloquent\User as UserModel;
 use Transaction\Infra\Repositories\Transaction as TransactionRepository;
 use Transaction\Infra\Repositories\User as UserRepository;
+
 use function app;
 
 class TransactionTest extends TestCase
@@ -26,11 +27,7 @@ class TransactionTest extends TestCase
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(
-            payee: $payee,
-            payer: $payer,
-            amount: 11000,
-        );
+        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
 
         // Actions
         $result = $repository->store($transfer);
@@ -46,11 +43,7 @@ class TransactionTest extends TestCase
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(
-            payee: $payee,
-            payer: $payer,
-            amount: 11000,
-        );
+        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
 
         // Expectations
         $service->expects($this->once())
@@ -72,11 +65,7 @@ class TransactionTest extends TestCase
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(
-            payee: $payee,
-            payer: $payer,
-            amount: 11000,
-        );
+        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
 
         $payer = UserModel::whereId(1)->first();
         $payee = UserModel::whereId(2)->first();

@@ -9,6 +9,17 @@ class User
 {
     private Account $account;
 
+    private function __construct(
+        private readonly int $id,
+        private readonly string $name,
+        private readonly string $registrationNumber,
+        private readonly Email $email,
+        private readonly Password $password,
+        private readonly string $type,
+        private readonly string $token
+    ) {
+    }
+
     public static function newUser(
         int $id = 0,
         string $name = '',
@@ -17,8 +28,7 @@ class User
         string $type = '',
         string $password = '',
         string $token = ''
-    ): self
-    {
+    ): self {
         $email = new Email($email);
         $password = new Password($password);
 
@@ -68,16 +78,5 @@ class User
     public function setAccount(Account $account): void
     {
         $this->account = $account;
-    }
-
-    private function __construct(
-        private readonly int $id,
-        private readonly string $name,
-        private readonly string $registrationNumber,
-        private readonly Email $email,
-        private readonly Password $password,
-        private readonly string $type,
-        private readonly string $token
-    ) {
     }
 }

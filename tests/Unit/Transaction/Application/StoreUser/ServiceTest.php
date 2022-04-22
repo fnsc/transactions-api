@@ -18,13 +18,7 @@ class ServiceTest extends TestCase
         $loginService = $this->createMock(LoginService::class);
         $service = new Service($repository, $loginService);
 
-        $input = new InputBoundary(
-            'random name',
-            'random@email.com',
-            '12345678909',
-            'regular',
-            'secret'
-        );
+        $input = new InputBoundary('random name', 'random@email.com', '12345678909', 'regular', 'secret');
         $user = UserEntity::newUser(
             name: 'random name',
             email: 'random@email.com',

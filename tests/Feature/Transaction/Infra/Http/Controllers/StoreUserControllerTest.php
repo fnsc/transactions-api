@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 use Transaction\Infra\Eloquent\User;
+
 use function bcrypt;
 use function route;
 

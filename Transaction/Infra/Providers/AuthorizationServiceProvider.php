@@ -11,7 +11,7 @@ class AuthorizationServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(Service::class, function(Application $app) {
+        $this->app->bind(Service::class, function (Application $app) {
             $client = $app->make(Authorization::class);
 
             return new Service($client);

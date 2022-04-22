@@ -2,7 +2,6 @@
 
 namespace Transaction\Application\StoreTransaction;
 
-use Money\MoneyFormatter;
 use Transaction\Application\Contracts\AuthenticatedUserAdapter;
 use Transaction\Application\Contracts\EventDispatcher;
 use Transaction\Application\Contracts\InputBoundary as InputBoundaryInterface;

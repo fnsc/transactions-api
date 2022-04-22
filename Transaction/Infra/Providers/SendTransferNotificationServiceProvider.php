@@ -11,7 +11,7 @@ class SendTransferNotificationServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(SendTransferNotification::class, function(Application $app) {
+        $this->app->bind(SendTransferNotification::class, function (Application $app) {
             $client = $app->make(Notification::class);
 
             return new SendTransferNotification($client);

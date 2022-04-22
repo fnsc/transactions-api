@@ -34,10 +34,7 @@ class LoginControllerTest extends TestCase
         $logger = m::mock(LoggerInterface::class);
         $controller = new LoginController($service, $transformer, $logger);
 
-        $input = new InputBoundary(
-        'user@email.com',
-        'secret',
-        );
+        $input = new InputBoundary('user@email.com', 'secret');
 
         // Expectations
         $request->expects()
@@ -74,10 +71,7 @@ class LoginControllerTest extends TestCase
         $controller = new LoginController($service, $transformer, $logger);
 
         $input = new InputBoundary('user@email.com', 'secret');
-        $user = UserEntity::newUser(
-            name: 'User Name',
-            token: 'auth token',
-        );
+        $user = UserEntity::newUser(name: 'User Name', token: 'auth token');
         $output = new OutputBoundary($user);
 
         $expected = [

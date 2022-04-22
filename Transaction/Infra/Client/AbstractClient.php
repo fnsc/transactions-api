@@ -14,6 +14,7 @@ abstract class AbstractClient
 
     protected function getOptions(Transaction $transaction): array
     {
+        $options = [];
         $options['header'] = $this->getHeader();
         $options['body'] = json_encode([
             'payer' => $transaction->getPayer()->getName(),
