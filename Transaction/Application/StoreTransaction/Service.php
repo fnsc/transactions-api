@@ -32,7 +32,7 @@ class Service implements ServiceInterface
         $authenticatedUser = $this->authenticatedUser->getAuthenticatedUser();
 
         if ($transaction->getPayer()->getId() !== $authenticatedUser->getId()) {
-            throw FraudException::payerIdisDifferent();
+            throw FraudException::payerIdIsDifferent();
         }
 
         if (!$payer = $this->userRepository->find($transaction->getPayer()->getId())) {

@@ -6,7 +6,7 @@ use Exception;
 
 class FraudException extends Exception
 {
-    public static function payerIdisDifferent(): self
+    public static function payerIdIsDifferent(): self
     {
         return new static('The payer id is different from the user that is currently authenticated.');
     }

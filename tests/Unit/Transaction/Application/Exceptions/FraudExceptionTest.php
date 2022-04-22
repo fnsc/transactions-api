@@ -9,7 +9,7 @@ class FraudExceptionTest extends TestCase
     public function test_should_throw_an_exception_when_payer_is_different(): void
     {
         // Actions
-        $exception = FraudException::payerIdisDifferent();
+        $exception = FraudException::payerIdIsDifferent();
 
         // Assertions
         $this->assertSame(

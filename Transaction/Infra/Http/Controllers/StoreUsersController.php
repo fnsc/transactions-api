@@ -29,7 +29,6 @@ class StoreUsersController extends Controller
         try {
             $input = $this->getInputBoundary($request);
             $output = $this->service->handle($input);
-
             $result = $this->transformer->transform($output->getUser());
 
             return $this->getSuccessResponse($result);

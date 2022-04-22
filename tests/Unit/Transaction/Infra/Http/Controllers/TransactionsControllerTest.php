@@ -131,7 +131,7 @@ class TransactionsControllerTest extends TestCase
     {
         return [
             'fraud exception' => [
-                'exception' => FraudException::payerIdisDifferent(),
+                'exception' => FraudException::payerIdIsDifferent(),
                 'exceptionMessage' => 'The payer id is different from the user that is currently authenticated.',
                 'expectedStatusCode' => Response::HTTP_NOT_ACCEPTABLE,
                 'loggerMethod' => 'alert',
