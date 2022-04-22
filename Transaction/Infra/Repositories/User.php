@@ -12,11 +12,8 @@ use Transaction\Infra\Eloquent\User as UserModel;
 
 class User implements UserRepository
 {
-    private Account $accountRepository;
-
-    public function __construct(Account $accountRepository)
+    public function __construct(private readonly Account $accountRepository)
     {
-        $this->accountRepository = $accountRepository;
     }
 
     public function find(int $id): ?UserEntity

@@ -4,7 +4,6 @@ namespace Transaction\Infra\Repositories;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Response;
 use Mockery as m;
 use Money\Money;
 use Tests\TestCase;
@@ -13,7 +12,6 @@ use Transaction\Application\Exceptions\FraudException;
 use Transaction\Domain\Entities\Account as AccountEntity;
 use Transaction\Domain\Entities\Transaction as TransactionEntity;
 use Transaction\Domain\Entities\User as UserEntity;
-use Transaction\Infra\Eloquent\Account as AccountModel;
 use Transaction\Infra\Eloquent\User as UserModel;
 
 class TransactionTest extends TestCase

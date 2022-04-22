@@ -2,6 +2,7 @@
 
 namespace Transaction\Application\Exceptions;
 
+use Illuminate\Http\Response;
 use PHPUnit\Framework\TestCase;
 
 class TransferExceptionTest extends TestCase
@@ -13,7 +14,7 @@ class TransferExceptionTest extends TestCase
         $payeeNotFound = TransferException::payeeNotFound();
         $accountNotFound = TransferException::accountNotFound();
         $notSufficientAmount = TransferException::notSufficientAmount();
-        $notificationWasNotSend = TransferException::notificationWasNotSend();
+        $notificationWasNotSend = TransferException::notificationWasNotSend(Response::HTTP_BAD_REQUEST);
 
         // Assertions
         $this->assertSame('The informed payer was not found on our registers.', $payerNotFound->getMessage());

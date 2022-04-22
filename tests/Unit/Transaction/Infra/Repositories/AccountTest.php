@@ -21,28 +21,9 @@ class AccountTest extends TestCase
     public function test_should_store_a_new_account(): void
     {
         // Set
-        $userEntity = m::mock(UserEntity::class);
-        $accountModel = $this->instance(AccountModel::class, m::mock(AccountModel::class));
+        $this->setUserDatabase();
+        $userEntity = $this->getNewUserEntity();
         $repository = new Account();
-        UserModel::create([
-            'name' => 'Random Name',
-            'email' => 'random@email.com',
-            'password' => 'secret',
-            'registration_number' => '123456890090',
-            'type' => 'regular',
-        ]);
-
-        // Expectations
-        $userEntity->expects()
-            ->getId()
-            ->andReturn(1);
-
-        $accountModel->shouldReceive('create')
-            ->with([
-                'number' => m::type('string'),
-                'user_id' => 1,
-                'amount' => 0,
-            ])->andReturn(m::mock(AccountModel::class));
 
         // Actions
         $result = $repository->store($userEntity);
@@ -119,5 +100,28 @@ class AccountTest extends TestCase
 
         // Actions
         $repository->update($accountEntity);
+    }
+
+    private function setUserDatabase(): void
+    {
+        UserModel::create([
+            'name' => 'Random Name',
+            'email' => 'random@email.com',
+            'password' => 'secret',
+            'registration_number' => '123456890090',
+            'type' => 'regular',
+        ]);
+    }
+
+    private function getNewUserEntity(): UserEntity
+    {
+        return UserEntity::newUser(
+            id: 1,
+            name: 'Random Name',
+            email: 'random@email.com',
+            registrationNumber: '123456890090',
+            type: 'regular',
+            password: 'secret',
+        );
     }
 }
