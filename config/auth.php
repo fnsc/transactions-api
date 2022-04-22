@@ -1,7 +1,5 @@
 <?php
 
-use Transaction\Infra\Eloquent\User;
-
 return [
 
     /*
@@ -64,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => User::class,
+            'model' => User\User::class,
         ],
 
         // 'users' => [

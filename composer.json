@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.0",
         "ext-mongodb": "*",
         "fonseca/cpf_cnpj_validation": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -27,14 +27,17 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Transaction\\": "Transaction/"
+            "Transfer\\": "Transfer/",
+            "User\\": "User/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Transaction\\": "tests/Unit/Transaction"
+            "Transfer\\": "tests/Unit/Transfer",
+            "User\\": "tests/Unit/User"
         }
     },
     "scripts": {
@@ -60,10 +63,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true
