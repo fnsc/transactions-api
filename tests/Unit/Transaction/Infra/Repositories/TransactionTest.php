@@ -28,30 +28,10 @@ class TransactionTest extends TestCase
         $authService = m::mock(Service::class);
         $repository = new Transaction($accountRepository, $authService);
 
-        $transaction = m::mock(TransactionEntity::class);
-        $payee = m::mock(UserEntity::class);
-        $payer = m::mock(UserEntity::class);
-
-        // Expectations
-        $transaction->expects()
-            ->getPayee()
-            ->andReturn($payee);
-
-        $payee->expects()
-            ->getId()
-            ->andReturn(2);
-
-        $transaction->expects()
-            ->getPayer()
-            ->andReturn($payer);
-
-        $payer->expects()
-            ->getId()
-            ->andReturn(1);
-
-        $transaction->expects()
-            ->getAmount()
-            ->andReturn(Money::BRL(10000));
+        $payee = UserEntity::newUser(id: 2);
+        $payer = UserEntity::newUser(id: 1);
+        
+        $transaction = new TransactionEntity(payee: $payee, payer: $payer, amount: 10000);
 
         // Actions
         $result = $repository->store($transaction);
@@ -71,45 +51,26 @@ class TransactionTest extends TestCase
         $authService = m::mock(Service::class);
         $repository = new Transaction($accountRepository, $authService);
 
-        $transaction = m::mock(TransactionEntity::class);
-        $payee = m::mock(UserEntity::class);
+        $payee = UserEntity::newUser(id: 2);
         $payeeAccount = m::mock(AccountEntity::class);
-        $payer = m::mock(UserEntity::class);
+        $payee->setAccount($payeeAccount);
+
+        $payer = UserEntity::newUser(id: 1);
         $payerAccount = m::mock(AccountEntity::class);
+        $payer->setAccount($payerAccount);
+
+        $transaction = new TransactionEntity(payee: $payee, payer: $payer, amount: 50000);
 
         // Expectations
-        $transaction->expects()
-            ->getPayer()
-            ->twice()
-            ->andReturn($payer);
-
-        $payer->expects()
-            ->getAccount()
-            ->andReturn($payerAccount);
-
         $payerAccount->expects()
             ->getAmount()
             ->andReturn(Money::BRL(100000));
-
-        $transaction->expects()
-            ->getAmount()
-            ->times(3)
-            ->andReturn(Money::BRL(50000));
 
         $payerAccount->expects()
             ->setAmount(50000);
 
         $accountRepository->expects()
             ->update($payerAccount);
-
-        $transaction->expects()
-            ->getPayee()
-            ->twice()
-            ->andReturn($payee);
-
-        $payee->expects()
-            ->getAccount()
-            ->andReturn($payeeAccount);
 
         $payeeAccount->expects()
             ->getAmount()
@@ -120,14 +81,6 @@ class TransactionTest extends TestCase
 
         $accountRepository->expects()
             ->update($payeeAccount);
-
-        $payee->expects()
-            ->getId()
-            ->andReturn(2);
-
-        $payer->expects()
-            ->getId()
-            ->andReturn(1);
 
         $authService->expects()
             ->handle(m::type(TransactionEntity::class))
@@ -143,52 +96,32 @@ class TransactionTest extends TestCase
     public function test_should_throw_an_exception_when_the_auth_service_fails(): void
     {
         // Set
-        // Set
         $this->setPayerInDatabase();
         $this->setPayeeInDataBase();
         $accountRepository = m::mock(Account::class);
         $authService = m::mock(Service::class);
         $repository = new Transaction($accountRepository, $authService);
 
-        $transaction = m::mock(TransactionEntity::class);
-        $payee = m::mock(UserEntity::class);
+        $payee = UserEntity::newUser(id: 2);
         $payeeAccount = m::mock(AccountEntity::class);
-        $payer = m::mock(UserEntity::class);
+        $payee->setAccount($payeeAccount);
+
+        $payer = UserEntity::newUser(id: 1);
         $payerAccount = m::mock(AccountEntity::class);
+        $payer->setAccount($payerAccount);
+
+        $transaction = new TransactionEntity(payee: $payee, payer: $payer, amount: 50000);
 
         // Expectations
-        $transaction->expects()
-            ->getPayer()
-            ->twice()
-            ->andReturn($payer);
-
-        $payer->expects()
-            ->getAccount()
-            ->andReturn($payerAccount);
-
         $payerAccount->expects()
             ->getAmount()
             ->andReturn(Money::BRL(100000));
-
-        $transaction->expects()
-            ->getAmount()
-            ->times(3)
-            ->andReturn(Money::BRL(50000));
 
         $payerAccount->expects()
             ->setAmount(50000);
 
         $accountRepository->expects()
             ->update($payerAccount);
-
-        $transaction->expects()
-            ->getPayee()
-            ->twice()
-            ->andReturn($payee);
-
-        $payee->expects()
-            ->getAccount()
-            ->andReturn($payeeAccount);
 
         $payeeAccount->expects()
             ->getAmount()
@@ -199,14 +132,6 @@ class TransactionTest extends TestCase
 
         $accountRepository->expects()
             ->update($payeeAccount);
-
-        $payee->expects()
-            ->getId()
-            ->andReturn(2);
-
-        $payer->expects()
-            ->getId()
-            ->andReturn(1);
 
         $authService->expects()
             ->handle(m::type(TransactionEntity::class))

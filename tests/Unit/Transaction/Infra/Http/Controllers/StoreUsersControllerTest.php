@@ -33,7 +33,12 @@ class StoreUsersControllerTest extends TestCase
         'regular',
         'secret',
         );
-        $user = m::mock(UserEntity::class);
+
+        $user = UserEntity::newUser(
+            name: 'User Name',
+            token: 'auth token',
+        );
+
         $output = new OutputBoundary($user);
 
         $expected = [

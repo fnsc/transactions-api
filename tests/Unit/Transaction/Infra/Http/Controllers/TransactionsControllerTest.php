@@ -26,6 +26,11 @@ class TransactionsControllerTest extends TestCase
         $logger = m::mock(LoggerInterface::class);
         $transformer = m::mock(Transaction::class);
         $controller = new TransactionsController($service, $logger, $transformer);
+
+        $transaction = m::mock(TransactionEntity::class);
+        $input = new InputBoundary(1, 2, '100.97');
+        $output = new OutputBoundary($transaction);
+
         $expected = [
             'message' => 'Success!!!',
             'data' => [
@@ -36,9 +41,6 @@ class TransactionsControllerTest extends TestCase
                 ],
             ],
         ];
-        $transaction = m::mock(TransactionEntity::class);
-        $input = new InputBoundary(1, 2, '100.97');
-        $output = new OutputBoundary($transaction);
 
         // Expectations
         $request->expects()

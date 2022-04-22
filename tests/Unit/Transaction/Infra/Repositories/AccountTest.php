@@ -4,8 +4,6 @@ namespace Transaction\Infra\Repositories;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery as m;
-use Money\Money;
 use Tests\TestCase;
 use Transaction\Application\Exceptions\TransferException;
 use Transaction\Domain\Entities\Account as AccountEntity;
@@ -35,42 +33,11 @@ class AccountTest extends TestCase
     public function test_should_proceed_and_update(): void
     {
         // Set
-        $accountModel = $this->instance(AccountModel::class, m::mock(AccountModel::class));
+        $this->setUserDatabase();
+        $this->setAccountDatabase();
+
         $repository = new Account();
-        $accountDatabase = m::mock(AccountModel::class);
-        $accountEntity = m::mock(AccountEntity::class);
-        $money = Money::BRL(10000);
-
-        UserModel::create([
-            'name' => 'Random Name',
-            'email' => 'random@email.com',
-            'password' => 'secret',
-            'registration_number' => '123456890090',
-            'type' => 'regular',
-        ]);
-
-        AccountModel::create([
-            'number' => '6261be3b1ba0f944391c5eb1',
-            'user_id' => 1,
-            'amount' => 0,
-        ]);
-
-        // Expectations
-        $accountEntity->expects()
-            ->getId()
-            ->andReturn(1);
-
-        $accountModel->shouldReceive('whereId')
-            ->with(1)
-            ->andReturn($accountDatabase);
-
-        $accountEntity->expects()
-            ->getAmount()
-            ->andReturn($money);
-
-        $accountDatabase->shouldReceive('update')
-            ->with(['amount' => $money->getAmount()])
-            ->andReturnTrue();
+        $accountEntity = new AccountEntity(amount: 10000, userId: 1, id: 1);
 
         // Actions
         $repository->update($accountEntity);
@@ -82,18 +49,8 @@ class AccountTest extends TestCase
     public function test_should_throw_an_exception_when_the_account_not_found(): void
     {
         // Set
-        $accountModel = $this->instance(AccountModel::class, m::mock(AccountModel::class));
         $repository = new Account();
-        $accountEntity = m::mock(AccountEntity::class);
-
-        // Expectations
-        $accountEntity->expects()
-            ->getId()
-            ->andReturn(1);
-
-        $accountModel->shouldReceive('whereId')
-            ->with(1)
-            ->andReturnNull();
+        $accountEntity = new AccountEntity(amount: 10000, userId: 1, id: 1);
 
         $this->expectException(TransferException::class);
         $this->expectExceptionMessage('The informed account was not found on our registers.');
@@ -123,5 +80,14 @@ class AccountTest extends TestCase
             type: 'regular',
             password: 'secret',
         );
+    }
+
+    private function setAccountDatabase(): void
+    {
+        AccountModel::create([
+            'number' => '6261be3b1ba0f944391c5eb1',
+            'user_id' => 1,
+            'amount' => 0,
+        ]);
     }
 }
