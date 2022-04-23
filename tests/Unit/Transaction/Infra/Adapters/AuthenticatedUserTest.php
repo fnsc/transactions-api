@@ -13,7 +13,7 @@ class AuthenticatedUserTest extends TestCase
     use DatabaseMigrations;
     use RefreshDatabase;
 
-    public function test_get_authenticated_user_instance(): void
+    public function testGetAuthenticatedUserInstance(): void
     {
         $user = UserModel::create([
             'name' => 'Random Name',

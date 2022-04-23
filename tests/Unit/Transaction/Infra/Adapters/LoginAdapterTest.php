@@ -8,7 +8,7 @@ use Transaction\Infra\Repositories\User as UserRepository;
 
 class LoginAdapterTest extends TestCase
 {
-    public function test_should_get_success_when_attempting_the_login(): void
+    public function testShouldGetSuccessWhenAttemptingTheLogin(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);
@@ -33,7 +33,7 @@ class LoginAdapterTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function test_should_fail_when_email_is_not_valid(): void
+    public function testShouldFailWhenEmailIsNotValid(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);
@@ -58,7 +58,7 @@ class LoginAdapterTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function test_should_fail_when_password_is_not_valid(): void
+    public function testShouldFailWhenPasswordIsNotValid(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);

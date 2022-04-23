@@ -14,7 +14,7 @@ use Transaction\Infra\Client\Notification;
 
 class SendTransferNotificationTest extends TestCase
 {
-    public function test_should_send_the_transfer_notification(): void
+    public function testShouldSendTheTransferNotification(): void
     {
         // Set
         $client = m::mock(Notification::class);
@@ -49,7 +49,7 @@ class SendTransferNotificationTest extends TestCase
         $this->assertNull(null);
     }
 
-    public function test_should_throw_an_exception_when_notification_service_fails(): void
+    public function testShouldThrowAnExceptionWhenNotificationServiceFails(): void
     {
         // Set
         $client = m::mock(Notification::class);

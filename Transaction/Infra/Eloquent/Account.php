@@ -8,6 +8,9 @@ use Money\Money;
 
 class Account extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'user_id',
         'number',

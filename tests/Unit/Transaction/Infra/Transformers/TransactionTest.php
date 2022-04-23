@@ -10,7 +10,7 @@ use Transaction\Domain\Entities\User as UserEntity;
 
 class TransactionTest extends TestCase
 {
-    public function test_should_transform_the_transaction(): void
+    public function testShouldTransformTheTransaction(): void
     {
         // Set
         $transaction = m::mock(TransactionEntity::class);

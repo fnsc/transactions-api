@@ -8,7 +8,7 @@ use Transaction\Domain\Entities\Transaction;
 
 class OutputBoundaryTest extends TestCase
 {
-    public function test_should_get_an_instance_from_output_boundary(): void
+    public function testShouldGetAnInstanceFromOutputBoundary(): void
     {
         // Set
         $transaction = m::mock(Transaction::class);

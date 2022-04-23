@@ -8,7 +8,7 @@ use Transaction\Domain\ValueObjects\Password;
 
 class UserTest extends TestCase
 {
-    public function test_should_get_an_user_instance(): void
+    public function testShouldGetAnUserInstance(): void
     {
         // Actions
         $user = User::newUser(

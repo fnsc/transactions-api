@@ -11,7 +11,7 @@ use Transaction\Domain\Entities\User;
 
 class ServiceTest extends TestCase
 {
-    public function test_should_handle_the_login(): void
+    public function testShouldHandleTheLogin(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);
@@ -40,7 +40,7 @@ class ServiceTest extends TestCase
         $this->assertInstanceOf(User::class, $result->getUser());
     }
 
-    public function test_should_throw_an_exception_when_login_failed(): void
+    public function testShouldThrowAnExceptionWhenLoginFailed(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);
@@ -68,7 +68,7 @@ class ServiceTest extends TestCase
         $service->handle($input);
     }
 
-    public function test_should_throw_an_exception_when_user_does_not_exist(): void
+    public function testShouldThrowAnExceptionWhenUserDoesNotExist(): void
     {
         // Set
         $userRepository = $this->createMock(UserRepository::class);

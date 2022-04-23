@@ -14,7 +14,7 @@ class ServiceTest extends TestCase
     /**
      * @dataProvider getAuthorizationsScenarios
      */
-    public function test_should_handle_the_authorization_service(string $message, bool $expected): void
+    public function testShouldHandleTheAuthorizationService(string $message, bool $expected): void
     {
         // Set
         $client = m::mock(AuthorizationClient::class);

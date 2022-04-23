@@ -16,7 +16,7 @@ class LoginControllerTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_proceed_with_the_login(): void
+    public function testShouldProceedWithTheLogin(): void
     {
         // Set
         User::create([

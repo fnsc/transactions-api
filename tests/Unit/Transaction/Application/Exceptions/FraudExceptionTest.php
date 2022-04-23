@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class FraudExceptionTest extends TestCase
 {
-    public function test_should_throw_an_exception_when_payer_is_different(): void
+    public function testShouldThrowAnExceptionWhenPayerIsDifferent(): void
     {
         // Actions
         $exception = FraudException::payerIdIsDifferent();
@@ -18,7 +18,7 @@ class FraudExceptionTest extends TestCase
         );
     }
 
-    public function test_should_throw_an_exception_when_authorization_was_declined(): void
+    public function testShouldThrowAnExceptionWhenAuthorizationWasDeclined(): void
     {
         // Actions
         $exception = FraudException::authorizationDeclined();

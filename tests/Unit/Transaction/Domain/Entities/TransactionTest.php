@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class TransactionTest extends TestCase
 {
-    public function test_should_get_a_transaction_instance(): void
+    public function testShouldGetATransactionInstance(): void
     {
         // Actions
         $transaction = new Transaction(

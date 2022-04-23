@@ -1,5 +1,7 @@
 # Desafio Back-end
 
+[![Build Status](https://github.com/fnsc/transactions-api/workflows/Tests/badge.svg)](https://github.com/fnsc/cpf-cnpj-validation/actions?query=workflow%3ATests)
+
 Primeiramente, obrigado pelo seu interesse em trabalhar na melhor plataforma de pagamentos do mundo!
 Abaixo você encontrará todos as informações necessárias para iniciar o seu teste.
 

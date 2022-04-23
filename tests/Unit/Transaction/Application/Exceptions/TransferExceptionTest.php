@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class TransferExceptionTest extends TestCase
 {
-    public function test_should_assert_transfer_exception_cases(): void
+    public function testShouldAssertTransferExceptionCases(): void
     {
         // Actions
         $payerNotFound = TransferException::payerNotFound();
