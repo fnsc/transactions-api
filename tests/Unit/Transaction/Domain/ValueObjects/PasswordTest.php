@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class PasswordTest extends TestCase
 {
-    public function test_should_get_a_password_instance(): void
+    public function testShouldGetAPasswordInstance(): void
     {
         // Actions
         $password = new Password('secret');

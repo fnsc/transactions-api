@@ -16,7 +16,7 @@ class StoreUserControllerTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_store_a_new_user(): void
+    public function testShouldStoreANewUser(): void
     {
         // Set
         $data = [
@@ -36,7 +36,7 @@ class StoreUserControllerTest extends TestCase
         $this->assertDatabaseHas('users', ['registration_number' => '12345678909']);
     }
 
-    public function test_should_not_store_a_user_with_same_registration_number(): void
+    public function testShouldNotStoreAUserWithSameRegistrationNumber(): void
     {
         // Set
         $dataOne = [
@@ -63,7 +63,7 @@ class StoreUserControllerTest extends TestCase
         $result->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    public function test_should_proceed_with_the_login(): void
+    public function testShouldProceedWithTheLogin(): void
     {
         // Set
         User::create([

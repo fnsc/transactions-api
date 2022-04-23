@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class InputBoundaryTest extends TestCase
 {
-    public function test_should_get_an_instance_from_input_boundary(): void
+    public function testShouldGetAnInstanceFromInputBoundary(): void
     {
         // Actions
         $input = new InputBoundary(1, 2, 100.0);

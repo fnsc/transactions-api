@@ -18,7 +18,7 @@ use Transaction\Infra\Transformers\Transaction;
 
 class TransactionsControllerTest extends TestCase
 {
-    public function test_should_store_a_transfer_successfully(): void
+    public function testShouldStoreATransferSuccessfully(): void
     {
         // Set
         $request = m::mock(TransactionRequest::class);
@@ -79,7 +79,7 @@ class TransactionsControllerTest extends TestCase
     /**
      * @dataProvider getExceptionsScenarios
      */
-    public function test_should_throw_an_exception_when_something_goes_wrong(
+    public function testShouldThrowAnExceptionWhenSomethingGoesWrong(
         Exception $exception,
         string $exceptionMessage,
         int $expectedStatusCode,

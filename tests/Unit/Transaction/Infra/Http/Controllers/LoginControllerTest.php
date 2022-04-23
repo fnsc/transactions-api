@@ -20,7 +20,7 @@ class LoginControllerTest extends TestCase
     /**
      * @dataProvider getLoginExceptionCases
      */
-    public function test_should_throw_an_exception_when_trying_to_login(
+    public function testShouldThrowAnExceptionWhenTryingToLogin(
         Exception $exception,
         string $loggerMethod,
         string $loggerMessage,
@@ -61,7 +61,7 @@ class LoginControllerTest extends TestCase
         $this->assertSame($expectedResponseContent, $result->getContent());
     }
 
-    public function test_should_proceed_with_the_login(): void
+    public function testShouldProceedWithTheLogin(): void
     {
         // Set
         $request = m::mock(LoginRequest::class);

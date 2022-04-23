@@ -22,7 +22,7 @@ class TransfersControllerTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_do_a_transfer_between_regular_users(): void
+    public function testShouldDoATransferBetweenRegularUsers(): void
     {
         // Set
         $accountRepository = app(AccountRepository::class);
@@ -53,7 +53,7 @@ class TransfersControllerTest extends TestCase
         $this->assertDatabaseHas('transactions', ['amount' => 10027]);
     }
 
-    public function test_should_revert_the_transfer_when_authorization_fails(): void
+    public function testShouldRevertTheTransferWhenAuthorizationFails(): void
     {
         // Set
         $accountRepository = app(AccountRepository::class);
@@ -84,7 +84,7 @@ class TransfersControllerTest extends TestCase
         $this->assertDatabaseMissing('transactions', ['amount' => 10027]);
     }
 
-    public function test_should_redirect_when_seller_user_try_to_do_a_transfer(): void
+    public function testShouldRedirectWhenSellerUserTryToDoATransfer(): void
     {
         // Set
         $accountRepository = app(AccountRepository::class);

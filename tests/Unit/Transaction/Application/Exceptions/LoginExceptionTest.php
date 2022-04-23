@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class LoginExceptionTest extends TestCase
 {
-    public function test_should_assert_transfer_exception_cases(): void
+    public function testShouldAssertTransferExceptionCases(): void
     {
         // Actions
         $invalidData = LoginException::invalidData();

@@ -8,7 +8,7 @@ use Transaction\Domain\Entities\User as UserEntity;
 
 class UserTest extends TestCase
 {
-    public function test_should_transform_the_user(): void
+    public function testShouldTransformTheUser(): void
     {
         // Set
         $user = m::mock(UserEntity::class);

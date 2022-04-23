@@ -8,7 +8,7 @@ use Transaction\Domain\Entities\User;
 
 class OutputBoundaryTest extends TestCase
 {
-    public function test_should_get_output_boundary_instance(): void
+    public function testShouldGetOutputBoundaryInstance(): void
     {
         // Actions
         $result = new OutputBoundary(m::mock(User::class));

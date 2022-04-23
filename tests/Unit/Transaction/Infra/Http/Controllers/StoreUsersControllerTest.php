@@ -17,7 +17,7 @@ use Transaction\Infra\Transformers\User;
 
 class StoreUsersControllerTest extends TestCase
 {
-    public function test_should_save_the_new_user(): void
+    public function testShouldSaveTheNewUser(): void
     {
         // Set
         $request = m::mock(UserRequest::class);
@@ -90,7 +90,7 @@ class StoreUsersControllerTest extends TestCase
     /**
      * @dataProvider getStoreExceptionsCases
      */
-    public function test_should_throw_an_exception(
+    public function testShouldThrowAnException(
         Exception $exception,
         string $loggerMethod,
         string $loggerMessage,

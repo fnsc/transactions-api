@@ -17,7 +17,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_store_the_new_user(): void
+    public function testShouldStoreTheNewUser(): void
     {
         // Set
         $repository = app(UserRepository::class);
@@ -39,7 +39,7 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => 'some@email.com']);
     }
 
-    public function test_should_throw_an_user_exception_when_the_email_already_exists(): void
+    public function testShouldThrowAnUserExceptionWhenTheEmailAlreadyExists(): void
     {
         // Set
         UserModel::create([
@@ -70,7 +70,7 @@ class UserTest extends TestCase
         $this->assertDatabaseCount('users', 1);
     }
 
-    public function test_should_throw_an_user_exception_when_the_registration_number_already_exists(): void
+    public function testShouldThrowAnUserExceptionWhenTheRegistrationNumberAlreadyExists(): void
     {
         // Set
         UserModel::create([

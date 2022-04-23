@@ -15,7 +15,7 @@ use Transaction\Domain\Entities\User as UserEntity;
 
 class NotificationTest extends TestCase
 {
-    public function test_should_send_a_request_to_get_authorization(): void
+    public function testShouldSendARequestToGetAuthorization(): void
     {
         // Set
         $http = m::mock(Client::class);

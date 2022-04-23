@@ -16,7 +16,7 @@ class AccountTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_return_the_required_account(): void
+    public function testShouldReturnTheRequiredAccount(): void
     {
         // Set
         $this->setAccountDatabase();
@@ -31,7 +31,7 @@ class AccountTest extends TestCase
         $this->assertSame('61a3c6e78e832a50830b8bb1', $result->getNumber());
     }
 
-    public function test_should_return_null_when_the_account_not_found(): void
+    public function testShouldReturnNullWhenTheAccountNotFound(): void
     {
         // Set
         $repository = new AccountRepository();
@@ -43,7 +43,7 @@ class AccountTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function test_should_find_an_account_by_user(): void
+    public function testShouldFindAnAccountByUser(): void
     {
         // Set
         $this->setAccountDatabase();
@@ -57,7 +57,7 @@ class AccountTest extends TestCase
         $this->assertInstanceOf(AccountEntity::class, $result);
     }
 
-    public function test_should_store_a_new_account(): void
+    public function testShouldStoreANewAccount(): void
     {
         // Set
         $repository = app(AccountRepository::class);
@@ -70,7 +70,7 @@ class AccountTest extends TestCase
         $this->assertSame('0', $result->getAmount()->getAmount());
     }
 
-    public function test_should_update_the_given_account(): void
+    public function testShouldUpdateTheGivenAccount(): void
     {
         // Set
         $repository = app(AccountRepository::class);

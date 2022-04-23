@@ -11,7 +11,7 @@ use Transaction\Infra\Repositories\User as UserRepository;
 
 class ServiceTest extends TestCase
 {
-    public function test_should_handle_with_the_new_user_data(): void
+    public function testShouldHandleWithTheNewUserData(): void
     {
         // Set
         $repository = $this->createMock(UserRepository::class);

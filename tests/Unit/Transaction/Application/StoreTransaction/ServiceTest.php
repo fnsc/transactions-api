@@ -18,7 +18,7 @@ use Transaction\Domain\Contracts\UserRepository;
 
 class ServiceTest extends TestCase
 {
-    public function test_should_throw_fraud_exception_when_payer_id_is_different(): void
+    public function testShouldThrowFraudExceptionWhenPayerIdIsDifferent(): void
     {
         // Set
         $transactionRepository = m::mock(TransactionRepository::class);
@@ -45,7 +45,7 @@ class ServiceTest extends TestCase
         $service->handle($input);
     }
 
-    public function test_should_throw_fraud_exception_when_payer_was_not_found(): void
+    public function testShouldThrowFraudExceptionWhenPayerWasNotFound(): void
     {
         // Set
         $transactionRepository = m::mock(TransactionRepository::class);
@@ -76,7 +76,7 @@ class ServiceTest extends TestCase
         $service->handle($input);
     }
 
-    public function test_should_throw_fraud_exception_when_payers_account_does_not_have_sufficient_amount(): void
+    public function testShouldThrowFraudExceptionWhenPayersAccountDoesNotHaveSufficientAmount(): void
     {
         // Set
         $transactionRepository = m::mock(TransactionRepository::class);
@@ -118,7 +118,7 @@ class ServiceTest extends TestCase
         $service->handle($input);
     }
 
-    public function test_should_throw_fraud_exception_when_payee_does_not_exists(): void
+    public function testShouldThrowFraudExceptionWhenPayeeDoesNotExists(): void
     {
         // Set
         $transactionRepository = m::mock(TransactionRepository::class);
@@ -162,7 +162,7 @@ class ServiceTest extends TestCase
         $service->handle($input);
     }
 
-    public function test_should_handle(): void
+    public function testShouldHandle(): void
     {
         // Set
         $transactionRepository = $this->createMock(TransactionRepository::class);

@@ -8,6 +8,9 @@ use Money\Money;
 
 class Transaction extends Model
 {
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'number',
         'payee_id',

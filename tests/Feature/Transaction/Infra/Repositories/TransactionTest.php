@@ -21,7 +21,7 @@ class TransactionTest extends TestCase
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_should_store_a_new_transaction(): void
+    public function testShouldStoreANewTransaction(): void
     {
         // Set
         $repository = app(TransactionRepository::class);
@@ -36,7 +36,7 @@ class TransactionTest extends TestCase
         $this->assertInstanceOf(TransactionEntity::class, $result);
     }
 
-    public function test_should_proceed_with_a_transfer(): void
+    public function testShouldProceedWithATransfer(): void
     {
         // Set
         $service = $this->instance(AuthorizationService::class, m::mock(AuthorizationService::class));
@@ -58,7 +58,7 @@ class TransactionTest extends TestCase
         $this->assertSame('11000', $result->getAmount()->getAmount());
     }
 
-    public function test_should_throw_an_exception_when_authorization_fails(): void
+    public function testShouldThrowAnExceptionWhenAuthorizationFails(): void
     {
         // Set
         $service = $this->instance(AuthorizationService::class, m::mock(AuthorizationService::class));
