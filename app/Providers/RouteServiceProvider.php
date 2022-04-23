@@ -15,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * This is used by Laravel authentication to redirect users after login.
      */
-    public const HOME = '/home';
+    public final const HOME = '/home';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             $this->getUserRoutes();
-            $this->getTransferRoutes();
+            $this->getTransactionRoutes();
         });
     }
 
@@ -39,24 +39,23 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+        RateLimiter::for(
+            'api',
+            fn(Request $request) => Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip())
+        );
     }
 
     private function getUserRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace('User\\Http\\Controllers')
-            ->group(base_path('User/routes/api.php'));
+            ->group(base_path('Transaction/routes/users_api.php'));
     }
 
-    private function getTransferRoutes(): void
+    private function getTransactionRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace('Transfer\\Http\\Controllers')
-            ->group(base_path('Transfer/routes/api.php'));
+            ->group(base_path('Transaction/routes/transactions_api.php'));
     }
 }

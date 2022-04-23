@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-mongodb": "*",
         "fonseca/cpf_cnpj_validation": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -19,25 +19,23 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.12",
-        "leroy-merlin-br/coding-standard": "^3.0",
+        "leroy-merlin-br/coding-standard": "dev-chore/bump-packages",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "rector/rector": "^0.12.21"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Transfer\\": "Transfer/",
-            "User\\": "User/"
+            "Transaction\\": "Transaction/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "Transfer\\": "tests/Unit/Transfer",
-            "User\\": "tests/Unit/User"
+            "Transaction\\": "tests/Unit/Transaction"
         }
     },
     "scripts": {
@@ -63,7 +61,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

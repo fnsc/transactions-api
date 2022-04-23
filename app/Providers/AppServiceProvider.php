@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use Fnsc\FiscalDoc\Validator as FiscalDoc;
+use Fnsc\FiscalDoc\Validator as RegistrationNumber;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     private array $rules = [
-        FiscalDoc::class,
+        RegistrationNumber::class,
     ];
 
     /**

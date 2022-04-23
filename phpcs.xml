@@ -10,10 +10,15 @@
     <arg value="nps"/>
 
     <!-- Folders that will be tracked -->
-    <file>./app</file>
     <file>./tests</file>
-    <file>./User</file>
-    <file>./Transfer</file>
+    <file>./Transaction</file>
 
     <rule ref="LeroyMerlin"/>
+
+    <rule ref="Generic.WhiteSpace.ScopeIndent.IncorrectExact">
+        <exclude-pattern>Transaction/Domain/UserType.php</exclude-pattern>
+    </rule>
+    <rule ref="Generic.WhiteSpace.ScopeIndent.Incorrect">
+        <exclude-pattern>Transaction/Domain/UserType.php</exclude-pattern>
+    </rule>
 </ruleset>
