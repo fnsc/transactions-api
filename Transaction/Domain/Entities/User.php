@@ -32,7 +32,15 @@ class User
         $email = new Email($email);
         $password = new Password($password);
 
-        return new static($id, $name, $registrationNumber, $email, $password, $type, $token);
+        return new static(
+            $id,
+            $name,
+            $registrationNumber,
+            $email,
+            $password,
+            $type,
+            $token
+        );
     }
 
     public function getId(): int

@@ -43,7 +43,12 @@ class User implements UserRepository
             throw UserException::emailAlreadyExists();
         }
 
-        if (!$this->isUnique($user->getRegistrationNumber(), 'registration_number')) {
+        if (
+            !$this->isUnique(
+                $user->getRegistrationNumber(),
+                'registration_number'
+            )
+        ) {
             throw UserException::fiscalDocAlreadyExists();
         }
 
@@ -97,7 +102,9 @@ class User implements UserRepository
             id: $userModel->getAttribute('id'),
             name: $userModel->getAttribute('name'),
             email: $userModel->getAttribute('email'),
-            registrationNumber: $userModel->getAttribute('registration_number'),
+            registrationNumber: $userModel->getAttribute(
+                'registration_number'
+            ),
             type: $userModel->getAttribute('type'),
             token: $userModel->createToken('auth')->plainTextToken
         );

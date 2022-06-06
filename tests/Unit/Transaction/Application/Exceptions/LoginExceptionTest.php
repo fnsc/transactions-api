@@ -13,7 +13,10 @@ class LoginExceptionTest extends TestCase
         $userNotFound = LoginException::userNotFound();
 
         // Assertions
-        $this->assertSame('The given data is invalid.', $invalidData->getMessage());
+        $this->assertSame(
+            'The given data is invalid.',
+            $invalidData->getMessage()
+        );
         $this->assertSame('User not found.', $userNotFound->getMessage());
     }
 }

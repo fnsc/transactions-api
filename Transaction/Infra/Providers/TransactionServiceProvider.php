@@ -19,7 +19,10 @@ class TransactionServiceProvider extends BaseServiceProvider
                 $accountRepository = $app->make(AccountRepository::class);
                 $authorizationService = $app->make(Service::class);
 
-                return new TransactionRepository($accountRepository, $authorizationService);
+                return new TransactionRepository(
+                    $accountRepository,
+                    $authorizationService
+                );
             }
         );
     }

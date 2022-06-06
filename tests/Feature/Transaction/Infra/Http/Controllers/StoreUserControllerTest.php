@@ -33,7 +33,10 @@ class StoreUserControllerTest extends TestCase
         // Assertions
         $result->assertStatus(Response::HTTP_CREATED);
         $this->assertDatabaseHas('users', ['name' => 'some random name']);
-        $this->assertDatabaseHas('users', ['registration_number' => '12345678909']);
+        $this->assertDatabaseHas(
+            'users',
+            ['registration_number' => '12345678909']
+        );
     }
 
     public function testShouldNotStoreAUserWithSameRegistrationNumber(): void

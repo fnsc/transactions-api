@@ -19,7 +19,9 @@ abstract class AbstractClient
         $options['body'] = json_encode([
             'payer' => $transaction->getPayer()->getName(),
             'payee' => $transaction->getPayee()->getName(),
-            'amount' => $this->moneyFormatter->format($transaction->getAmount()),
+            'amount' => $this->moneyFormatter->format(
+                $transaction->getAmount()
+            ),
             'created_at' => (new DateTime())->format(DATE_ATOM),
         ]);
 

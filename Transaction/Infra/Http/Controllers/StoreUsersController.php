@@ -33,11 +33,17 @@ class StoreUsersController extends Controller
 
             return $this->getSuccessResponse($result);
         } catch (UserException $exception) {
-            $this->logger->notice('Something went wrong while storing the user', compact('exception'));
+            $this->logger->notice(
+                'Something went wrong while storing the user',
+                compact('exception')
+            );
 
             return $this->getUnprocessableEntityResponse($exception);
         } catch (Exception $exception) {
-            $this->logger->warning('Something went wrong.', compact('exception'));
+            $this->logger->warning(
+                'Something went wrong.',
+                compact('exception')
+            );
 
             return $this->getServerErrorResponse();
         }

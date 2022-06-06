@@ -10,6 +10,9 @@ class AuthenticatedUserServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(AuthenticatedUserAdapterInterface::class, AuthenticatedUser::class);
+        $this->app->bind(
+            AuthenticatedUserAdapterInterface::class,
+            AuthenticatedUser::class
+        );
     }
 }

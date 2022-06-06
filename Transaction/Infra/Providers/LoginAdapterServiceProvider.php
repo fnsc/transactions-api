@@ -12,10 +12,13 @@ class LoginAdapterServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(LoginAdapterInterface::class, function (Application $app) {
-            $userRepository = $app->make(UserRepositoryInterface::class);
+        $this->app->bind(
+            LoginAdapterInterface::class,
+            function (Application $app) {
+                $userRepository = $app->make(UserRepositoryInterface::class);
 
-            return new LoginAdapter($userRepository);
-        });
+                return new LoginAdapter($userRepository);
+            }
+        );
     }
 }

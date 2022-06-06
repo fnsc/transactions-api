@@ -81,7 +81,9 @@ class SendTransferNotificationTest extends TestCase
             ->getContents()
             ->andReturn('{"message":"Fail"}');
 
-        $this->expectExceptionMessage('The user notification was not send due an issue with the provider.');
+        $this->expectExceptionMessage(
+            'The user notification was not send due an issue with the provider.'
+        );
         $this->expectException(TransferException::class);
         $this->expectExceptionCode(Response::HTTP_BAD_REQUEST);
 

@@ -8,7 +8,9 @@ class FraudException extends Exception
 {
     public static function payerIdIsDifferent(): self
     {
-        return new static('The payer id is different from the user that is currently authenticated.');
+        return new static(
+            'The payer id is different from the user that is currently authenticated.'
+        );
     }
 
     public static function authorizationDeclined(): self

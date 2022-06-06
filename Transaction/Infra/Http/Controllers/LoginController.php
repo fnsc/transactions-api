@@ -37,11 +37,17 @@ class LoginController extends Controller
 
             return $this->getSuccessResponse($result);
         } catch (LoginException $exception) {
-            $this->logger->notice('Something went wrong while logging in.', compact('exception'));
+            $this->logger->notice(
+                'Something went wrong while logging in.',
+                compact('exception')
+            );
 
             return $this->getForbiddenResponse($exception);
         } catch (Exception $exception) {
-            $this->logger->warning('Something went wrong.', compact('exception'));
+            $this->logger->warning(
+                'Something went wrong.',
+                compact('exception')
+            );
 
             return $this->getServerErrorResponse();
         }

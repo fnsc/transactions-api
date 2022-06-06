@@ -25,7 +25,12 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
+        $service = new Service(
+            $transactionRepository,
+            $userRepository,
+            $authenticatedUser,
+            $evenDispatcher
+        );
         $user = m::mock(User::class);
         $input = new InputBoundary(1, 3, '100.00');
 
@@ -39,7 +44,9 @@ class ServiceTest extends TestCase
             ->andReturn(2);
 
         $this->expectException(FraudException::class);
-        $this->expectExceptionMessage('The payer id is different from the user that is currently authenticated.');
+        $this->expectExceptionMessage(
+            'The payer id is different from the user that is currently authenticated.'
+        );
 
         // Actions
         $service->handle($input);
@@ -52,7 +59,12 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
+        $service = new Service(
+            $transactionRepository,
+            $userRepository,
+            $authenticatedUser,
+            $evenDispatcher
+        );
         $user = m::mock(User::class);
         $input = new InputBoundary(1, 2, '100.00');
 
@@ -70,7 +82,9 @@ class ServiceTest extends TestCase
             ->andReturnNull();
 
         $this->expectException(TransferException::class);
-        $this->expectExceptionMessage('The informed payer was not found on our registers.');
+        $this->expectExceptionMessage(
+            'The informed payer was not found on our registers.'
+        );
 
         // Actions
         $service->handle($input);
@@ -83,7 +97,12 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
+        $service = new Service(
+            $transactionRepository,
+            $userRepository,
+            $authenticatedUser,
+            $evenDispatcher
+        );
         $user = m::mock(User::class);
         $account = m::mock(AccountEntity::class);
         $input = new InputBoundary(1, 2, '100.00');
@@ -125,7 +144,12 @@ class ServiceTest extends TestCase
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = m::mock(EventDispatcher::class);
-        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
+        $service = new Service(
+            $transactionRepository,
+            $userRepository,
+            $authenticatedUser,
+            $evenDispatcher
+        );
         $user = m::mock(User::class);
         $account = m::mock(AccountEntity::class);
         $input = new InputBoundary(1, 2, '100.00');
@@ -156,7 +180,9 @@ class ServiceTest extends TestCase
             ->andReturnNull();
 
         $this->expectException(TransferException::class);
-        $this->expectExceptionMessage('The informed payee was not found on our registers.');
+        $this->expectExceptionMessage(
+            'The informed payee was not found on our registers.'
+        );
 
         // Actions
         $service->handle($input);
@@ -165,15 +191,29 @@ class ServiceTest extends TestCase
     public function testShouldHandle(): void
     {
         // Set
-        $transactionRepository = $this->createMock(TransactionRepository::class);
+        $transactionRepository = $this->createMock(
+            TransactionRepository::class
+        );
         $userRepository = m::mock(UserRepository::class);
         $authenticatedUser = m::mock(AuthenticatedUserAdapter::class);
         $evenDispatcher = $this->createMock(EventDispatcher::class);
 
-        $service = new Service($transactionRepository, $userRepository, $authenticatedUser, $evenDispatcher);
+        $service = new Service(
+            $transactionRepository,
+            $userRepository,
+            $authenticatedUser,
+            $evenDispatcher
+        );
 
         $payer = User::newUser(id: 2);
-        $payer->setAccount(new AccountEntity(amount: 100000, userId: 2, number: 'io12j3oijasodi', id: 1));
+        $payer->setAccount(
+            new AccountEntity(
+                amount: 100000,
+                userId: 2,
+                number: 'io12j3oijasodi',
+                id: 1
+            )
+        );
         $payee = User::newUser(id: 1);
         $transaction = new Transaction($payee, $payer, 10000);
         $input = new InputBoundary(1, 2, '100.00');

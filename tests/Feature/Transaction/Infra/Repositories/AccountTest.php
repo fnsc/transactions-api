@@ -92,7 +92,10 @@ class AccountTest extends TestCase
 
         // Assertions
         $this->assertSame(200, $account->getAttribute('amount'));
-        $this->assertSame('61a3c6e78e832a50830b8bb1', $account->getAttribute('number'));
+        $this->assertSame(
+            '61a3c6e78e832a50830b8bb1',
+            $account->getAttribute('number')
+        );
     }
 
     protected function setUp(): void

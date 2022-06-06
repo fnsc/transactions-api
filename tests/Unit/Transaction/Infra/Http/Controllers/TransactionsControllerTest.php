@@ -25,7 +25,11 @@ class TransactionsControllerTest extends TestCase
         $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
         $transformer = m::mock(Transaction::class);
-        $controller = new TransactionsController($service, $logger, $transformer);
+        $controller = new TransactionsController(
+            $service,
+            $logger,
+            $transformer
+        );
 
         $transaction = m::mock(TransactionEntity::class);
         $input = new InputBoundary(1, 2, '100.97');
@@ -91,7 +95,11 @@ class TransactionsControllerTest extends TestCase
         $service = $this->createMock(Service::class);
         $logger = m::mock(LoggerInterface::class);
         $transformer = m::mock(Transaction::class);
-        $controller = new TransactionsController($service, $logger, $transformer);
+        $controller = new TransactionsController(
+            $service,
+            $logger,
+            $transformer
+        );
         $expected = [
             'message' => $exceptionMessage,
             'data' => [],
