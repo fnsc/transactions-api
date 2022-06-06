@@ -11,17 +11,17 @@
 
     <!-- Folders that will be tracked -->
     <file>./tests</file>
-    <file>./Transaction</file>
+    <file>./src</file>
 
     <rule ref="LeroyMerlin"/>
 
     <rule ref="Generic.WhiteSpace.ScopeIndent.IncorrectExact">
-        <exclude-pattern>Transaction/Domain/UserType.php</exclude-pattern>
+        <exclude-pattern>src/Domain/UserType.php</exclude-pattern>
     </rule>
     <rule ref="Generic.WhiteSpace.ScopeIndent.Incorrect">
-        <exclude-pattern>Transaction/Domain/UserType.php</exclude-pattern>
+        <exclude-pattern>src/Domain/UserType.php</exclude-pattern>
     </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
-        <exclude-pattern>Transaction/Infra/Eloquent/*.php</exclude-pattern>
+        <exclude-pattern>src/Infra/Eloquent/*.php</exclude-pattern>
     </rule>
 </ruleset>

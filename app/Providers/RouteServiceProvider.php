@@ -41,7 +41,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for(
             'api',
-            fn(Request $request) => Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip())
+            fn (Request $request) => Limit::perMinute(60)->by(
+                optional($request->user())->id ?: $request->ip()
+            )
         );
     }
 
@@ -49,13 +51,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->group(base_path('Transaction/routes/users_api.php'));
+            ->group(base_path('src/routes/users_api.php'));
     }
 
     private function getTransactionRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
-            ->group(base_path('Transaction/routes/transactions_api.php'));
+            ->group(base_path('src/routes/transactions_api.php'));
     }
 }
