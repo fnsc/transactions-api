@@ -21,4 +21,7 @@
     <rule ref="Generic.WhiteSpace.ScopeIndent.Incorrect">
         <exclude-pattern>Transaction/Domain/UserType.php</exclude-pattern>
     </rule>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
+        <exclude-pattern>Transaction/Infra/Eloquent/*.php</exclude-pattern>
+    </rule>
 </ruleset>
