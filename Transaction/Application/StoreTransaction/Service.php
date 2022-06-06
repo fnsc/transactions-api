@@ -34,7 +34,11 @@ class Service implements ServiceInterface
             throw FraudException::payerIdIsDifferent();
         }
 
-        if (!$payer = $this->userRepository->find($transaction->getPayer()->getId())) {
+        if (
+            !$payer = $this->userRepository->find(
+                $transaction->getPayer()->getId()
+            )
+        ) {
             throw TransferException::payerNotFound();
         }
 
@@ -42,7 +46,11 @@ class Service implements ServiceInterface
             throw TransferException::notSufficientAmount();
         }
 
-        if (!$payee = $this->userRepository->find($transaction->getPayee()->getId())) {
+        if (
+            !$payee = $this->userRepository->find(
+                $transaction->getPayee()->getId()
+            )
+        ) {
             throw TransferException::payeeNotFound();
         }
 

@@ -29,7 +29,13 @@ class AuthenticatedUserTest extends TestCase
         $authenticatedUser = new AuthenticatedUser();
 
         // Assertions
-        $this->assertInstanceOf(UserEntity::class, $authenticatedUser->getAuthenticatedUser());
-        $this->assertSame('Random Name', $authenticatedUser->getAuthenticatedUser()->getName());
+        $this->assertInstanceOf(
+            UserEntity::class,
+            $authenticatedUser->getAuthenticatedUser()
+        );
+        $this->assertSame(
+            'Random Name',
+            $authenticatedUser->getAuthenticatedUser()->getName()
+        );
     }
 }

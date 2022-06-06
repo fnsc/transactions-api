@@ -18,10 +18,10 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.12",
-        "leroy-merlin-br/coding-standard": "dev-chore/bump-packages",
+        "leroy-merlin-br/coding-standard": "v3.1.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
+        "phpro/grumphp": "^1.12",
         "phpunit/phpunit": "^9.5.10",
         "rector/rector": "^0.12.21"
     },
@@ -63,7 +63,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpro/grumphp": true
         }
     },
     "minimum-stability": "dev",

@@ -57,7 +57,10 @@ class LoginControllerTest extends TestCase
         $result = $controller->login($request);
 
         // Assertions
-        $this->assertSame($expectedResponseStatusCode, $result->getStatusCode());
+        $this->assertSame(
+            $expectedResponseStatusCode,
+            $result->getStatusCode()
+        );
         $this->assertSame($expectedResponseContent, $result->getContent());
     }
 
@@ -135,7 +138,9 @@ class LoginControllerTest extends TestCase
                 'expectedResponseContent' => '{"message":"User not found.","data":[]}',
             ],
             'user exception when fiscal doc already exists' => [
-                'exception' => new Exception('Some unexpected random error occurs.'),
+                'exception' => new Exception(
+                    'Some unexpected random error occurs.'
+                ),
                 'loggerMethod' => 'warning',
                 'loggerMessage' => 'Something went wrong.',
                 'expectedResponseStatusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,

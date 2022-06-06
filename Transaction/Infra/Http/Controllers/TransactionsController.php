@@ -34,7 +34,10 @@ class TransactionsController extends Controller
 
             return $this->getSuccessResponse($result);
         } catch (FraudException $exception) {
-            $this->logger->alert('Maybe something nasty is happening.', compact('exception'));
+            $this->logger->alert(
+                'Maybe something nasty is happening.',
+                compact('exception')
+            );
 
             return $this->getNotAcceptableResponse($exception);
         } catch (TransferException $exception) {
@@ -45,7 +48,10 @@ class TransactionsController extends Controller
 
             return $this->getNotAcceptableResponse($exception);
         } catch (Exception $exception) {
-            $this->logger->warning('Something unexpected happened.', compact('exception'));
+            $this->logger->warning(
+                'Something unexpected happened.',
+                compact('exception')
+            );
 
             return $this->getServerErrorResponse();
         }

@@ -98,7 +98,12 @@ class TransfersControllerTest extends TestCase
         ]);
 
         auth()->login($payer);
-        $payer = UserEntity::newUser($payer->id, $payer->email, $payer->registration_number, $payer->type);
+        $payer = UserEntity::newUser(
+            $payer->id,
+            $payer->email,
+            $payer->registration_number,
+            $payer->type
+        );
         $account = $accountRepository->store($payer);
         $account->setAmount(200000);
         $accountRepository->update($account);
@@ -129,7 +134,12 @@ class TransfersControllerTest extends TestCase
         ]);
 
         auth()->login($payer);
-        $payer = UserEntity::newUser($payer->id, $payer->email, $payer->registration_number, $payer->type);
+        $payer = UserEntity::newUser(
+            $payer->id,
+            $payer->email,
+            $payer->registration_number,
+            $payer->type
+        );
         $account = $accountRepository->store($payer);
         $account->setAmount(200000);
         $accountRepository->update($account);
@@ -144,7 +154,12 @@ class TransfersControllerTest extends TestCase
             'password' => 'secret',
             'registration_number' => '98765432101',
         ]);
-        $payee = UserEntity::newUser($payee->id, $payee->email, $payee->registration_number, $payee->type);
+        $payee = UserEntity::newUser(
+            $payee->id,
+            $payee->email,
+            $payee->registration_number,
+            $payee->type
+        );
         $accountRepository->store($payee);
     }
 }

@@ -17,7 +17,12 @@ class Account implements AccountRepositoryInterface
     {
         $accountModel = $this->getModel();
 
-        if (!$accountModel = $accountModel->where('id', $account->getId())->first()) {
+        if (
+            !$accountModel = $accountModel->where(
+                'id',
+                $account->getId()
+            )->first()
+        ) {
             return null;
         }
 
@@ -32,7 +37,10 @@ class Account implements AccountRepositoryInterface
     public function findByUser(UserEntity $user): AccountEntity
     {
         $accountModel = $this->getModel();
-        $accountDatabase = $accountModel->where('user_id', $user->getId())->first();
+        $accountDatabase = $accountModel->where(
+            'user_id',
+            $user->getId()
+        )->first();
 
         return new AccountEntity(
             amount: $accountDatabase->getAttribute('amount'),

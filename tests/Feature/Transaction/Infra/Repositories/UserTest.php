@@ -92,7 +92,9 @@ class UserTest extends TestCase
 
         // Expectations
         $this->expectException(UserException::class);
-        $this->expectExceptionMessage('The fiscal doc has already been taken.');
+        $this->expectExceptionMessage(
+            'The fiscal doc has already been taken.'
+        );
 
         // Actions
         $repository->store($userEntity);
