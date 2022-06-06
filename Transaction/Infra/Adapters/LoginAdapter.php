@@ -14,7 +14,9 @@ class LoginAdapter implements LoginAdapterInterface
 
     public function attempt(User $user): bool
     {
-        $userDatabase = $this->userRepository->getLoginCredentials($user->getEmail());
+        $userDatabase = $this->userRepository->getLoginCredentials(
+            $user->getEmail()
+        );
 
         if (!$this->isValidEmail($user, $userDatabase)) {
             return false;

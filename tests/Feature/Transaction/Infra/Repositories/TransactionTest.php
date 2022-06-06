@@ -27,7 +27,11 @@ class TransactionTest extends TestCase
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
+        $transfer = new TransactionEntity(
+            payee: $payee,
+            payer: $payer,
+            amount: 11000
+        );
 
         // Actions
         $result = $repository->store($transfer);
@@ -39,11 +43,18 @@ class TransactionTest extends TestCase
     public function testShouldProceedWithATransfer(): void
     {
         // Set
-        $service = $this->instance(AuthorizationService::class, m::mock(AuthorizationService::class));
+        $service = $this->instance(
+            AuthorizationService::class,
+            m::mock(AuthorizationService::class)
+        );
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
+        $transfer = new TransactionEntity(
+            payee: $payee,
+            payer: $payer,
+            amount: 11000
+        );
 
         // Expectations
         $service->expects($this->once())
@@ -61,11 +72,18 @@ class TransactionTest extends TestCase
     public function testShouldThrowAnExceptionWhenAuthorizationFails(): void
     {
         // Set
-        $service = $this->instance(AuthorizationService::class, m::mock(AuthorizationService::class));
+        $service = $this->instance(
+            AuthorizationService::class,
+            m::mock(AuthorizationService::class)
+        );
         $repository = app(TransactionRepository::class);
         $payee = app(UserRepository::class)->find(2);
         $payer = app(UserRepository::class)->find(1);
-        $transfer = new TransactionEntity(payee: $payee, payer: $payer, amount: 11000);
+        $transfer = new TransactionEntity(
+            payee: $payee,
+            payer: $payer,
+            amount: 11000
+        );
 
         $payer = UserModel::whereId(1)->first();
         $payee = UserModel::whereId(2)->first();
@@ -76,7 +94,9 @@ class TransactionTest extends TestCase
             ->andReturnFalse();
 
         $this->expectException(FraudException::class);
-        $this->expectExceptionMessage('The authorization service declined the operation.');
+        $this->expectExceptionMessage(
+            'The authorization service declined the operation.'
+        );
 
         // Actions
         $repository->transfer($transfer, $payer, $payee);

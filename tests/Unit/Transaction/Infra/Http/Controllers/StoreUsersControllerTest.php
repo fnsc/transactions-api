@@ -24,9 +24,19 @@ class StoreUsersControllerTest extends TestCase
         $service = $this->createMock(Service::class);
         $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new StoreUsersController($service, $transformer, $logger);
+        $controller = new StoreUsersController(
+            $service,
+            $transformer,
+            $logger
+        );
 
-        $input = new InputBoundary('User Name', 'user@email.com', '12345678909', 'regular', 'secret');
+        $input = new InputBoundary(
+            'User Name',
+            'user@email.com',
+            '12345678909',
+            'regular',
+            'secret'
+        );
 
         $user = UserEntity::newUser(name: 'User Name', token: 'auth token');
 
@@ -102,9 +112,19 @@ class StoreUsersControllerTest extends TestCase
         $service = $this->createMock(Service::class);
         $transformer = m::mock(User::class);
         $logger = m::mock(LoggerInterface::class);
-        $controller = new StoreUsersController($service, $transformer, $logger);
+        $controller = new StoreUsersController(
+            $service,
+            $transformer,
+            $logger
+        );
 
-        $input = new InputBoundary('User Name', 'user@email.com', '12345678909', 'regular', 'secret');
+        $input = new InputBoundary(
+            'User Name',
+            'user@email.com',
+            '12345678909',
+            'regular',
+            'secret'
+        );
 
         // Expectations
         $request->expects()
@@ -139,7 +159,10 @@ class StoreUsersControllerTest extends TestCase
         $result = $controller->store($request);
 
         // Assertions
-        $this->assertSame($expectedResponseStatusCode, $result->getStatusCode());
+        $this->assertSame(
+            $expectedResponseStatusCode,
+            $result->getStatusCode()
+        );
         $this->assertSame($expectedResponseContent, $result->getContent());
     }
 
@@ -168,7 +191,9 @@ class StoreUsersControllerTest extends TestCase
                 'expectedResponseContent' => '{"message":"The fiscal doc has already been taken.","data":[]}',
             ],
             'generic exception for a non expected error' => [
-                'exception' => new Exception('Some unexpected random error occurs.'),
+                'exception' => new Exception(
+                    'Some unexpected random error occurs.'
+                ),
                 'loggerMethod' => 'warning',
                 'loggerMessage' => 'Something went wrong.',
                 'expectedResponseStatusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
