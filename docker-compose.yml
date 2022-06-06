@@ -1,50 +1,43 @@
-# For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3.7"
+
 services:
-    laravel.test:
+    web:
+        container_name: web
         build:
-            context: ./docker/8.0
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            context: ./
+            dockerfile: ./docker/php/Dockerfile
         volumes:
-            - '.:/var/www/html'
+            - ./:/var/www/html
         networks:
-            - sail
+            - transactions.dev
         depends_on:
             - mysql
+            - nginx
+
     mysql:
-        image: 'mysql/mysql-server:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+        container_name: mysql
+        image: mysql:8
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: "%"
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-            - 'sailmysql:/var/lib/mysql'
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: ${DB_SERVICE_TAG}
+            SERVICE_NAME: ${DB_CONNECTION}
         networks:
-            - sail
-        healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
-            retries: 3
-            timeout: 5s
+            - transactions.dev
+
+    nginx:
+        container_name: nginx
+        image: nginx:1.21.6
+        ports:
+            - 8100:80
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - transactions.dev
+
 networks:
-    sail:
+    transactions.dev:
         driver: bridge
-volumes:
-    sailmysql:
-        driver: local
