@@ -101,4 +101,28 @@ Caso não tenha atingido aceitavelmente o que estamos propondo acima, não iremo
 - Proposta de melhoria na arquitetura
 
 ## Swagger
-O arquivo na raiz do projeto `api_swagger.yaml` contem as instruções necessárias para rodar os principais endpoints. 
+O arquivo na raiz do projeto `api_swagger.yaml` contem as instruções necessárias para rodar os principais endpoints.
+
+## Setup
+Após clonar o repositório na sua máquina, rode os seguintes comandos:
+1. Copie o arquivo .env.example:
+    ```shell
+    cp .env.example .env
+    ```
+2. Build das imagens docker:
+    ```shell
+    docker-compose build --no-cache web
+    ```
+3. Build das imagens docker:
+    ```shell
+    docker-compose up -d web
+    ```
+4. Gere a chave para a aplicação:
+    ```shell
+    docker-compose exec web php artisan key:generate
+    ```
+5. Rode as migrations:
+    ```shell
+    docker-compose exec web php artisan migrate
+    ```
+6. Acesse [http://localhost:8100](http://localhost:8100)
