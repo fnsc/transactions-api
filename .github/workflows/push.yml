@@ -1,19 +1,25 @@
 on: [push]
 name: Tests
 jobs:
-    setup-and-tests:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+  setup-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            -   name: Composer install
-                run: composer install --no-interaction --no-progress
+      - name: Build containers
+        run: docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
 
-            -   name: Run Code Standards
-                run: vendor/bin/phpcs
+      - name: Composer install
+        run: docker-compose run --rm -T web composer install --no-interaction --no-progress
 
-            -   name: Run Unit Tests
-                run: vendor/bin/phpunit tests/Unit
+      - name: Run Code Standards
+        run: docker-compose run --rm -T web vendor/bin/phpcs
 
-            -   name: Run Integration Tests
-                run: vendor/bin/phpunit tests/Feature
+      - name: Create Laravel Settings
+        run: docker-compose run --rm -T web cp .env.example .env && docker-compose run --rm -T web php artisan key:generate
+
+      - name: Run Unit Tests
+        run: docker-compose run --rm -T web vendor/bin/phpunit tests/Unit
+
+      - name: Run Feature Tests
+        run: docker-compose run --rm -T web vendor/bin/phpunit tests/Feature
