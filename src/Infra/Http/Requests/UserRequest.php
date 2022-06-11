@@ -3,7 +3,6 @@
 namespace Transaction\Infra\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Transaction\Application\StoreUser\User as UserValueObject;
 
 class UserRequest extends FormRequest
 {
@@ -23,14 +22,9 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,id',
-            'registration_number' => 'required|string|fiscal_doc|unique:users,registration_number,id',
+            'registration_number' => 'required|string|registration_number|unique:users,registration_number,id',
             'type' => 'required|string|in:regular,seller',
             'password' => 'required|min:6',
         ];
-    }
-
-    public function getUserValueObject(): UserValueObject
-    {
-        return new UserValueObject($this->all());
     }
 }
